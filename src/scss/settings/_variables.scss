@@ -1,0 +1,4 @@
+@use "colors" as c;
+
+$border-primary-stroke: solid 2px c.$color-primary-black;
+$border-primary-radius: 8px;

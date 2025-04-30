@@ -1,0 +1,12 @@
+@use "variables" as *;
+
+@mixin flex-center() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin border-stroke() {
+  border: $border-primary-stroke;
+  border-radius: $border-primary-radius;
+}

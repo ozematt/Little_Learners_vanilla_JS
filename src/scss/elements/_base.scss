@@ -1,4 +1,8 @@
+@use "../settings/colors" as c;
+
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -6,6 +10,21 @@ a {
   text-decoration: none;
 }
 
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 body {
-  font-size: 50px;
+  background-color: c.$color-background;
+}
+
+.container {
+  width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 0 50px;
+  // padding: 18px 50px 50px 50px;
 }
