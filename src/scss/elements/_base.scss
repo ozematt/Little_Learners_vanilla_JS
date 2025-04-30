@@ -1,4 +1,4 @@
-@use "../settings/colors" as c;
+@use "../settings/colors" as *;
 
 * {
   margin: 0;
@@ -8,6 +8,7 @@
 
 a {
   text-decoration: none;
+  color: inherit;
 }
 
 ul,
@@ -18,7 +19,7 @@ li {
 }
 
 body {
-  background-color: c.$color-background;
+  background-color: $color-background;
 }
 
 .container {
@@ -26,5 +27,4 @@ body {
   max-width: 1920px;
   margin: 0 auto;
   padding: 0 50px;
-  // padding: 18px 50px 50px 50px;
 }

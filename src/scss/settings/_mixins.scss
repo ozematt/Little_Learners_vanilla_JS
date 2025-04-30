@@ -1,4 +1,6 @@
 @use "variables" as *;
+@use "colors" as *;
+@use "fonts" as *;
 
 @mixin flex-center() {
   display: flex;
@@ -9,4 +11,11 @@
 @mixin border-stroke() {
   border: $border-primary-stroke;
   border-radius: $border-primary-radius;
+}
+
+@mixin outfit-medium() {
+  font-family: $font-outfit;
+  font-weight: 500;
+  font-size: 20px;
+  color: $color-primary-black;
 }
