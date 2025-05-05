@@ -19,6 +19,12 @@
   font-size: 20px;
   color: $color-primary-black;
 }
+@mixin outfit-extra-bold() {
+  font-family: $font-outfit;
+  font-weight: 800;
+  font-size: 44px;
+  color: $color-primary-black;
+}
 
 @mixin raleway-title() {
   font-family: $font-raleway;
@@ -26,4 +32,8 @@
   font-size: 54px;
   line-height: 130%;
   color: $color-primary-black;
+}
+
+@mixin stats-shadow() {
+  box-shadow: 8px 8px 0px 1px $color-primary-shadow;
 }

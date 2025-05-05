@@ -11,23 +11,41 @@
 
   &__content {
     padding-left: 60px;
-  }
-  & p:first-of-type {
-    font-size: 22px;
-    line-height: 150%;
-    text-decoration: underline;
-    text-underline-offset: 15px;
-    padding-bottom: 20px;
-  }
-  & p:last-of-type {
-    padding-top: 30px;
-    line-height: 150%;
-    color: $color-gray;
-  }
-  & h1 {
-    @include raleway-title();
-    & span {
-      color: $color-primary-accent;
+
+    &__intro-text {
+      font-size: 22px;
+      line-height: 150%;
+      text-decoration: underline;
+      text-underline-offset: 15px;
+      padding-bottom: 20px;
+    }
+    &__description {
+      padding-top: 30px;
+      line-height: 150%;
+      color: $color-gray;
+    }
+    &__main-heading {
+      @include raleway-title();
+      & span {
+        color: $color-primary-accent;
+      }
+    }
+
+    &__stats {
+      @include border-stroke();
+      @include stats-shadow();
+      margin-top: 60px;
+      padding: 24px 50px;
+      display: flex;
+      justify-content: space-between;
+      background-color: $color-secondary-accent;
+      &__number {
+        @include outfit-extra-bold();
+      }
+      &__info {
+        @include outfit-medium();
+        font-size: 18px;
+      }
     }
   }
 }
