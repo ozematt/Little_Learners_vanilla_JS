@@ -1,0 +1,34 @@
+@use "../../settings/colors" as *;
+@use "../../settings/variables" as *;
+@use "../../settings/fonts" as *;
+@use "../../settings/mixins" as *;
+
+.home {
+  padding: 80px 115px 200px;
+}
+
+.section-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-subtitle {
+  @include border-stroke();
+  @include outfit-medium();
+  line-height: 150%;
+  background-color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+}
+
+.section-title {
+  @include raleway-bold();
+  padding: 19px 0;
+}
+
+.section-description {
+  @include outfit-medium();
+  line-height: 150%;
+  text-align: center;
+}

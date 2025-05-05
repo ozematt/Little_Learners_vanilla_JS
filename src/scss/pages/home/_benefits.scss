@@ -1,0 +1,49 @@
+@use "../../settings/colors" as *;
+@use "../../settings/variables" as *;
+@use "../../settings/fonts" as *;
+@use "../../settings/mixins" as *;
+
+.benefits__container {
+  padding-top: 135px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 40px;
+  row-gap: 85px;
+}
+.benefits {
+  padding-top: 200px;
+}
+
+.benefit {
+  @include border-stroke();
+  @include item-shadow();
+  padding: 80px 50px 50px;
+  width: 100%;
+  max-width: 504px;
+  height: 306px;
+  position: relative;
+
+  &__icon-container {
+    @include border-stroke();
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 74px;
+    height: 74px;
+    background: $color-background-item;
+    left: 30px;
+    top: -37px;
+  }
+
+  &__title {
+    @include raleway-bold();
+    font-size: 28px;
+  }
+  &__description {
+    @include outfit-medium();
+    padding-top: 20px;
+    font-size: 18px;
+    line-height: 150%;
+    color: $color-gray-description;
+  }
+}

@@ -3,4 +3,6 @@
 @use "elements/header";
 @use "elements/nav";
 
-@use "pages/home";
+@use "pages/home/home";
+@use "pages/home/hero";
+@use "pages/home/benefits";

@@ -18,4 +18,4 @@ export const navLinks = {
   },
   "/contact": { text: "Contact", html: "pages/contact.html" },
   "/404": { text: "404", html: "/pages/404.html" },
-};
+} as const;

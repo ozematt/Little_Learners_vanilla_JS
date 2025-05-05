@@ -1,11 +1,11 @@
-@use "../settings/colors" as *;
-@use "../settings/variables" as *;
-@use "../settings/fonts" as *;
-@use "../settings/mixins" as *;
+@use "../../settings/colors" as *;
+@use "../../settings/variables" as *;
+@use "../../settings/fonts" as *;
+@use "../../settings/mixins" as *;
 
 .hero {
   @include outfit-medium();
-  padding: 80px 115px;
+  // padding: 80px 115px 200px;
   display: flex;
   align-items: center;
 
@@ -41,10 +41,12 @@
       background-color: $color-secondary-accent;
       &__number {
         @include outfit-extra-bold();
+        line-height: 150%;
       }
       &__info {
         @include outfit-medium();
         font-size: 18px;
+        line-height: 150%;
       }
     }
   }
