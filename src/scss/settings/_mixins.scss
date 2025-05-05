@@ -19,3 +19,11 @@
   font-size: 20px;
   color: $color-primary-black;
 }
+
+@mixin raleway-title() {
+  font-family: $font-raleway;
+  font-weight: 800;
+  font-size: 54px;
+  line-height: 130%;
+  color: $color-primary-black;
+}

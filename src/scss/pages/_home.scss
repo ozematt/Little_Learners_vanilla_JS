@@ -1,0 +1,33 @@
+@use "../settings/colors" as *;
+@use "../settings/variables" as *;
+@use "../settings/fonts" as *;
+@use "../settings/mixins" as *;
+
+.hero {
+  @include outfit-medium();
+  padding: 80px 115px;
+  display: flex;
+  align-items: center;
+
+  &__content {
+    padding-left: 60px;
+  }
+  & p:first-of-type {
+    font-size: 22px;
+    line-height: 150%;
+    text-decoration: underline;
+    text-underline-offset: 15px;
+    padding-bottom: 20px;
+  }
+  & p:last-of-type {
+    padding-top: 30px;
+    line-height: 150%;
+    color: $color-gray;
+  }
+  & h1 {
+    @include raleway-title();
+    & span {
+      color: $color-primary-accent;
+    }
+  }
+}

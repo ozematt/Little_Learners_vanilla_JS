@@ -12,12 +12,14 @@ export class Router {
     this.renderNavLinks(); // render navigation links on initialization
     this.setupEventListeners(); // setup event listeners for navigation
   }
+
   private setupEventListeners() {
     window.addEventListener("popstate", () => {
       this.render();
     });
     document.addEventListener("click", this.handleLinkClick);
   }
+
   private handleLinkClick(e: MouseEvent) {
     const target = e.target as HTMLElement;
     if (target.matches("[data-link]")) {
@@ -26,6 +28,7 @@ export class Router {
       if (path) this.navigate(path);
     }
   }
+
   public async render() {
     try {
       this.rootElement.classList.add("fade-out"); // Add fade-out class
@@ -45,6 +48,7 @@ export class Router {
       console.error("Render error:", error);
     }
   }
+
   public renderNavLinks() {
     const container = document.getElementById("nav-bar__links");
     if (!container) return;
@@ -63,10 +67,12 @@ export class Router {
 
     container.innerHTML = links.join("");
   }
+
   public navigate(path: string) {
     window.history.pushState({}, "", path);
     this.render();
   }
+
   private async fetchTemplate(url: string): Promise<string> {
     try {
       const response = await fetch(url);
@@ -76,6 +82,7 @@ export class Router {
       return "<h1>Network Error</h1>";
     }
   }
+
   private async prefetchTemplates() {
     const urls = Object.values(this.routes).map((route) => route.html);
     await Promise.all(urls.map((url) => this.fetchTemplate(url)));

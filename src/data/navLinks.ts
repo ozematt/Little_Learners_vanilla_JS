@@ -1,9 +1,4 @@
-export type NavLink = {
-  text: string;
-  html: string;
-};
-
-export const navLinks: Record<string, NavLink> = {
+export const navLinks = {
   "/": { text: "Home", html: "pages/home.html" },
   "/about-us": {
     text: "About Us",
