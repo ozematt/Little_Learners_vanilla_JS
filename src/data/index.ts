@@ -1,2 +1,2 @@
 export * from "./navLinks";
-export * from "./benefits";
+export * from "./home";

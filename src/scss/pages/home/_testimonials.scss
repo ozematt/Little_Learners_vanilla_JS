@@ -1,0 +1,47 @@
+@use "../../settings/colors" as *;
+@use "../../settings/variables" as *;
+@use "../../settings/fonts" as *;
+@use "../../settings/mixins" as *;
+
+.testimonials {
+  padding-top: 200px;
+
+  &__container {
+    padding-top: 100px;
+
+    &__card {
+      @include border-stroke();
+      @include item-shadow();
+      width: 100%;
+      max-width: 425px;
+      height: 462px;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  &__user-name {
+    padding-top: 12px;
+    font-family: $font-outfit;
+    font-size: 24px;
+    line-height: 150%;
+    font-weight: 600;
+    color: $color-gray;
+  }
+  &__comment {
+    @include outfit-medium();
+    padding: 30px 50px 50px;
+    color: $color-gray;
+    text-align: center;
+  }
+}
+
+.avatar__container {
+  margin-top: 50px;
+  border: $border-secondary-stroke;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  background-color: $color-background;
+}
