@@ -61,9 +61,11 @@
 .rating__container {
   position: relative;
   padding-top: 30px;
-  & img:first-of-type {
+  width: 140px;
+  &__full {
     position: absolute;
-    opacity: 0; //// RATING STAR
+    overflow: hidden;
+    // width: 140px;
   }
 }
 .arrow-btn {

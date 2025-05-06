@@ -17,18 +17,27 @@ export class Testimonials {
   private setTemplate(item: TestimonialT): string {
     const template = `
         <article class="testimonials__container__card">
-          <div class="avatar__container"><img src="${item.avatar}" alt="avatar icon" /></div>
+          <div class="avatar__container"><img src="${
+            item.avatar
+          }" alt="avatar icon" /></div>
           <p class="testimonials__user-name">${item.name}</p>
+
           <div id="rating__container" class="rating__container">
-            <img
+          <div class="rating__container__full" style="width: ${
+            item.rating * 28
+          }px">
+           <img
               src="pages/home_assets/rating-full-stars.svg"
               alt="rating stars"
             />
+          </div>
+           
             <img
               src="pages/home_assets/rating-empty-stars.svg"
               alt="rating stars"
             />
           </div>
+          
           <p class="testimonials__comment">
             ${item.comment}
           </p>
