@@ -3,25 +3,38 @@ import { RouteConfig } from "./types";
 export class Router {
   private routes: RouteConfig;
   private rootElement: HTMLElement;
+  private onRenderCallbacks: (() => void)[] = [];
+  private navUl: HTMLElement;
 
   constructor(routes: RouteConfig, rootElement: HTMLElement) {
     this.routes = routes;
     this.rootElement = rootElement;
-    this.prefetchTemplates(); // prefetch templates for faster navigation
-    this.handleLinkClick = this.handleLinkClick.bind(this); // bind the method to the class instance
-    this.renderNavLinks(); // render navigation links on initialization
-    this.setupEventListeners(); // setup event listeners for navigation
+    this.prefetchTemplates();
+    this.handleLinkClick = this.handleLinkClick.bind(this);
+    this.renderNavLinks();
+    this.setupEventListeners();
+  }
+  public onRender(callback: () => void) {
+    this.onRenderCallbacks.push(callback);
   }
 
   private setupEventListeners() {
     window.addEventListener("popstate", () => {
       this.render();
     });
-    document.addEventListener("click", this.handleLinkClick);
+
+    const navbar = document.getElementById("nav-bar__links");
+    if (navbar) {
+      navbar.addEventListener("click", this.handleLinkClick);
+    }
   }
 
   private handleLinkClick(e: MouseEvent) {
     const target = e.target as HTMLElement;
+
+    const navbar = document.getElementById("nav-bar__links");
+    if (!navbar?.contains(target)) return;
+
     if (target.matches("[data-link]")) {
       e.preventDefault();
       const path = target.getAttribute("href");
@@ -43,6 +56,7 @@ export class Router {
 
       this.rootElement.innerHTML = html;
       this.rootElement.classList.remove("fade-out");
+      this.onRenderCallbacks.forEach((callback) => callback()); // Call all registered render callbacks
     } catch (error) {
       this.rootElement.innerHTML = this.routes["/404"].html;
       console.error("Render error:", error);

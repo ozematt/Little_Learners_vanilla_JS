@@ -8,15 +8,27 @@ type TestimonialT = {
 export class Testimonials {
   private testimonials: TestimonialT[];
   private container: HTMLElement;
+  private previousButton: HTMLElement;
+  private nextButton: HTMLElement;
+  private currentIndex: number = 0;
 
-  constructor(testimonials: TestimonialT[], container: HTMLElement) {
+  constructor(
+    testimonials: TestimonialT[],
+    container: HTMLElement,
+    previousButton: HTMLElement,
+    nextButton: HTMLElement
+  ) {
     this.testimonials = testimonials;
     this.container = container;
+    this.previousButton = previousButton;
+    this.nextButton = nextButton;
+    this.setupEventListeners();
   }
 
   private setTemplate(item: TestimonialT): string {
     const template = `
-        <article class="testimonials__container__card">
+        <article class="testimonials__container__card" 
+          >
           <div class="avatar__container"><img src="${
             item.avatar
           }" alt="avatar icon" /></div>
@@ -46,9 +58,33 @@ export class Testimonials {
   }
   public render(): void {
     if (!this.testimonials || this.testimonials.length === 0) return;
-    const html = this.testimonials
-      .map((item) => this.setTemplate(item))
-      .join("");
-    this.container.innerHTML = html;
+
+    const carouselContainer = `
+      <div class="testimonials__container__slider" style="transform: translateX(-${
+        this.currentIndex * 470
+      }px)">
+        ${this.testimonials.map((item) => this.setTemplate(item)).join("")}
+      </div>
+`;
+
+    this.container.innerHTML = carouselContainer;
+  }
+  private setupEventListeners() {
+    this.previousButton.addEventListener("click", () => {
+      if (this.currentIndex === 0) return;
+      this.currentIndex -= 1;
+
+      this.render();
+    });
+    this.nextButton.addEventListener("click", () => {
+      if (this.currentIndex === this.testimonials.length - 3) {
+        this.currentIndex = 0;
+        this.render();
+        return;
+      }
+      this.currentIndex += 1;
+
+      this.render();
+    });
   }
 }

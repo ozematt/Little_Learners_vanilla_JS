@@ -3,32 +3,58 @@ import { navLinks, benefitsData, testimonialsData } from "./data";
 import { Benefit, Testimonials } from "./home";
 
 document.addEventListener("DOMContentLoaded", async function () {
-  // router
-  const router = new Router(navLinks, document.getElementById("app")!);
-  await router.render();
+  const rootElement = document.getElementById("app")!;
+  // const navUl = document.getElementById("nav-bar__links")!;
+  const router = new Router(navLinks, rootElement);
 
-  // render benefit items
-  const benefitsContainer = document.getElementById(
-    "benefitsId"
-  ) as HTMLElement;
+  // Dodaj metodę do ponownej inicjalizacji komponentów
+  router.onRender(() => {
+    initializePageComponents();
+  });
 
-  if (benefitsContainer) {
-    const benefitItems = new Benefit(benefitsData, benefitsContainer);
+  router.render();
 
-    benefitItems.render();
+  // Przenieś inicjalizację komponentów do osobnej funkcji
+  function initializePageComponents() {
+    const currentPath = window.location.pathname;
+
+    if (currentPath === "/") {
+      initBenefits();
+      initTestimonials();
+    }
+
+    // Dodaj inicjalizację dla innych ścieżek
+    // if (currentPath === "/about") {
+    //   initAboutPageComponents();
+    // }
   }
 
-  // render testimonials
-  const testimonialsContainer = document.getElementById(
-    "testimonials"
-  ) as HTMLElement;
+  ////HOME PAGE - RENDERING
+  function initBenefits() {
+    const benefitsContainer = document.getElementById("benefitsId");
+    if (benefitsContainer) {
+      new Benefit(benefitsData, benefitsContainer).render();
+    }
+  }
 
-  if (testimonialsContainer) {
-    const testimonials = new Testimonials(
-      testimonialsData,
-      testimonialsContainer
-    );
-
-    testimonials.render();
+  function initTestimonials() {
+    //// ładowanie kodu gdy jest potrzebne
+    // const { Testimonials } = await import("./components/Testimonials");
+    const testimonialsContainer = document.getElementById("testimonials");
+    const previousButton = document.getElementById("previous-comment");
+    const nextButton = document.getElementById("next-comment");
+    if (testimonialsContainer && previousButton && nextButton) {
+      const comments = new Testimonials(
+        testimonialsData,
+        testimonialsContainer,
+        previousButton,
+        nextButton
+      );
+      comments.render();
+      // comments.handlePreviousButton();
+      // comments.handleNextButton();
+      // console.log(comments.currentIndex);
+      // console.log(previousButton);
+    }
   }
 });

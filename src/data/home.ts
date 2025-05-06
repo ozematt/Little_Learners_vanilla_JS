@@ -48,7 +48,7 @@ export const testimonialsData = [
   {
     avatar: "pages/home_assets/avatar-icon02.svg",
     name: "David K",
-    rating: 5,
+    rating: 4.5,
     comment:
       "Choosing Little Learners Academy for my daughter was the best decision. She has thrived in their nurturing and stimulating environment.",
   },
@@ -58,5 +58,12 @@ export const testimonialsData = [
     rating: 5,
     comment:
       "My son's social and academic growth has been remarkable since joining Little Learners Academy. I am grateful for the supportive and dedicated teachers.",
+  },
+  {
+    avatar: "pages/home_assets/avatar-icon01.svg",
+    name: "John L",
+    rating: 4.5,
+    comment:
+      "Looking for a preschool that truly cares about your child's development? Look no further than Little Learners Academy. The staff is amazing, and my child has blossomed here.",
   },
 ];

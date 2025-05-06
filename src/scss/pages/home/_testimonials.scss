@@ -14,20 +14,26 @@
   }
 
   &__container {
-    display: flex;
-    justify-content: space-between;
-    gap: 50px;
+    width: 1380px;
+    padding: 8px;
+    overflow: hidden;
 
+    &__slider {
+      display: flex;
+      justify-content: space-between;
+      gap: 50px;
+      transition: transform 0.5s ease-in-out;
+    }
     &__card {
       @include border-stroke();
       @include item-shadow();
-      width: 100%;
-      max-width: 425px;
-      height: 462px;
+      width: 420px;
+
       background-color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
+      flex-shrink: 0;
     }
   }
   &__user-name {
@@ -65,7 +71,6 @@
   &__full {
     position: absolute;
     overflow: hidden;
-    // width: 140px;
   }
 }
 .arrow-btn {
@@ -75,6 +80,7 @@
   height: 58px;
   display: grid;
   place-items: center;
+  cursor: pointer;
   &__left {
     transform: rotate(180deg);
   }
