@@ -1,6 +1,6 @@
 import { Router } from "./core/Router.js";
-import { navLinks, benefits } from "./data";
-import { Benefit } from "./home/Benefit";
+import { navLinks, benefitsData, testimonialsData } from "./data";
+import { Benefit, Testimonials } from "./home";
 
 document.addEventListener("DOMContentLoaded", async function () {
   // router
@@ -13,8 +13,22 @@ document.addEventListener("DOMContentLoaded", async function () {
   ) as HTMLElement;
 
   if (benefitsContainer) {
-    const benefitItems = new Benefit(benefits, benefitsContainer);
+    const benefitItems = new Benefit(benefitsData, benefitsContainer);
 
     benefitItems.render();
+  }
+
+  // render testimonials
+  const testimonialsContainer = document.getElementById(
+    "testimonials"
+  ) as HTMLElement;
+
+  if (testimonialsContainer) {
+    const testimonials = new Testimonials(
+      testimonialsData,
+      testimonialsContainer
+    );
+
+    testimonials.render();
   }
 });

@@ -6,8 +6,17 @@
 .testimonials {
   padding-top: 200px;
 
-  &__container {
+  &__content {
     padding-top: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
 
     &__card {
       @include border-stroke();
@@ -34,6 +43,7 @@
     padding: 30px 50px 50px;
     color: $color-gray;
     text-align: center;
+    line-height: 150%;
   }
 }
 
@@ -44,4 +54,26 @@
   width: 80px;
   height: 80px;
   background-color: $color-background;
+  display: grid;
+  place-items: center;
+}
+
+.rating__container {
+  position: relative;
+  padding-top: 30px;
+  & img:first-of-type {
+    position: absolute;
+    opacity: 0; //// RATING STAR
+  }
+}
+.arrow-btn {
+  @include border-stroke();
+  background-color: white;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  &__left {
+    transform: rotate(180deg);
+  }
 }

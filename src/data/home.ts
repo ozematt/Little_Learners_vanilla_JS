@@ -1,4 +1,4 @@
-export const benefits = [
+export const benefitsData = [
   {
     icon: "pages/home_assets/benefits-icon01.svg",
     title: "Holistic Learning Approach",
@@ -34,5 +34,29 @@ export const benefits = [
     title: "Parent Involvement",
     description:
       "We foster a strong parent-school partnership to ensure seamless communication and collaboration.",
+  },
+];
+
+export const testimonialsData = [
+  {
+    avatar: "pages/home_assets/avatar-icon01.svg",
+    name: "Jennifer B",
+    rating: 5,
+    comment:
+      "Little Learners Academy has been a second home for my child. The caring staff and engaging programs have made her excited to go to school every day!",
+  },
+  {
+    avatar: "pages/home_assets/avatar-icon02.svg",
+    name: "David K",
+    rating: 5,
+    comment:
+      "Choosing Little Learners Academy for my daughter was the best decision. She has thrived in their nurturing and stimulating environment.",
+  },
+  {
+    avatar: "pages/home_assets/avatar-icon03.svg",
+    name: "Emily L",
+    rating: 5,
+    comment:
+      "My son's social and academic growth has been remarkable since joining Little Learners Academy. I am grateful for the supportive and dedicated teachers.",
   },
 ];

@@ -17,6 +17,7 @@
 .benefit {
   @include border-stroke();
   @include item-shadow();
+  background-color: white;
   padding: 80px 50px 50px;
   width: 100%;
   max-width: 504px;
