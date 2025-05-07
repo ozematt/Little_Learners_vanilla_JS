@@ -19,9 +19,14 @@
       @include flex-center;
       border-left: $border-primary-stroke;
       padding: 0 34px;
+      position: relative;
       cursor: pointer;
       &:hover {
         background-color: $color-secondary-accent;
+      }
+      & a {
+        position: absolute;
+        inset: 0;
       }
     }
     & li:last-child {

@@ -4,7 +4,6 @@ export class Router {
   private routes: RouteConfig;
   private rootElement: HTMLElement;
   private onRenderCallbacks: (() => void)[] = [];
-  private navUl: HTMLElement;
 
   constructor(routes: RouteConfig, rootElement: HTMLElement) {
     this.routes = routes;
@@ -72,8 +71,8 @@ export class Router {
       .map(
         (path) => `
         <li>
-          <a href="${path}" data-link>
-            ${this.routes[path].text || path}
+        ${this.routes[path].text || path}
+          <a href="${path}"  data-link>
           </a>
         </li>
       `

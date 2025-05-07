@@ -64,8 +64,7 @@ export class Testimonials {
       <div id="testimonials-slider-id" class="testimonials__container__slider" >
         ${this.testimonials.map((item) => this.setTemplate(item)).join("")}
       </div>
-`;
-
+      `;
     this.container.innerHTML = carouselContainer;
   }
   private setupEventListeners() {
