@@ -22,6 +22,7 @@ export class Testimonials {
     this.container = container;
     this.previousButton = previousButton;
     this.nextButton = nextButton;
+    this.render();
     this.setupEventListeners();
   }
 
@@ -60,9 +61,7 @@ export class Testimonials {
     if (!this.testimonials || this.testimonials.length === 0) return;
 
     const carouselContainer = `
-      <div class="testimonials__container__slider" style="transform: translateX(-${
-        this.currentIndex * 470
-      }px)">
+      <div id="testimonials-slider-id" class="testimonials__container__slider" >
         ${this.testimonials.map((item) => this.setTemplate(item)).join("")}
       </div>
 `;
@@ -73,18 +72,21 @@ export class Testimonials {
     this.previousButton.addEventListener("click", () => {
       if (this.currentIndex === 0) return;
       this.currentIndex -= 1;
-
-      this.render();
+      this.updateSliderPosition();
     });
+
     this.nextButton.addEventListener("click", () => {
       if (this.currentIndex === this.testimonials.length - 3) {
         this.currentIndex = 0;
-        this.render();
-        return;
+      } else {
+        this.currentIndex += 1;
       }
-      this.currentIndex += 1;
-
-      this.render();
+      this.updateSliderPosition();
     });
+  }
+  private updateSliderPosition() {
+    const slider = document.getElementById("testimonials-slider-id");
+    if (!slider) return;
+    slider.style.transform = `translateX(-${this.currentIndex * 470}px)`;
   }
 }
