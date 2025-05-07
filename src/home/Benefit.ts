@@ -11,6 +11,7 @@ export class Benefit {
   constructor(benefits: BenefitT[], container: HTMLElement) {
     this.benefits = benefits;
     this.container = container;
+    this.render();
   }
   private setTemplate(item: BenefitT): string {
     const template = `

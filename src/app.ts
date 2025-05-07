@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   function initBenefits() {
     const benefitsContainer = document.getElementById("benefitsId");
     if (benefitsContainer) {
-      new Benefit(benefitsData, benefitsContainer).render();
+      new Benefit(benefitsData, benefitsContainer);
     }
   }
 
@@ -44,17 +44,12 @@ document.addEventListener("DOMContentLoaded", async function () {
     const previousButton = document.getElementById("previous-comment");
     const nextButton = document.getElementById("next-comment");
     if (testimonialsContainer && previousButton && nextButton) {
-      const comments = new Testimonials(
+      new Testimonials(
         testimonialsData,
         testimonialsContainer,
         previousButton,
         nextButton
       );
-      comments.render();
-      // comments.handlePreviousButton();
-      // comments.handleNextButton();
-      // console.log(comments.currentIndex);
-      // console.log(previousButton);
     }
   }
 });
