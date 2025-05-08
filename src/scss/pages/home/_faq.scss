@@ -16,8 +16,14 @@
   cursor: pointer;
   width: 100%;
   max-width: 770px;
-  background-color: white;
-  //   display: flex;
+  background-color: $color-secondary-accent;
+  &[open] {
+    .faq__item__question__q {
+      text-decoration: underline;
+      text-underline-offset: 24px;
+    }
+  }
+
   &__question {
     @include outfit-semi-bold();
     line-height: 150%;
@@ -32,10 +38,6 @@
       display: none;
       content: "";
     }
-    // &__q {
-    //   text-decoration: underline;
-    //   text-underline-offset: 24px;
-    // }
   }
   &__answer {
     @include outfit-medium();

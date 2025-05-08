@@ -1,6 +1,6 @@
 import { Router } from "./core/Router.js";
 import { navLinks, benefitsData, testimonialsData } from "./data";
-import { Benefit, Testimonials } from "./home";
+import { Benefit, Testimonials, FAQ } from "./home";
 
 document.addEventListener("DOMContentLoaded", async function () {
   const rootElement = document.getElementById("app")!;
@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (currentPath === "/") {
       initBenefits();
       initTestimonials();
+      initFAQ();
     }
 
     // Dodaj inicjalizację dla innych ścieżek
@@ -50,6 +51,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         previousButton,
         nextButton
       );
+    }
+  }
+
+  function initFAQ() {
+    const faqContainer = document.getElementById("faq-container");
+    if (faqContainer) {
+      new FAQ(faqContainer);
     }
   }
 });
