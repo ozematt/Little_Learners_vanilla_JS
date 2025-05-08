@@ -19,6 +19,13 @@
   font-size: 20px;
   color: $color-primary-black;
 }
+@mixin outfit-semi-bold() {
+  font-family: $font-outfit;
+  font-weight: 600;
+  font-size: 22px;
+  color: $color-primary-black;
+}
+
 @mixin outfit-extra-bold() {
   font-family: $font-outfit;
   font-weight: 800;

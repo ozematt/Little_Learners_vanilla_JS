@@ -1,0 +1,54 @@
+@use "../../settings/colors" as *;
+@use "../../settings/variables" as *;
+@use "../../settings/fonts" as *;
+@use "../../settings/mixins" as *;
+
+.faq {
+  padding-top: 200px;
+  &__content {
+    padding-top: 100px;
+  }
+}
+
+.faq__item {
+  @include border-stroke();
+  list-style: none;
+  cursor: pointer;
+  width: 100%;
+  max-width: 770px;
+  background-color: white;
+  //   display: flex;
+  &__question {
+    @include outfit-semi-bold();
+    line-height: 150%;
+    width: 100%;
+    display: inline-flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px 37px;
+
+    &::-webkit-details-marker,
+    &::marker {
+      display: none;
+      content: "";
+    }
+    // &__q {
+    //   text-decoration: underline;
+    //   text-underline-offset: 24px;
+    // }
+  }
+  &__answer {
+    @include outfit-medium();
+    line-height: 150%;
+    padding: 24px 110px 40px 40px;
+  }
+}
+
+.faq__icon {
+  @include border-stroke();
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background-color: $color-background;
+}
