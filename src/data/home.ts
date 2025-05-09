@@ -112,10 +112,29 @@ export const faqData = [
   },
 ];
 
-const navigationData = [
+export const navigationData = [
   {
     title: "About Us",
+    href: "/about-us",
     description:
       "Discover our Mission, Values, and our unwavering commitment to providing the best learning experience for your child. Learn about our passionate educators and our engaging approach to early education.",
+  },
+  {
+    title: "Student Life",
+    href: "/student-life",
+    description:
+      "Peek into the vibrant and enriching world of Student Life at Little Learners Academy. Discover the array of extracurricular activities, arts and crafts, sports, and social events that make our school experience truly memorable",
+  },
+  {
+    title: "Academics",
+    href: "/academics",
+    description:
+      "Delve into our comprehensive academic programs designed to stimulate young minds, foster creativity, and encourage a love for learning. Explore our well-rounded curriculum that nurtures both intellectual and social development.",
+  },
+  {
+    title: "Admissions",
+    href: "/admissions",
+    description:
+      "Learn about our Enrollment Process and how to secure your child's place at Little Learners Academy. Find information about our admission requirements, application deadlines, and available spaces.",
   },
 ];
