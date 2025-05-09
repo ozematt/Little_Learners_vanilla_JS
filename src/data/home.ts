@@ -111,3 +111,11 @@ export const faqData = [
       "To apply for admission, please visit our website and fill out the online application form. You can also schedule a tour of our facility to learn more about our programs and meet our staff.",
   },
 ];
+
+const navigationData = [
+  {
+    title: "About Us",
+    description:
+      "Discover our Mission, Values, and our unwavering commitment to providing the best learning experience for your child. Learn about our passionate educators and our engaging approach to early education.",
+  },
+];

@@ -1,0 +1,57 @@
+@use "../../settings/colors" as *;
+@use "../../settings/variables" as *;
+@use "../../settings/fonts" as *;
+@use "../../settings/mixins" as *;
+
+.navigation {
+  padding-top: 200px;
+  &__content {
+    padding-top: 100px;
+  }
+}
+
+.navigation__item {
+  @include border-stroke();
+  @include item-shadow();
+  background-color: white;
+  width: 100%;
+  max-width: 773px;
+  &__content {
+    padding: 80px;
+  }
+  &__title {
+    @include raleway-bold();
+    font-size: 48px;
+    text-align: center;
+  }
+  &__description {
+    @include outfit-medium();
+    padding-top: 50px;
+    line-height: 150%;
+    text-align: center;
+    color: $color-gray-description;
+  }
+  &__btn {
+    @include border-stroke();
+    @include item-shadow();
+    @include outfit-medium();
+    width: 100%;
+    max-width: 613px;
+    margin: 0 80px 80px 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 0;
+    gap: 10px;
+    background-color: $color-background-item;
+    cursor: pointer;
+    &:hover {
+      box-shadow: none;
+      transition: all 0.2s ease-in-out;
+    }
+  }
+}
+
+.decoration__container {
+  padding-top: 30px;
+}
