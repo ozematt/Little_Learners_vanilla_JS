@@ -31,23 +31,42 @@ export class FAQ {
 
   public render(): void {
     if (!this.questions || this.questions.length === 0) return;
-    const html = this.questions.map((item) => this.setTemplate(item)).join("");
-    this.container.innerHTML = html;
+    const firstColumn = this.questions.slice(0, 3);
+    const secondColumn = this.questions.slice(3, 6);
+
+    const firstColumnHtml = firstColumn
+      .map((item) => this.setTemplate(item))
+      .join("");
+
+    const secondColumnHtml = secondColumn
+      .map((item) => this.setTemplate(item))
+      .join("");
+
+    this.container.innerHTML = `
+      <div class="faq__column">
+        ${firstColumnHtml}
+      </div>
+      <div class="faq__column">
+        ${secondColumnHtml}
+      </div>
+    `;
   }
   private setupEventListeners() {
     this.container.addEventListener("click", (e) => {
       const target = (e.target as HTMLElement).closest(
-        "details"
+        "summary"
       ) as HTMLDetailsElement;
       if (!target) return;
 
-      const icon = target.querySelector(".faq__icon img") as HTMLImageElement;
-
-      if (!target.hasAttribute("open")) {
-        target.style.backgroundColor = "white";
+      const details = target.parentNode as HTMLDetailsElement;
+      const icon = details.querySelector(".faq__icon img") as HTMLImageElement;
+      if (!details.hasAttribute("open")) {
+        details.classList.add("faq__item--open");
+        details.classList.remove("faq__item--closed");
         icon.src = "pages/home_assets/minus-icon.svg";
       } else {
-        target.style.backgroundColor = "var(--color-secondary-accent)";
+        details.classList.add("faq__item--closed");
+        details.classList.remove("faq__item--open");
         icon.src = "pages/home_assets/plus-icon.svg";
       }
     });

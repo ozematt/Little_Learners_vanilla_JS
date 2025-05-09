@@ -5,16 +5,11 @@
 
 .faq {
   padding-top: 200px;
-  //   width: 665px;
+
   &__content {
     padding-top: 100px;
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    // height: 771px;
-    &__q {
-      width: 665px;
-    }
+    gap: 50px;
   }
 }
 
@@ -23,10 +18,15 @@
   list-style: none;
   cursor: pointer;
   width: 100%;
-  max-width: 770px;
   background-color: $color-secondary-accent;
   height: fit-content;
-
+  margin-bottom: 30px;
+  &--open {
+    background-color: white;
+  }
+  &--closed {
+    background-color: $color-secondary-accent;
+  }
   &[open] {
     .faq__item__question__q {
       text-decoration: underline;
@@ -63,4 +63,8 @@
   display: grid;
   place-items: center;
   background-color: $color-background;
+}
+
+.faq__column {
+  width: 771px;
 }
