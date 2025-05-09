@@ -7,6 +7,10 @@
   padding-top: 200px;
   &__content {
     padding-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 50px;
+    gap: 50px;
   }
 }
 
@@ -44,6 +48,7 @@
     padding: 18px 0;
     gap: 10px;
     background-color: $color-background-item;
+    position: relative;
     cursor: pointer;
     &:hover {
       box-shadow: none;
@@ -54,4 +59,8 @@
 
 .decoration__container {
   padding-top: 30px;
+}
+.navigation__link {
+  position: absolute;
+  inset: 0;
 }

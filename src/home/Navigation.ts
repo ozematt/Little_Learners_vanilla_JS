@@ -20,23 +20,26 @@ export class Navigation extends Router {
     super(routes, rootElement);
     this.container = container;
     this.navigateData = navigateData;
-    this.setEventListeners();
     this.navItemsRender();
+    this.setEventListeners();
   }
   public setEventListeners() {
+    if (!this.container) return;
     this.container.addEventListener("click", (e) => {
       const item = e.target as HTMLElement;
+      console.log("działa");
+
       if (item.matches("[data-nav-link]")) {
         const href = item.getAttribute("href") as string;
         this.navigate(href);
       }
     });
   }
-  // public render(){}
+
   public navigate(path: string) {
     super.navigate(path);
   }
-  public navItemsRender() {
+  public navItemsRender(): void {
     if (!this.navigateData || this.navigateData.length === 0) return;
     const html = this.navigateData
       .map((item) => this.setTemplate(item))
@@ -60,7 +63,7 @@ export class Navigation extends Router {
         </div>
 
         <button class="navigation__item__btn">
-          <a href="${item.href}" data-nav-link>Learn More </a><img src="arrow.svg" alt="arrow" />
+          <a href="${item.href}" class="navigation__link" data-nav-link></a>Learn More<img src="arrow.svg" alt="arrow" />
         </button>
       </article>
     `;
