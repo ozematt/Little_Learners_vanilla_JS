@@ -5,8 +5,16 @@
 
 .faq {
   padding-top: 200px;
+  //   width: 665px;
   &__content {
     padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    // height: 771px;
+    &__q {
+      width: 665px;
+    }
   }
 }
 
@@ -17,6 +25,8 @@
   width: 100%;
   max-width: 770px;
   background-color: $color-secondary-accent;
+  height: fit-content;
+
   &[open] {
     .faq__item__question__q {
       text-decoration: underline;

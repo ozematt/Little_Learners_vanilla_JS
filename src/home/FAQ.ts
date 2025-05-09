@@ -1,26 +1,39 @@
+type FAQdata = {
+  question: string;
+  answer: string;
+};
+
 export class FAQ {
-  //   private questions: string[];
+  private questions: FAQdata[];
   private container: HTMLElement;
 
-  constructor(container: HTMLElement) {
-    // this.questions = questions;
+  constructor(questions: FAQdata[], container: HTMLElement) {
+    this.questions = questions;
     this.container = container;
     this.setupEventListeners();
-    // this.render();
+    this.render();
   }
 
-  private setTemplate(item: string): string {
+  private setTemplate(item: FAQdata): string {
     const template = `
-      
+       <details class="faq__item">
+          <summary class="faq__item__question">
+            <span class="faq__item__question__q">${item.question}</span>
+            <span class="faq__icon">
+              <img src="pages/home_assets/plus-icon.svg" alt="plus icon"/>
+            </span>
+          </summary>
+          <p class="faq__item__answer">${item.answer}</p>
+        </details>
         `;
     return template;
   }
 
-  //   public render(): void {
-  //     if (!this.questions || this.questions.length === 0) return;
-  //     const html = this.questions.map((item) => this.setTemplate(item)).join("");
-  //     this.container.innerHTML = html;
-  //   }
+  public render(): void {
+    if (!this.questions || this.questions.length === 0) return;
+    const html = this.questions.map((item) => this.setTemplate(item)).join("");
+    this.container.innerHTML = html;
+  }
   private setupEventListeners() {
     this.container.addEventListener("click", (e) => {
       const target = (e.target as HTMLElement).closest(

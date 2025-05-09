@@ -1,5 +1,5 @@
 import { Router } from "./core/Router.js";
-import { navLinks, benefitsData, testimonialsData } from "./data";
+import { navLinks, benefitsData, testimonialsData, faqData } from "./data";
 import { Benefit, Testimonials, FAQ } from "./home";
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   function initFAQ() {
     const faqContainer = document.getElementById("faq-container");
     if (faqContainer) {
-      new FAQ(faqContainer);
+      new FAQ(faqData, faqContainer);
     }
   }
 });
