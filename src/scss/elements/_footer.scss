@@ -1,0 +1,44 @@
+@use "../settings/colors" as *;
+@use "../settings/variables" as *;
+@use "../settings/fonts" as *;
+@use "../settings/mixins" as *;
+
+footer {
+  @include border-stroke();
+  @include item-shadow();
+  background-color: white;
+}
+
+.company-info {
+  padding: 100px 113px 50px;
+  &__contact {
+    @include outfit-medium();
+    line-height: 150%;
+    color: $color-gray-description;
+    width: 519px;
+    & p {
+      padding-top: 20px;
+    }
+  }
+}
+
+.contact-item-container {
+  padding-top: 50px;
+
+  & .contact__item {
+    display: flex;
+    align-items: center;
+    padding-bottom: 24px;
+    & .item__icon {
+      @include border-stroke();
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      background-color: $color-background;
+    }
+    & span {
+      padding-left: 10px;
+    }
+  }
+}
