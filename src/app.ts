@@ -4,7 +4,7 @@ import { Testimonials, FAQ, Navigation } from "./home";
 
 document.addEventListener("DOMContentLoaded", async function () {
   const rootElement = document.getElementById("app")!;
-  // const navUl = document.getElementById("nav-bar__links")!;
+
   const router = new Router(navLinks, rootElement);
 
   // Dodaj metodę do ponownej inicjalizacji komponentów
@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   ////HOME PAGE - RENDERING
-
   function initTestimonials() {
     //// ładowanie kodu gdy jest potrzebne
     // const { Testimonials } = await import("./components/Testimonials");
