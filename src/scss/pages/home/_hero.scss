@@ -5,9 +5,9 @@
 
 .hero {
   @include outfit-medium();
-  // padding: 80px 115px 200px;
   display: flex;
   align-items: center;
+  padding-top: 80px;
 
   &__content {
     padding-left: 60px;
@@ -24,7 +24,7 @@
       line-height: 150%;
       color: $color-gray;
     }
-    &__main-heading {
+    & h1 {
       @include raleway-title();
       & span {
         color: $color-primary-accent;
@@ -47,6 +47,41 @@
         @include outfit-medium();
         font-size: 18px;
         line-height: 150%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 1700px) {
+  .hero {
+    padding-top: 60px;
+    & img {
+      width: 615px;
+      height: 663px;
+    }
+    & h1 {
+      font-size: 40px;
+    }
+    &__content {
+      padding-left: 50px;
+      &__intro-text {
+        text-underline-offset: 10px;
+        font-size: 18px;
+        padding-bottom: 7px;
+      }
+      &__description {
+        font-size: 16px;
+        padding-top: 20px;
+      }
+      &__stats {
+        margin-top: 50px;
+        padding: 20px 40px;
+        &__number {
+          font-size: 34px;
+        }
+        &__info {
+          font-size: 16px;
+        }
       }
     }
   }

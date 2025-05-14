@@ -4,7 +4,7 @@
 @use "../../settings/mixins" as *;
 
 .home {
-  padding: 80px 115px 200px;
+  padding: 0 115px 200px;
 }
 
 .section-header {
@@ -31,4 +31,10 @@
   @include outfit-medium();
   line-height: 150%;
   text-align: center;
+}
+
+@media only screen and (max-width: 1700px) {
+  .home {
+    padding: 0 30px 200px;
+  }
 }
