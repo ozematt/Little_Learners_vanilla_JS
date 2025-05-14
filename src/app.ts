@@ -1,12 +1,6 @@
 import { Router } from "./core/Router.js";
-import {
-  navLinks,
-  benefitsData,
-  testimonialsData,
-  faqData,
-  navigationData,
-} from "./data";
-import { Benefit, Testimonials, FAQ, Navigation } from "./home";
+import { navLinks, testimonialsData, faqData, navigationData } from "./data";
+import { Testimonials, FAQ, Navigation } from "./home";
 
 document.addEventListener("DOMContentLoaded", async function () {
   const rootElement = document.getElementById("app")!;
@@ -25,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const currentPath = window.location.pathname;
 
     if (currentPath === "/") {
-      initBenefits();
+      // initBenefits();
       initTestimonials();
       initFAQ();
       initNavigation();
@@ -38,12 +32,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   ////HOME PAGE - RENDERING
-  function initBenefits() {
-    const benefitsContainer = document.getElementById("benefitsId");
-    if (benefitsContainer) {
-      new Benefit(benefitsData, benefitsContainer);
-    }
-  }
 
   function initTestimonials() {
     //// ładowanie kodu gdy jest potrzebne
