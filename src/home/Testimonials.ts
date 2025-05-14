@@ -86,6 +86,12 @@ export class Testimonials {
   private updateSliderPosition() {
     const slider = document.getElementById("testimonials-slider-id");
     if (!slider) return;
+    const laptop = window.matchMedia("(max-width: 1700px)");
+    if (laptop.matches) {
+      slider.style.transform = `translateX(-${this.currentIndex * 380}px)`;
+      return;
+    }
+
     slider.style.transform = `translateX(-${this.currentIndex * 470}px)`;
   }
 }

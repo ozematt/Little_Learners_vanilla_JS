@@ -21,7 +21,7 @@
   padding: 80px 50px 50px;
   width: 100%;
   max-width: 504px;
-  height: 306px;
+  // height: 306px;
   position: relative;
 
   &__icon-container {
@@ -46,5 +46,34 @@
     font-size: 18px;
     line-height: 150%;
     color: $color-gray-description;
+  }
+}
+
+@media only screen and (max-width: 1700px) {
+  .benefits__container {
+    padding-top: 80px;
+    row-gap: 68px;
+  }
+  .benefits {
+    padding-top: 150px;
+  }
+  .benefit {
+    // height: 246px;
+    padding: 60px 38px 40px;
+    &__icon-container {
+      width: 56px;
+      height: 56px;
+      left: 24px;
+      top: -28px;
+      & img {
+        scale: 0.7;
+      }
+    }
+    &__title {
+      font-size: 24px;
+    }
+    &__description {
+      font-size: 16px;
+    }
   }
 }

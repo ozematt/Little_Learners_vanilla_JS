@@ -81,8 +81,54 @@
   height: 58px;
   display: grid;
   place-items: center;
+  flex-shrink: 0;
   cursor: pointer;
   &__left {
     transform: rotate(180deg);
+  }
+}
+
+@media only screen and (max-width: 1700px) {
+  .testimonials {
+    padding-top: 150px;
+    &__container {
+      width: 1115px;
+      &__card {
+        width: 340px;
+      }
+      &__slider {
+        gap: 40px;
+      }
+    }
+
+    &__content {
+      padding-top: 80px;
+    }
+    &__user-name {
+      padding-top: 10px;
+      font-size: 20px;
+    }
+    &__comment {
+      padding: 24px 40px 40px;
+      font-size: 16px;
+    }
+  }
+  .arrow-btn {
+    width: 48px;
+    height: 48px;
+    & img {
+      scale: 0.6;
+    }
+  }
+
+  .avatar__container {
+    margin-top: 40px;
+    width: 66px;
+    height: 66px;
+  }
+
+  .rating__container {
+    padding-top: 24px;
+    scale: 0.8;
   }
 }
