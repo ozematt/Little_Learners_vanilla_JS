@@ -1,7 +1,8 @@
 export type RouteConfig = {
   [path: string]: {
     html: string;
-    text?: string;
+    title: string;
+    description?: string;
   };
 };
 

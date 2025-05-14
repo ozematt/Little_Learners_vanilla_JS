@@ -1,5 +1,5 @@
 import { Router } from "./core/Router.js";
-import { navLinks, testimonialsData, faqData, navigationData } from "./data";
+import { navLinks, testimonialsData, faqData } from "./data";
 import { Testimonials, FAQ, Navigation } from "./home";
 
 document.addEventListener("DOMContentLoaded", async function () {
@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     const currentPath = window.location.pathname;
 
     if (currentPath === "/") {
-      // initBenefits();
       initTestimonials();
       initFAQ();
       initNavigation();
@@ -59,12 +58,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   function initNavigation() {
     const navigationContainer = document.getElementById("navigation-container");
     if (navigationContainer) {
-      new Navigation(
-        navLinks,
-        rootElement,
-        navigationContainer,
-        navigationData
-      );
+      new Navigation(navLinks, rootElement, navigationContainer);
     }
   }
 });

@@ -1,7 +1,7 @@
 import { RouteConfig } from "./types";
 
 export class Router {
-  private routes: RouteConfig;
+  public routes: RouteConfig;
   private rootElement: HTMLElement;
   private onRenderCallbacks: (() => void)[] = [];
 
@@ -71,7 +71,7 @@ export class Router {
       .map(
         (path) => `
         <li>
-        ${this.routes[path].text || path}
+        ${this.routes[path].title || path}
           <a href="${path}"  data-link>
           </a>
         </li>

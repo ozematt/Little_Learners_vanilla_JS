@@ -1,21 +1,29 @@
 export const navLinks = {
-  "/": { text: "Home", html: "pages/home.html" },
+  "/": { title: "Home", html: "pages/home.html" },
   "/about-us": {
-    text: "About Us",
+    title: "About Us",
     html: "/pages/about-us.html",
+    description:
+      "Discover our Mission, Values, and our unwavering commitment to providing the best learning experience for your child. Learn about our passionate educators and our engaging approach to early education.",
   },
   "/academics": {
-    text: "Academics",
+    title: "Academics",
     html: "/pages/academics.html",
+    description:
+      "Delve into our comprehensive academic programs designed to stimulate young minds, foster creativity, and encourage a love for learning. Explore our well-rounded curriculum that nurtures both intellectual and social development.",
   },
   "/admissions": {
-    text: "Admissions",
+    title: "Admissions",
     html: "pages/admissions.html",
+    description:
+      "Learn about our Enrollment Process and how to secure your child's place at Little Learners Academy. Find information about our admission requirements, application deadlines, and available spaces.",
   },
   "/student-life": {
-    text: "Student Life",
+    title: "Student Life",
     html: "pages/student-life.html",
+    description:
+      "Peek into the vibrant and enriching world of Student Life at Little Learners Academy. Discover the array of extracurricular activities, arts and crafts, sports, and social events that make our school experience truly memorable",
   },
-  "/contact": { text: "Contact", html: "pages/contact.html" },
-  "/404": { text: "404", html: "/pages/404.html" },
-} as const;
+  "/contact": { title: "Contact", html: "pages/contact.html" },
+  "/404": { title: "404", html: "/pages/404.html" },
+};
