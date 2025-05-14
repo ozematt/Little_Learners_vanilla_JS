@@ -57,6 +57,10 @@ footer {
     width: 226px;
     & li {
       padding-bottom: 14px;
+      &:hover {
+        opacity: 0.5;
+        cursor: pointer;
+      }
     }
     & .info-link__title {
       font-weight: 600;
@@ -91,6 +95,10 @@ footer {
       display: grid;
       place-items: center;
       background-color: $color-background-item;
+      &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+      }
     }
   }
 }
