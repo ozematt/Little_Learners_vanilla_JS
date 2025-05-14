@@ -3,6 +3,7 @@
 @use "../settings/fonts" as *;
 @use "../settings/mixins" as *;
 
+// DESKTOP
 .nav-bar {
   @include border-stroke;
   @include outfit-medium;
@@ -40,5 +41,23 @@
     background-color: $color-primary-accent;
     padding: 0 24px;
     border-right: $border-primary-stroke;
+  }
+}
+
+// LAPTOP
+@media only screen and (max-width: 1700px) {
+  .nav-bar {
+    font-size: 16px;
+    height: 66px;
+    & li {
+      padding: 0 30px;
+    }
+    &__logo {
+      padding: 0 20px;
+      img {
+        width: 155px;
+        height: 34px;
+      }
+    }
   }
 }
