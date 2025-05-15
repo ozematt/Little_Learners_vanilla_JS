@@ -19,6 +19,7 @@ export class FAQ {
        <details class="faq__item">
           <summary class="faq__item__question">
             <span class="faq__item__question__q">${item.question}</span>
+            <div class="question-underline"></div> 
             <span class="faq__icon">
               <img src="pages/home_assets/plus-icon.svg" alt="plus icon"/>
             </span>
@@ -31,8 +32,8 @@ export class FAQ {
 
   public render(): void {
     if (!this.questions || this.questions.length === 0) return;
-    const firstColumn = this.questions.slice(0, 3);
-    const secondColumn = this.questions.slice(3, 6);
+    const firstColumn = this.questions.slice(0, 4);
+    const secondColumn = this.questions.slice(4, 8);
 
     const firstColumnHtml = firstColumn
       .map((item) => this.setTemplate(item))

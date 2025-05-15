@@ -15,12 +15,14 @@
 
 .faq__item {
   @include border-stroke();
+  position: relative;
   list-style: none;
   cursor: pointer;
   width: 100%;
   background-color: $color-secondary-accent;
   height: fit-content;
   margin-bottom: 30px;
+  padding: 40px 110px 37px 40px;
   &--open {
     background-color: white;
   }
@@ -28,9 +30,8 @@
     background-color: $color-secondary-accent;
   }
   &[open] {
-    .faq__item__question__q {
-      text-decoration: underline;
-      text-underline-offset: 24px;
+    .question-underline {
+      display: block;
     }
   }
 
@@ -38,11 +39,8 @@
     @include outfit-semi-bold();
     line-height: 150%;
     width: 100%;
-    display: inline-flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 40px 37px;
 
+    // hidden summary default
     &::-webkit-details-marker,
     &::marker {
       display: none;
@@ -52,19 +50,57 @@
   &__answer {
     @include outfit-medium();
     line-height: 150%;
-    padding: 24px 110px 40px 40px;
+    padding-top: 24px;
   }
 }
 
 .faq__icon {
   @include border-stroke();
+  position: absolute;
   width: 40px;
   height: 40px;
   display: grid;
   place-items: center;
   background-color: $color-background;
+  right: 34px;
+  top: 34px;
 }
 
 .faq__column {
   width: 771px;
+}
+.question-underline {
+  display: none;
+  border-bottom: 2px solid black;
+  width: 100%;
+  padding-top: 20px;
+}
+
+@media only screen and (max-width: 1700px) {
+  .faq {
+    padding-top: 150px;
+    &__content {
+      padding-top: 80px;
+      gap: 40px;
+    }
+  }
+  .faq__item {
+    padding: 26px 86px 26px 30px;
+    margin-bottom: 24px;
+    &__question {
+      font-size: 18px;
+    }
+    &__answer {
+      font-size: 16px;
+    }
+  }
+  .faq__icon {
+    width: 32px;
+    height: 32px;
+    right: 30px;
+    top: 24px;
+    & img {
+      scale: 0.8;
+    }
+  }
 }
