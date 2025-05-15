@@ -9,20 +9,32 @@
   grid-template-columns: repeat(3, 1fr);
   column-gap: 40px;
   row-gap: 85px;
+
+  @include media-max($laptop) {
+    padding-top: 80px;
+    row-gap: 68px;
+  }
 }
 .benefits {
   padding-top: 200px;
+
+  @include media-max($laptop) {
+    padding-top: 150px;
+  }
 }
 
 .benefit {
   @include border-stroke();
   @include item-shadow();
-  background-color: white;
+  position: relative;
   padding: 80px 50px 50px;
   width: 100%;
   max-width: 504px;
-  // height: 306px;
-  position: relative;
+  background-color: white;
+
+  @include media-max($laptop) {
+    padding: 60px 38px 40px;
+  }
 
   &__icon-container {
     @include border-stroke();
@@ -34,33 +46,8 @@
     background: $color-background-item;
     left: 30px;
     top: -37px;
-  }
 
-  &__title {
-    @include raleway-bold();
-    font-size: 28px;
-  }
-  &__description {
-    @include outfit-medium();
-    padding-top: 20px;
-    font-size: 18px;
-    line-height: 150%;
-    color: $color-gray-description;
-  }
-}
-
-@media only screen and (max-width: 1700px) {
-  .benefits__container {
-    padding-top: 80px;
-    row-gap: 68px;
-  }
-  .benefits {
-    padding-top: 150px;
-  }
-  .benefit {
-    // height: 246px;
-    padding: 60px 38px 40px;
-    &__icon-container {
+    @include media-max($laptop) {
       width: 56px;
       height: 56px;
       left: 24px;
@@ -69,10 +56,24 @@
         scale: 0.7;
       }
     }
-    &__title {
+  }
+
+  &__title {
+    @include raleway-bold();
+    font-size: 28px;
+
+    @include media-max($laptop) {
       font-size: 24px;
     }
-    &__description {
+  }
+  &__description {
+    @include outfit-medium();
+    padding-top: 20px;
+    font-size: 18px;
+    line-height: 150%;
+    color: $color-gray-description;
+
+    @include media-max($laptop) {
       font-size: 16px;
     }
   }
