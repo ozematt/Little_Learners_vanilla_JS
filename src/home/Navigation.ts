@@ -64,7 +64,6 @@ export class Navigation extends Router {
           ${routeConfig.description}
           </p>
         </div>
-
         <button class="navigation__item__btn">
           <a href="${path}" class="navigation__link" data-nav-link></a>Learn More<img src="arrow.svg" alt="arrow" />
         </button>

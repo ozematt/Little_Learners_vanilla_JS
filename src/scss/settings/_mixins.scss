@@ -55,3 +55,9 @@
 @mixin item-shadow() {
   box-shadow: 6px 6px 0px 2px $color-secondary-black;
 }
+
+@mixin media-max($breakpoint) {
+  @media only screen and (max-width: $breakpoint) {
+    @content;
+  }
+}

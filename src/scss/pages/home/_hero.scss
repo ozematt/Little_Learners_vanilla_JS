@@ -9,8 +9,23 @@
   align-items: center;
   padding-top: 80px;
 
+  @include media-max($laptop) {
+    padding-top: 60px;
+    & img {
+      width: 615px;
+      height: 663px;
+    }
+    & h1 {
+      font-size: 40px;
+    }
+  }
+
   &__content {
     padding-left: 60px;
+
+    @include media-max($laptop) {
+      padding-left: 50px;
+    }
 
     &__intro-text {
       font-size: 22px;
@@ -18,11 +33,22 @@
       text-decoration: underline;
       text-underline-offset: 15px;
       padding-bottom: 20px;
+
+      @include media-max($laptop) {
+        text-underline-offset: 10px;
+        font-size: 18px;
+        padding-bottom: 7px;
+      }
     }
     &__description {
       padding-top: 30px;
       line-height: 150%;
       color: $color-gray;
+
+      @include media-max($laptop) {
+        font-size: 16px;
+        padding-top: 20px;
+      }
     }
     & h1 {
       @include raleway-title();
@@ -39,47 +65,25 @@
       display: flex;
       justify-content: space-between;
       background-color: $color-secondary-accent;
+
+      @include media-max($laptop) {
+        margin-top: 50px;
+        padding: 20px 40px;
+      }
       &__number {
         @include outfit-extra-bold();
         line-height: 150%;
+
+        @include media-max($laptop) {
+          font-size: 34px;
+        }
       }
       &__info {
         @include outfit-medium();
         font-size: 18px;
         line-height: 150%;
-      }
-    }
-  }
-}
 
-@media only screen and (max-width: 1700px) {
-  .hero {
-    padding-top: 60px;
-    & img {
-      width: 615px;
-      height: 663px;
-    }
-    & h1 {
-      font-size: 40px;
-    }
-    &__content {
-      padding-left: 50px;
-      &__intro-text {
-        text-underline-offset: 10px;
-        font-size: 18px;
-        padding-bottom: 7px;
-      }
-      &__description {
-        font-size: 16px;
-        padding-top: 20px;
-      }
-      &__stats {
-        margin-top: 50px;
-        padding: 20px 40px;
-        &__number {
-          font-size: 34px;
-        }
-        &__info {
+        @include media-max($laptop) {
           font-size: 16px;
         }
       }

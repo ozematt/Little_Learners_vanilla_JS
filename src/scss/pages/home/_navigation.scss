@@ -20,9 +20,7 @@
   background-color: white;
   width: 100%;
   max-width: 773px;
-  &__content {
-    padding: 80px;
-  }
+  padding: 80px;
   &__title {
     @include raleway-bold();
     font-size: 48px;
@@ -40,8 +38,8 @@
     @include item-shadow();
     @include outfit-medium();
     width: 100%;
-    max-width: 613px;
-    margin: 0 80px 80px 80px;
+
+    margin-top: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,4 +61,18 @@
 .navigation__link {
   position: absolute;
   inset: 0;
+}
+
+@media only screen and (max-width: 1700px) {
+  .navigation {
+    padding-top: 150px;
+    &__content {
+      padding-top: 80px;
+      column-gap: 40px;
+      gap: 40px;
+    }
+  }
+  .navigation__item {
+    max-width: 620px;
+  }
 }
