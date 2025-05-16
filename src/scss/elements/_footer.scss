@@ -18,6 +18,10 @@
 .company-info {
   display: flex;
   padding-bottom: 50px;
+
+  @include media-max($laptop) {
+    padding-bottom: 40px;
+  }
   &__contact {
     @include outfit-medium();
     line-height: 150%;
@@ -27,16 +31,34 @@
     & p {
       padding-top: 20px;
     }
+
+    @include media-max($laptop) {
+      font-size: 16px;
+
+      .logo-container {
+        img {
+          width: 182px;
+        }
+      }
+    }
   }
 }
 
 .contact-item-container {
   padding-top: 50px;
 
+  @include media-max($laptop) {
+    padding-top: 40px;
+  }
+
   & .contact__item {
     display: flex;
     align-items: center;
     padding-bottom: 24px;
+
+    @include media-max($laptop) {
+      padding-bottom: 20px;
+    }
     &:last-child {
       padding-bottom: 0;
     }
@@ -47,6 +69,15 @@
       width: 40px;
       height: 40px;
       background-color: $color-background;
+
+      @include media-max($laptop) {
+        width: 32px;
+        height: 32px;
+
+        img {
+          width: 20px;
+        }
+      }
     }
     & span {
       padding-left: 10px;
@@ -58,12 +89,20 @@
   @include outfit-medium();
   line-height: 150%;
   margin-left: 80px;
-  // line-clamp: 1;
   display: flex;
-  // grid-template-columns: repeat(4, 1fr);
+
+  @include media-max($laptop) {
+    font-size: 16px;
+  }
+
   & .info-link {
     margin-right: 30px;
     width: 226px;
+
+    @include media-max($laptop) {
+      margin-right: 20px;
+      width: 161px;
+    }
     &:last-child {
       margin-right: 0;
     }
@@ -77,6 +116,10 @@
     &__title {
       font-weight: 600;
       padding-bottom: 24px;
+
+      @include media-max($laptop) {
+        padding-bottom: 20px;
+      }
     }
   }
 }
@@ -92,6 +135,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @include media-max($laptop) {
+    font-size: 16px;
+  }
 
   & .media-icons {
     display: flex;
@@ -117,4 +164,8 @@
   line-height: 150%;
   text-align: center;
   padding-top: 30px;
+
+  @include media-max($laptop) {
+    font-size: 16px;
+  }
 }
