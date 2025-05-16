@@ -6,6 +6,7 @@ import history from "connect-history-api-fallback";
 export default defineConfig({
   plugins: [createHtmlPlugin()],
   server: {
+    host: true,
     middleware: [history()], // Dodaj middleware
   },
 });

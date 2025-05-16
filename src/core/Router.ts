@@ -9,9 +9,10 @@ export class Router {
     this.routes = routes;
     this.rootElement = rootElement;
     this.prefetchTemplates();
-    this.handleLinkClick = this.handleLinkClick.bind(this);
+    this.handleLinkClick = this.handleLinkClick.bind(this); // bind coz THIS
     this.renderNavLinks();
     this.setupEventListeners();
+    this.handleFooterLinks();
   }
   public onRender(callback: () => void) {
     this.onRenderCallbacks.push(callback);
@@ -21,18 +22,11 @@ export class Router {
     window.addEventListener("popstate", () => {
       this.render();
     });
-
-    const navbar = document.getElementById("nav-bar__links");
-    if (navbar) {
-      navbar.addEventListener("click", this.handleLinkClick);
-    }
+    document.addEventListener("click", this.handleLinkClick);
   }
 
   private handleLinkClick(e: MouseEvent) {
     const target = e.target as HTMLElement;
-
-    const navbar = document.getElementById("nav-bar__links");
-    if (!navbar?.contains(target)) return;
 
     if (target.matches("[data-link]")) {
       e.preventDefault();
@@ -41,12 +35,13 @@ export class Router {
     }
   }
 
-  public async render() {
+  public async render(sectionId?: string) {
     try {
-      this.rootElement.classList.add("fade-out"); // Add fade-out class
+      this.rootElement.classList.add("fade-out");
       await new Promise((resolve) => {
         setTimeout(resolve, 300);
       }); // Wait for fade-out animation
+
       const path = window.location.pathname;
       const route = this.routes[path] || this.routes["/404"];
       const template = route.html;
@@ -56,6 +51,11 @@ export class Router {
       this.rootElement.innerHTML = html;
       this.rootElement.classList.remove("fade-out");
       this.onRenderCallbacks.forEach((callback) => callback()); // Call all registered render callbacks
+      if (sectionId) {
+        const section = document.querySelector(`#${sectionId}`);
+        if (!section) return;
+        section.scrollIntoView();
+      }
     } catch (error) {
       this.rootElement.innerHTML = this.routes["/404"].html;
       console.error("Render error:", error);
@@ -81,9 +81,9 @@ export class Router {
     container.innerHTML = links.join("");
   }
 
-  public navigate(path: string) {
+  public navigate(path: string, sectionId?: string) {
     window.history.pushState({}, "", path);
-    this.render();
+    this.render(sectionId);
   }
 
   private async fetchTemplate(url: string): Promise<string> {
@@ -99,5 +99,23 @@ export class Router {
   private async prefetchTemplates() {
     const urls = Object.values(this.routes).map((route) => route.html);
     await Promise.all(urls.map((url) => this.fetchTemplate(url)));
+  }
+
+  private handleFooterLinks() {
+    const links =
+      document.querySelectorAll<HTMLAnchorElement>("a[data-target]");
+
+    links.forEach((link: HTMLAnchorElement) => {
+      link.addEventListener("click", async (e: MouseEvent) => {
+        e.preventDefault();
+
+        const hash = link.dataset.target;
+        const path = link.dataset.path;
+
+        if (hash && path) {
+          this.navigate(path, hash);
+        }
+      });
+    });
   }
 }

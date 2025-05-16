@@ -3,15 +3,19 @@
 @use "../settings/fonts" as *;
 @use "../settings/mixins" as *;
 
-footer {
+.footer__content {
   @include border-stroke();
   @include item-shadow();
   background-color: white;
-  margin-bottom: 50px;
+  width: 100%;
+  height: 100%;
+  padding: 100px 113px 40px;
+  // margin: 200px 50px 50px;
+  // padding: 100px 113px 40px;
 }
 
 .company-info {
-  padding: 100px 113px 50px;
+  // padding: 100px 113px 50px;
   display: flex;
   &__contact {
     @include outfit-medium();
@@ -71,13 +75,13 @@ footer {
 
 .separator {
   border-bottom: 1px solid black;
-  margin: 0 113px;
+  // margin: 0 113px;
 }
 
 .media-content {
   @include outfit-medium();
   line-height: 150%;
-  padding: 30px 113px;
+  // padding: 30px 113px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -105,5 +109,5 @@ footer {
   font-size: 18px;
   line-height: 150%;
   text-align: center;
-  padding: 30px 0 40px 0;
+  padding-top: 30px;
 }

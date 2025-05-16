@@ -5,12 +5,30 @@
 
 .navigation {
   padding-top: 200px;
+
+  @include media-max($laptop) {
+    padding-top: 150px;
+  }
   &__content {
     padding-top: 100px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 50px;
-    gap: 50px;
+
+    @include media-max($laptop) {
+      padding-top: 80px;
+      column-gap: 40px;
+    }
+
+    &__column {
+      & article:first-child {
+        margin-bottom: 50px;
+
+        @include media-max($laptop) {
+          margin-bottom: 40px;
+        }
+      }
+    }
   }
 }
 
@@ -21,10 +39,21 @@
   width: 100%;
   max-width: 773px;
   padding: 80px;
+  // height: 588px;
+
+  @include media-max($laptop) {
+    padding: 60px;
+    height: 467px;
+  }
+
   &__title {
     @include raleway-bold();
     font-size: 48px;
     text-align: center;
+
+    @include media-max($laptop) {
+      font-size: 34px;
+    }
   }
   &__description {
     @include outfit-medium();
@@ -32,6 +61,11 @@
     line-height: 150%;
     text-align: center;
     color: $color-gray-description;
+
+    @include media-max($laptop) {
+      padding-top: 40px;
+      font-size: 16px;
+    }
   }
   &__btn {
     @include border-stroke();
@@ -52,27 +86,27 @@
       box-shadow: none;
       transition: all 0.2s ease-in-out;
     }
+
+    @include media-max($laptop) {
+      margin-top: 60px;
+      font-size: 18px;
+    }
   }
 }
 
 .decoration__container {
   padding-top: 30px;
+  width: 100%;
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  @include media-max($laptop) {
+    padding-top: 24px;
+  }
 }
 .navigation__link {
   position: absolute;
   inset: 0;
-}
-
-@media only screen and (max-width: 1700px) {
-  .navigation {
-    padding-top: 150px;
-    &__content {
-      padding-top: 80px;
-      column-gap: 40px;
-      gap: 40px;
-    }
-  }
-  .navigation__item {
-    max-width: 620px;
-  }
 }

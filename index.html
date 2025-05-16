@@ -28,7 +28,7 @@
     <!-- MAIN CONTENT -->
     <main id="app" class="container"></main>
     <!-- FOOTER -->
-    <footer class="container">
+    <footer class="container footer__content">
       <!-- INFO -->
       <div class="company-info">
         <div class="company-info__contact">
@@ -62,11 +62,20 @@
         </div>
         <div class="company-info__links">
           <div class="info-link">
+            <!-- HOME PAGE LINKS -->
             <p class="info-link__title">Home</p>
             <ul>
-              <li>Features <a href=""></a></li>
-              <li>Our Testimonials <a href=""></a></li>
-              <li>FAQ <a href=""></a></li>
+              <li>
+                <a href="#" data-target="benefits" data-path="/">Features</a>
+              </li>
+              <li>
+                <a href="#" data-target="testimonials" data-path="/"
+                  >Our Testimonials</a
+                >
+              </li>
+              <li>
+                <a href="#" data-target="faq" data-path="/">FAQ</a>
+              </li>
             </ul>
           </div>
           <div class="info-link">
@@ -95,7 +104,9 @@
           </div>
         </div>
       </div>
+
       <div class="separator"></div>
+
       <!-- media -->
       <div class="media-content">
         <span>
@@ -114,7 +125,9 @@
           </div>
         </div>
       </div>
+
       <div class="separator"></div>
+
       <!-- copyrights -->
       <div class="copyrights-container">
         <p>Copyright © [2023] Little Learners Academy. All rights reserved.</p>
@@ -123,3 +136,4 @@
     <script type="module" src="/src/app.ts"></script>
   </body>
 </html>
+`
