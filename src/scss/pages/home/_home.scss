@@ -5,6 +5,10 @@
 
 .home {
   padding: 0 115px 200px;
+
+  @include media-max($laptop) {
+    padding: 0 30px 150px;
+  }
 }
 
 .section-header {
@@ -20,32 +24,29 @@
   background-color: white;
   padding: 10px 20px;
   font-size: 18px;
+
+  @include media-max($laptop) {
+    font-size: 16px;
+    padding: 8px 14px;
+  }
 }
 
 .section-title {
   @include raleway-bold();
   padding: 19px 0;
+
+  @include media-max($laptop) {
+    font-size: 48px;
+    padding: 14px 0;
+  }
 }
 
 .section-description {
   @include outfit-medium();
   line-height: 150%;
   text-align: center;
-}
 
-@media only screen and (max-width: 1700px) {
-  .home {
-    padding: 0 30px 200px;
-  }
-  .section-subtitle {
-    font-size: 16px;
-    padding: 8px 14px;
-  }
-  .section-title {
-    font-size: 48px;
-    padding: 14px 0;
-  }
-  .section-description {
+  @include media-max($laptop) {
     font-size: 16px;
   }
 }
