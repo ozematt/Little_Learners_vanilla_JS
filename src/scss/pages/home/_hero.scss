@@ -96,6 +96,9 @@
         font-size: 16px;
         padding-top: 20px;
       }
+      @include media-max($mobile-large) {
+        padding-top: 18px;
+      }
     }
 
     &__stats {
@@ -111,6 +114,17 @@
       @include media-max(1830px) {
         margin-top: 50px;
         padding: 20px 40px;
+      }
+      @include media-max($mobile-large) {
+        margin-top: 40px;
+        display: block;
+        text-align: center;
+        padding: 40px;
+        // gap: 40px;
+
+        // &:nth-child(2){
+
+        // }
       }
       &__number {
         @include outfit-extra-bold();
@@ -130,5 +144,15 @@
         }
       }
     }
+  }
+}
+
+.stats-separator {
+  display: none;
+  border: 1px solid black;
+  margin: 20px 0;
+
+  @include media-max($mobile-large) {
+    display: block;
   }
 }
