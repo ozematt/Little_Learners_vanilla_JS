@@ -30,7 +30,7 @@ body {
   margin: 0 auto;
   padding: 0 50px;
 
-  @include media-max(700px) {
+  @media (max-width: 700px) {
     padding: 0 17px;
   }
 }

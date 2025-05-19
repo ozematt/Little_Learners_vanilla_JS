@@ -6,10 +6,10 @@
 .home {
   padding: 0 115px 200px;
 
-  @include media-max($laptop) {
+  @media (max-width: $laptop) {
     padding: 0 30px 150px;
   }
-  @include media-max(800px) {
+  @media (max-width: 800px) {
     padding: 0 0 150px;
   }
 }
@@ -28,11 +28,11 @@
   padding: 10px 20px;
   font-size: 18px;
 
-  @include media-max($laptop) {
+  @media (max-width: $laptop) {
     font-size: 16px;
     padding: 8px 14px;
   }
-  @include media-max($mobile-large) {
+  @media (max-width: $mobile-large) {
     font-size: 14px;
   }
 }
@@ -42,11 +42,11 @@
   padding: 19px 0;
   text-align: center;
 
-  @include media-max($laptop) {
+  @media (max-width: $laptop) {
     font-size: 48px;
     padding: 14px 0;
   }
-  @include media-max($mobile-large) {
+  @media (max-width: $mobile-large) {
     font-size: 38px;
     padding: 10px 0;
   }
@@ -59,11 +59,11 @@
   width: 100%;
   max-width: 990px;
 
-  @include media-max($laptop) {
+  @media (max-width: $laptop) {
     font-size: 16px;
     max-width: 880px;
   }
-  @include media-max($mobile-large) {
+  @media (max-width: $mobile-large) {
     max-width: 100%;
   }
 }

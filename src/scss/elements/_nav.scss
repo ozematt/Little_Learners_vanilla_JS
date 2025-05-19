@@ -14,18 +14,18 @@
   overflow: hidden;
   margin-top: 14px;
 
-  @include media-max($laptop) {
+  @media (max-width: $laptop) {
     font-size: 16px;
     height: 66px;
   }
-  @include media-max($mobile-large) {
+  @media (max-width: $mobile-large) {
     height: 62px;
   }
 
   & ul {
     display: flex;
 
-    @include media-max(1170px) {
+    @media (max-width: 1170px) {
       display: none;
     }
     & li {
@@ -35,7 +35,7 @@
       position: relative;
       cursor: pointer;
 
-      @include media-max($laptop) {
+      @media (max-width: $laptop) {
         padding: 0 30px;
       }
       &:hover {
@@ -58,12 +58,12 @@
     padding: 0 24px;
     border-right: $border-primary-stroke;
 
-    @include media-max($laptop) {
+    @media (max-width: $laptop) {
       padding: 0 20px;
     }
 
     img {
-      @include media-max($laptop) {
+      @media (max-width: $laptop) {
         width: 155px;
         height: 34px;
       }
@@ -82,7 +82,7 @@
     opacity: 0.9;
   }
 
-  @include media-max(1170px) {
+  @media (max-width: 1170px) {
     display: block;
   }
 }

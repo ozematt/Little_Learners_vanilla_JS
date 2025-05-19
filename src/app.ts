@@ -37,15 +37,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     const testimonialsContainer = document.getElementById(
       "testimonials-container"
     );
-    const previousButton = document.getElementById("previous-comment");
-    const nextButton = document.getElementById("next-comment");
-    if (testimonialsContainer && previousButton && nextButton) {
-      new Testimonials(
-        testimonialsData,
-        testimonialsContainer,
-        previousButton,
-        nextButton
-      );
+
+    if (testimonialsContainer) {
+      new Testimonials(testimonialsData, testimonialsContainer);
     }
   }
 
