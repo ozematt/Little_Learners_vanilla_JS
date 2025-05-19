@@ -87,6 +87,7 @@
         color: $color-primary-accent;
       }
     }
+
     &__description {
       padding-top: 30px;
       line-height: 150%;
@@ -120,12 +121,8 @@
         display: block;
         text-align: center;
         padding: 40px;
-        // gap: 40px;
-
-        // &:nth-child(2){
-
-        // }
       }
+
       &__number {
         @include outfit-extra-bold();
         line-height: 150%;
@@ -134,6 +131,7 @@
           font-size: 34px;
         }
       }
+
       &__info {
         @include outfit-medium();
         font-size: 18px;

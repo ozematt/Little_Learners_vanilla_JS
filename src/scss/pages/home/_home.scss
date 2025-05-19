@@ -32,15 +32,23 @@
     font-size: 16px;
     padding: 8px 14px;
   }
+  @include media-max($mobile-large) {
+    font-size: 14px;
+  }
 }
 
 .section-title {
   @include raleway-bold();
   padding: 19px 0;
+  text-align: center;
 
   @include media-max($laptop) {
     font-size: 48px;
     padding: 14px 0;
+  }
+  @include media-max($mobile-large) {
+    font-size: 38px;
+    padding: 10px 0;
   }
 }
 
@@ -48,8 +56,14 @@
   @include outfit-medium();
   line-height: 150%;
   text-align: center;
+  width: 100%;
+  max-width: 990px;
 
   @include media-max($laptop) {
     font-size: 16px;
+    max-width: 880px;
+  }
+  @include media-max($mobile-large) {
+    max-width: 100%;
   }
 }

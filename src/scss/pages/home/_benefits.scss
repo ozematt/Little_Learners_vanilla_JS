@@ -3,6 +3,17 @@
 @use "../../settings/fonts" as *;
 @use "../../settings/mixins" as *;
 
+.benefits {
+  padding-top: 200px;
+
+  @include media-max($laptop) {
+    padding-top: 150px;
+  }
+  @include media-max(1000px) {
+    padding-top: 80px;
+  }
+}
+
 .benefits__container {
   padding-top: 135px;
   display: grid;
@@ -14,12 +25,14 @@
     padding-top: 80px;
     row-gap: 68px;
   }
-}
-.benefits {
-  padding-top: 200px;
 
-  @include media-max($laptop) {
-    padding-top: 150px;
+  @include media-max(1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include media-max($mobile-large) {
+    grid-template-columns: repeat(1, 1fr);
+    place-items: center;
   }
 }
 
@@ -34,6 +47,9 @@
 
   @include media-max($laptop) {
     padding: 60px 38px 40px;
+  }
+  @include media-max($mobile-large) {
+    padding: 50px 35px 30px 30px;
   }
 
   &__icon-container {
@@ -64,6 +80,9 @@
 
     @include media-max($laptop) {
       font-size: 24px;
+    }
+    @include media-max($mobile-large) {
+      font-size: 22px;
     }
   }
   &__description {
