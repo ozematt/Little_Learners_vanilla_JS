@@ -9,7 +9,7 @@
   @media (max-width: $laptop) {
     padding-top: 150px;
   }
-  @media (width-max: 1000px) {
+  @media (max-width: 1000px) {
     padding-top: 80px;
   }
 
@@ -23,8 +23,10 @@
       padding-top: 80px;
     }
     @media (max-width: 1020px) {
-      // padding-top: 80px;
       display: block;
+    }
+    @media (max-width: $mobile-large) {
+      padding-top: 50px;
     }
   }
 
@@ -38,9 +40,9 @@
     }
     @media (max-width: 1020px) {
       width: 740px;
-      // display: flex;
-      // justify-content: center;
-      // transform: translateX(50%, 50%);
+    }
+    @media (max-width: $mobile-large) {
+      padding: 8px 8px 8px 0;
     }
 
     &__slider {
@@ -58,6 +60,7 @@
       @include border-stroke();
       @include item-shadow();
       width: 420px;
+
       background-color: white;
       display: flex;
       flex-direction: column;
@@ -66,6 +69,11 @@
 
       @media (max-width: $laptop) {
         width: 340px;
+      }
+
+      @media (max-width: $mobile-large) {
+        width: 355px;
+        height: 328px;
       }
     }
   }
@@ -92,6 +100,9 @@
     @media (max-width: $laptop) {
       padding: 24px 40px 40px;
       font-size: 16px;
+    }
+    @media (max-width: $mobile-large) {
+      padding: 16px 30px 30px;
     }
   }
 }
@@ -122,6 +133,9 @@
     padding-top: 24px;
     scale: 0.8;
   }
+  @media (max-width: $mobile-large) {
+    padding-top: 17px;
+  }
 
   &__full {
     position: absolute;
@@ -137,6 +151,7 @@
   place-items: center;
   flex-shrink: 0;
   cursor: pointer;
+
   @media (max-width: $laptop) {
     width: 48px;
     height: 48px;
@@ -152,6 +167,7 @@
 .comments-nav {
   display: none;
   margin-top: 40px;
+
   @media (max-width: 1020px) {
     display: flex;
     justify-content: center;

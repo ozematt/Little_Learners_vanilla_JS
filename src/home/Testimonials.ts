@@ -55,6 +55,7 @@ export class Testimonials {
           <div class="avatar__container"><img src="${
             item.avatar
           }" alt="avatar icon" /></div>
+
           <p class="testimonials__user-name">${item.name}</p>
 
           <div id="rating__container" class="rating__container">
@@ -116,8 +117,12 @@ export class Testimonials {
     const slider = document.getElementById("testimonials-slider-id");
     if (!slider) return;
 
-    const { laptop } = this.mediaBreakpoints();
+    const { laptop, mobile } = this.mediaBreakpoints();
 
+    if (mobile.matches) {
+      slider.style.transform = `translateX(-${this.currentIndex * 400}px)`;
+      return;
+    }
     if (laptop.matches) {
       slider.style.transform = `translateX(-${this.currentIndex * 380}px)`;
       return;
