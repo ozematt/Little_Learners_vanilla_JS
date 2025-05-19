@@ -11,12 +11,30 @@
 
   @include media-max($laptop) {
     padding-top: 60px;
-    & img {
-      width: 615px;
-      height: 663px;
+  }
+
+  @include media-max(1420px) {
+    display: block;
+    padding: 0 100px;
+    padding-top: 50px;
+    text-align: center;
+  }
+
+  @include media-max(990px) {
+    padding: 0;
+    padding-top: 50px;
+  }
+
+  &__img {
+    @include media-max($laptop) {
+      width: 100%;
+      max-width: 615px;
+      height: 100%;
+      max-height: 663px;
     }
-    & h1 {
-      font-size: 40px;
+    @include media-max(1000px) {
+      width: 100%;
+      height: 100%;
     }
   }
 
@@ -25,6 +43,11 @@
 
     @include media-max($laptop) {
       padding-left: 50px;
+    }
+
+    @include media-max(1420px) {
+      padding-left: 0;
+      padding-top: 40px;
     }
 
     &__intro-text {
@@ -39,6 +62,30 @@
         font-size: 18px;
         padding-bottom: 7px;
       }
+      @include media-max($mobile-large) {
+        font-size: 16px;
+      }
+    }
+
+    &__title {
+      @include raleway-title();
+
+      @include media-max($laptop) {
+        font-size: 40px;
+      }
+
+      @include media-max(1420px) {
+        padding-top: 10px;
+      }
+
+      @include media-max($mobile-large) {
+        font-size: 30px;
+        line-height: 130%;
+      }
+
+      & span {
+        color: $color-primary-accent;
+      }
     }
     &__description {
       padding-top: 30px;
@@ -50,12 +97,6 @@
         padding-top: 20px;
       }
     }
-    & h1 {
-      @include raleway-title();
-      & span {
-        color: $color-primary-accent;
-      }
-    }
 
     &__stats {
       @include border-stroke();
@@ -65,6 +106,7 @@
       display: flex;
       justify-content: space-between;
       background-color: $color-secondary-accent;
+      text-align: left;
 
       @include media-max(1830px) {
         margin-top: 50px;

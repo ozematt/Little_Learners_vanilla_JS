@@ -14,6 +14,14 @@
   overflow: hidden;
   margin-top: 14px;
 
+  @include media-max($laptop) {
+    font-size: 16px;
+    height: 66px;
+  }
+  @include media-max($mobile-large) {
+    height: 62px;
+  }
+
   & ul {
     display: flex;
 
@@ -26,6 +34,10 @@
       padding: 0 34px;
       position: relative;
       cursor: pointer;
+
+      @include media-max($laptop) {
+        padding: 0 30px;
+      }
       &:hover {
         background-color: $color-secondary-accent;
       }
@@ -45,20 +57,13 @@
     background-color: $color-primary-accent;
     padding: 0 24px;
     border-right: $border-primary-stroke;
-  }
-}
 
-// LAPTOP
-@media only screen and (max-width: 1700px) {
-  .nav-bar {
-    font-size: 16px;
-    height: 66px;
-    & li {
-      padding: 0 30px;
-    }
-    &__logo {
+    @include media-max($laptop) {
       padding: 0 20px;
-      img {
+    }
+
+    img {
+      @include media-max($laptop) {
         width: 155px;
         height: 34px;
       }

@@ -9,6 +9,9 @@
   @include media-max($laptop) {
     padding: 0 30px 150px;
   }
+  @include media-max(800px) {
+    padding: 0 0 150px;
+  }
 }
 
 .section-header {
