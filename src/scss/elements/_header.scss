@@ -4,7 +4,7 @@
 @use "../settings/mixins" as *;
 
 .top-bar {
-  @include flex-center;
+  // @include flex-center;
   @include border-stroke;
   @include outfit-medium;
 
@@ -14,31 +14,67 @@
   height: 58px;
   overflow: hidden;
   position: relative;
+  display: flex;
+  justify-content: space-between;
 
-  &::before {
-    content: url("/top-bar_abstract.svg");
-    position: absolute;
-    left: 0;
-    z-index: 0;
-  }
-  &::after {
-    content: url("/top-bar_abstract.svg");
-    transform: rotateY(180deg);
-    position: absolute;
-    right: 0;
-    z-index: 0;
-  }
-  & img {
-    padding-left: 14px;
-  }
-}
-
-@media only screen and (max-width: 1700px) {
-  .top-bar {
+  @include media-max($laptop) {
     height: 48px;
     font-size: 16px;
-    & img {
+  }
+
+  @include media-max(700px) {
+    margin-top: 40px;
+    height: 45px;
+    font-size: 14px;
+  }
+
+  .arrow-icon {
+    @include media-max($laptop) {
       scale: 0.8;
+    }
+    @include media-max(430px) {
+      scale: 0.7;
+      position: absolute;
+      right: 25px;
+      z-index: 1;
+    }
+  }
+
+  &__text {
+    @include flex-center;
+  }
+
+  .decoration-left {
+    img {
+      width: 100%;
+      max-width: 180px;
+      transform: translateY(-110px);
+      @include media-max(780px) {
+        max-width: 100px;
+        transform: translateY(0px);
+      }
+      @include media-max(690px) {
+        max-width: 50px;
+        transform: translateY(0px);
+      }
+    }
+  }
+
+  .decoration-right {
+    transform: rotateY(180deg);
+    img {
+      width: 100%;
+      max-width: 180px;
+      transform: translateY(-110px);
+
+      @include media-max(780px) {
+        max-width: 100px;
+        transform: translateY(0px);
+      }
+      @include media-max(690px) {
+        max-width: 50px;
+        transform: translateY(0px);
+      }
     }
   }
 }

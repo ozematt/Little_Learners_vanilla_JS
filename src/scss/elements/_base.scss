@@ -1,4 +1,5 @@
 @use "../settings/colors" as *;
+@use "../settings/mixins" as *;
 
 * {
   margin: 0;
@@ -28,9 +29,17 @@ body {
   max-width: 1920px;
   margin: 0 auto;
   padding: 0 50px;
+
+  @include media-max(700px) {
+    padding: 0 17px;
+  }
 }
 
 .fade-out {
   opacity: 0;
   transition: opacity 0.3s;
+}
+
+.hidden {
+  display: none;
 }

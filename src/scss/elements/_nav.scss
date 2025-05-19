@@ -16,6 +16,10 @@
 
   & ul {
     display: flex;
+
+    @include media-max(1170px) {
+      display: none;
+    }
     & li {
       @include flex-center;
       border-left: $border-primary-stroke;
@@ -59,5 +63,21 @@
         height: 34px;
       }
     }
+  }
+}
+
+.hamburger {
+  display: none;
+  padding: 17px 30px;
+  border-left: $border-primary-stroke;
+  background-color: $color-secondary-accent;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  @include media-max(1170px) {
+    display: block;
   }
 }
