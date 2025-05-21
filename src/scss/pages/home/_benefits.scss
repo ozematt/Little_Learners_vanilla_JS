@@ -6,10 +6,10 @@
 .benefits {
   padding-top: 200px;
 
-  @include media-max($laptop) {
+  @media (max-width: $laptop) {
     padding-top: 150px;
   }
-  @include media-max(1000px) {
+  @media (max-width: $laptop-small) {
     padding-top: 80px;
   }
 }
@@ -21,16 +21,16 @@
   column-gap: 40px;
   row-gap: 85px;
 
-  @include media-max($laptop) {
+  @media (max-width: $laptop) {
     padding-top: 80px;
     row-gap: 68px;
   }
 
-  @include media-max(1200px) {
+  @media (max-width: 1200px) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @include media-max($mobile-large) {
+  @media (max-width: $mobile-large) {
     grid-template-columns: repeat(1, 1fr);
     place-items: center;
   }
@@ -45,11 +45,11 @@
   max-width: 504px;
   background-color: white;
 
-  @include media-max($laptop) {
+  @media (max-width: $laptop) {
     padding: 60px 38px 40px;
   }
-  @include media-max($mobile-large) {
-    padding: 50px 35px 30px 30px;
+  @media (max-width: $mobile-large) {
+    padding: 50px 38px 30px 30px;
   }
 
   &__icon-container {
@@ -63,7 +63,7 @@
     left: 30px;
     top: -37px;
 
-    @include media-max($laptop) {
+    @media (max-width: $laptop) {
       width: 56px;
       height: 56px;
       left: 24px;
@@ -78,10 +78,10 @@
     @include raleway-bold();
     font-size: 28px;
 
-    @include media-max($laptop) {
+    @media (max-width: $laptop) {
       font-size: 24px;
     }
-    @include media-max($mobile-large) {
+    @media (max-width: $mobile-large) {
       font-size: 22px;
     }
   }
@@ -92,7 +92,7 @@
     line-height: 150%;
     color: $color-gray-description;
 
-    @include media-max($laptop) {
+    @media (max-width: $laptop) {
       font-size: 16px;
     }
   }

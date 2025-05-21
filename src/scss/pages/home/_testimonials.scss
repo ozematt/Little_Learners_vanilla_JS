@@ -9,7 +9,7 @@
   @media (max-width: $laptop) {
     padding-top: 150px;
   }
-  @media (max-width: 1000px) {
+  @media (max-width: $laptop-small) {
     padding-top: 80px;
   }
 
