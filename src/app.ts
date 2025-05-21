@@ -1,15 +1,31 @@
-import { Loader } from "./core/Loader.js";
-import { Router } from "./core/Router.js";
+import { Loader, Router, Nav } from "./core/index";
+// import { Router } from "./core/Router.js";
 import { navLinks, testimonialsData, faqData } from "./data";
 import { Testimonials, FAQ } from "./home";
 
 document.addEventListener("DOMContentLoaded", async function () {
-  // const loader = document.getElementById("loader");
+  function handleButtonBgChange(path: string) {
+    const navButtons = Array.from(
+      document.querySelectorAll("[data-link-name]")
+    ) as HTMLElement[];
 
+    const currentButton = document.querySelector(
+      `[data-link-name="${path}"]`
+    )! as HTMLElement;
+
+    navButtons
+      .filter((item: HTMLElement) => item.innerText !== "Contact")
+      .forEach((link) => {
+        link.style.backgroundColor = "white";
+      });
+
+    currentButton.style.backgroundColor = "#ffefe5";
+  }
   const rootElement = document.getElementById("app")!;
 
   const router = new Router(navLinks, rootElement);
   const loader = new Loader();
+  const nav = new Nav();
 
   loader.handleDisplayLoader();
 
@@ -21,20 +37,19 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   router.render();
 
-  // Przenieś inicjalizację komponentów do osobnej funkcji
-  async function initializePageComponents() {
+  //
+  function initializePageComponents() {
     const currentPath = window.location.pathname;
 
     if (currentPath === "/") {
+      handleButtonBgChange(currentPath); // nav button bg change
       initTestimonials();
       initFAQ();
-      // initNavigation();
     }
 
-    // Dodaj inicjalizację dla innych ścieżek
-    // if (currentPath === "/about") {
-    //   initAboutPageComponents();
-    // }
+    if (currentPath === "/about-us") {
+      handleButtonBgChange(currentPath);
+    }
   }
 
   ////HOME PAGE - RENDERING

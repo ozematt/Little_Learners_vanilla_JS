@@ -1,5 +1,6 @@
 @use "../settings/colors" as *;
 @use "../settings/mixins" as *;
+@use "../settings/variables" as *;
 
 * {
   margin: 0;
@@ -48,4 +49,10 @@ body {
   display: grid;
   place-items: center;
   height: 100vh;
+  & img {
+    @media (max-width: $mobile-large) {
+      width: 60px;
+      height: 60px;
+    }
+  }
 }

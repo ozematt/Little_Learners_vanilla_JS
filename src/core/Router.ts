@@ -70,7 +70,7 @@ export class Router {
       .filter((path) => path !== "/404")
       .map(
         (path) => `
-        <li>
+        <li data-link-name="${path}">
         ${this.routes[path].title || path}
           <a href="${path}"  data-link>
           </a>
