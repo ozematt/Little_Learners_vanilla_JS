@@ -6,10 +6,23 @@
 .faq {
   padding-top: 200px;
 
+  @media (max-width: $laptop) {
+    padding-top: 150px;
+  }
+
   &__content {
     padding-top: 100px;
     display: flex;
     gap: 50px;
+
+    @media (max-width: $laptop) {
+      padding-top: 80px;
+      gap: 40px;
+    }
+
+    @media (max-width: $mobile-large) {
+      display: block;
+    }
   }
 }
 
@@ -23,6 +36,19 @@
   height: fit-content;
   margin-bottom: 30px;
   padding: 40px 110px 37px 40px;
+
+  @media (max-width: $laptop) {
+    padding: 26px 86px 26px 30px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 1000px) {
+    padding: 20px 24px;
+  }
+  // @media (max-width: $mobile-large) {
+  //   max-width: 700px;
+  // }
+
   &--open {
     background-color: white;
   }
@@ -40,6 +66,21 @@
     line-height: 150%;
     width: 100%;
 
+    @media (max-width: $laptop) {
+      font-size: 18px;
+    }
+    // @media (max-width: 1000px) {
+    //   max-width: 250px;
+    //   // padding-right: 50px;
+    // }
+
+    &__q {
+      @media (max-width: 1000px) {
+        display: block;
+        margin-right: 40px;
+      }
+    }
+
     // hidden summary default
     &::-webkit-details-marker,
     &::marker {
@@ -51,6 +92,10 @@
     @include outfit-medium();
     line-height: 150%;
     padding-top: 24px;
+
+    @media (max-width: $laptop) {
+      font-size: 16px;
+    }
   }
 }
 
@@ -64,43 +109,41 @@
   background-color: $color-background;
   right: 34px;
   top: 34px;
+
+  @media (max-width: $laptop) {
+    width: 32px;
+    height: 32px;
+    right: 30px;
+    top: 24px;
+  }
+
+  @media (max-width: 1000px) {
+    top: 35px;
+    right: 24px;
+  }
+  @media (max-width: $mobile-large) {
+    top: 19px;
+    right: 24px;
+  }
+  @media (max-width: 450px) {
+    top: 30px;
+    right: 24px;
+  }
+
+  & img {
+    @media (max-width: $laptop) {
+      scale: 0.8;
+    }
+  }
 }
 
 .faq__column {
-  width: 771px;
+  width: 100%;
+  max-width: 771px;
 }
 .question-underline {
   display: none;
   border-bottom: 2px solid black;
   width: 100%;
   padding-top: 20px;
-}
-
-@media only screen and (max-width: 1700px) {
-  .faq {
-    padding-top: 150px;
-    &__content {
-      padding-top: 80px;
-      gap: 40px;
-    }
-  }
-  .faq__item {
-    padding: 26px 86px 26px 30px;
-    margin-bottom: 24px;
-    &__question {
-      font-size: 18px;
-    }
-    &__answer {
-      font-size: 16px;
-    }
-  }
-  .faq__icon {
-    width: 32px;
-    height: 32px;
-    right: 30px;
-    top: 24px;
-    & img {
-      scale: 0.8;
-    }
-  }
 }
