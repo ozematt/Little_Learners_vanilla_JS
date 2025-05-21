@@ -1,21 +1,28 @@
+import { Loader } from "./core/Loader.js";
 import { Router } from "./core/Router.js";
 import { navLinks, testimonialsData, faqData } from "./data";
 import { Testimonials, FAQ } from "./home";
 
 document.addEventListener("DOMContentLoaded", async function () {
+  // const loader = document.getElementById("loader");
+
   const rootElement = document.getElementById("app")!;
 
   const router = new Router(navLinks, rootElement);
+  const loader = new Loader();
+
+  loader.handleDisplayLoader();
 
   // Dodaj metodę do ponownej inicjalizacji komponentów
   router.onRender(() => {
     initializePageComponents();
+    loader.handleHiddenLoader();
   });
 
   router.render();
 
   // Przenieś inicjalizację komponentów do osobnej funkcji
-  function initializePageComponents() {
+  async function initializePageComponents() {
     const currentPath = window.location.pathname;
 
     if (currentPath === "/") {

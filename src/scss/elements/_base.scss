@@ -43,3 +43,9 @@ body {
 .hidden {
   display: none;
 }
+
+.loader {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+}
