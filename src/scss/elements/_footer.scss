@@ -3,6 +3,8 @@
 @use "../settings/fonts" as *;
 @use "../settings/mixins" as *;
 
+$laptop-xl: 1200px;
+
 .footer__content {
   @include border-stroke();
   @include item-shadow();
@@ -13,6 +15,9 @@
   @media (max-width: $laptop) {
     padding: 80px 80px 40px;
   }
+  @media (max-width: $laptop-xl) {
+    padding: 60px 30px 30px;
+  }
 }
 
 .company-info {
@@ -22,6 +27,10 @@
   @media (max-width: $laptop) {
     padding-bottom: 40px;
   }
+  @media (max-width: $laptop-xl) {
+    display: block;
+    padding-bottom: 30px;
+  }
   &__contact {
     @include outfit-medium();
     line-height: 150%;
@@ -30,14 +39,74 @@
     max-width: 519px;
     & p {
       padding-top: 20px;
+      @media (max-width: $mobile-large) {
+        text-align: center;
+      }
     }
 
     @media (max-width: $laptop) {
       font-size: 16px;
 
       .logo-container {
+        @media (max-width: $mobile-large) {
+          display: grid;
+          place-items: center;
+        }
+
         img {
           width: 182px;
+        }
+      }
+    }
+  }
+
+  &__links {
+    @include outfit-medium();
+    line-height: 150%;
+    margin-left: 80px;
+    display: flex;
+
+    @media (max-width: $laptop) {
+      font-size: 16px;
+    }
+    @media (max-width: $laptop-xl) {
+      margin-left: 0;
+      padding-top: 40px;
+    }
+    @media (max-width: $mobile-large) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+    }
+
+    & .info-link {
+      margin-right: 30px;
+      width: 226px;
+
+      @media (max-width: $laptop) {
+        margin-right: 20px;
+        width: 161px;
+      }
+      @media (max-width: $mobile-large) {
+        width: 100%;
+        max-width: 161px;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+      & li {
+        padding-bottom: 14px;
+        &:hover {
+          opacity: 0.5;
+          cursor: pointer;
+        }
+      }
+      &__title {
+        font-weight: 600;
+        padding-bottom: 24px;
+
+        @media (max-width: $laptop) {
+          padding-bottom: 20px;
         }
       }
     }
@@ -85,45 +154,6 @@
   }
 }
 
-.company-info__links {
-  @include outfit-medium();
-  line-height: 150%;
-  margin-left: 80px;
-  display: flex;
-
-  @media (max-width: $laptop) {
-    font-size: 16px;
-  }
-
-  & .info-link {
-    margin-right: 30px;
-    width: 226px;
-
-    @media (max-width: $laptop) {
-      margin-right: 20px;
-      width: 161px;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
-    & li {
-      padding-bottom: 14px;
-      &:hover {
-        opacity: 0.5;
-        cursor: pointer;
-      }
-    }
-    &__title {
-      font-weight: 600;
-      padding-bottom: 24px;
-
-      @media (max-width: $laptop) {
-        padding-bottom: 20px;
-      }
-    }
-  }
-}
-
 .separator {
   border-bottom: 1px solid black;
 }
@@ -139,6 +169,12 @@
   @media (max-width: $laptop) {
     font-size: 16px;
   }
+  @media (max-width: $mobile-large) {
+    // display: block;
+    flex-direction: column;
+    gap: 20px;
+    padding: 16px 0;
+  }
 
   & .media-icons {
     display: flex;
@@ -150,6 +186,16 @@
       display: grid;
       place-items: center;
       background-color: $color-background-item;
+
+      @media (max-width: $mobile-large) {
+        width: 44px;
+        height: 44px;
+      }
+      & img {
+        @media (max-width: $mobile-large) {
+          scale: 0.9;
+        }
+      }
       &:hover {
         opacity: 0.8;
         cursor: pointer;
@@ -167,5 +213,10 @@
 
   @media (max-width: $laptop) {
     font-size: 16px;
+  }
+  @media (max-width: $mobile-large) {
+    font-size: 14px;
+    opacity: 0.7;
+    padding-top: 16px;
   }
 }

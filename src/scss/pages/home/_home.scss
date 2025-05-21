@@ -12,6 +12,9 @@
   @media (max-width: 800px) {
     padding: 0 0 150px;
   }
+  @media (max-width: $laptop-small) {
+    padding: 0 0 80px;
+  }
 }
 
 .section-header {
