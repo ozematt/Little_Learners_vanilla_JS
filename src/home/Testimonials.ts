@@ -168,39 +168,29 @@ export class Testimonials extends BaseComponent {
       this.listeners.push({ element, type, handler });
     };
 
-    addListener(this.previousButton, "click", () => {
-      if (this._currentIndex === 0) return;
+    addListener(this.previousButton, "click", this.handlePreviousButton);
+    addListener(this.previousButtonMobile, "click", this.handlePreviousButton);
+    addListener(this.nextButton, "click", this.handleNextButton);
+    addListener(this.nextButtonMobile, "click", this.handleNextButton);
+  }
 
-      this._currentIndex -= 1;
-      this.updateSliderPosition();
-    });
+  private handlePreviousButton = (): void => {
+    if (this._currentIndex === 0) return;
 
-    addListener(this.previousButtonMobile, "click", () => {
-      if (this._currentIndex === 0) return;
+    this._currentIndex -= 1;
+    this.updateSliderPosition();
+  };
 
-      this._currentIndex -= 1;
-      this.updateSliderPosition();
-    });
-
+  private handleNextButton = (): void => {
     const commentNumber = this.updateCommentsDisplay() as number;
 
-    addListener(this.nextButton, "click", () => {
-      if (this._currentIndex === this.testimonialsData.length - commentNumber) {
-        this._currentIndex = 0;
-      } else {
-        this._currentIndex += 1;
-      }
-      this.updateSliderPosition();
-    });
-    addListener(this.nextButtonMobile, "click", () => {
-      if (this._currentIndex === this.testimonialsData.length - commentNumber) {
-        this._currentIndex = 0;
-      } else {
-        this._currentIndex += 1;
-      }
-      this.updateSliderPosition();
-    });
-  }
+    if (this._currentIndex === this.testimonialsData.length - commentNumber) {
+      this._currentIndex = 0;
+    } else {
+      this._currentIndex += 1;
+    }
+    this.updateSliderPosition();
+  };
 
   private updateSliderPosition(): void {
     if (!this.slider) return;
