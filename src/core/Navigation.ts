@@ -3,6 +3,7 @@ export class Nav {
 
   public handleNavLinkBG(path: string): void {
     const navButtons = Array.from(this.navLinks) as HTMLElement[];
+
     const currentButton = document.querySelector(
       `[data-link-name="${path}"]`
     )! as HTMLElement;

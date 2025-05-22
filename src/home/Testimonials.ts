@@ -1,4 +1,10 @@
-type TestimonialT = {
+import { BaseComponent } from "../core";
+
+interface TestimonialsConfig {
+  data: TestimonialsData[];
+}
+
+type TestimonialsData = {
   avatar: string;
   name: string;
   rating: number;
@@ -14,41 +20,100 @@ type MediaQuery = {
   mobile: MediaQueryList;
 };
 
-export class Testimonials {
-  private testimonials: TestimonialT[];
-  private container: HTMLElement;
+export class Testimonials extends BaseComponent {
+  // Data
+  private readonly testimonialsData: TestimonialsData[];
 
-  // comments nav buttons
+  // Breakpoints
+  private readonly laptopBreakpoint: number = 1700;
+  private readonly mobileBreakpoint: number = 1020;
+
+  // DOM elements
+  private container: HTMLElement;
+  private slider: HTMLElement;
   private previousButton: HTMLElement;
   private nextButton: HTMLElement;
   private previousButtonMobile: HTMLElement;
   private nextButtonMobile: HTMLElement;
-  private currentIndex: number = 0;
 
-  // Breakpoints
-  private laptopBreakpoint: number = 1700;
-  private mobileBreakpoint: number = 1020;
+  // State
+  private _currentIndex: number = 0;
 
-  constructor(testimonials: TestimonialT[], container: HTMLElement) {
-    this.testimonials = testimonials;
-    this.container = container;
-    this.previousButton = document.getElementById(
-      "previous-comment"
-    ) as HTMLElement;
-    this.nextButton = document.getElementById("next-comment") as HTMLElement;
-    this.previousButtonMobile = document.getElementById(
-      "previous-comment-mobile"
-    ) as HTMLElement;
-    this.nextButtonMobile = document.getElementById(
-      "next-comment-mobile"
-    ) as HTMLElement;
-    this.laptopBreakpoint;
-    this.mobileBreakpoint;
-    this.render();
-    this.setupEventListeners();
+  //Magic numbers
+  private readonly SLIDE_WIDTHS = {
+    mobile: 400,
+    laptop: 380,
+    desktop: 470,
+  };
+  private readonly BREAKPOINT = {
+    mobile: 1020,
+    laptop: 1700,
+  };
+
+  public static create(config: TestimonialsConfig): Testimonials {
+    if (!config.data) {
+      throw new Error("Data not found");
+    }
+
+    // Mozliwa dodatkowa inicjalizacja
+
+    const instance = new Testimonials(config);
+    return instance;
   }
 
-  private setTemplate(item: TestimonialT): string {
+  private constructor(config: TestimonialsConfig) {
+    super();
+    this.listeners;
+    this.testimonialsData = config.data;
+
+    this.initializeElements();
+    this.addEventListeners();
+  }
+
+  protected cleanup(): void {}
+
+  private initializeElements(): void {
+    // Najpierw inicjalizujemy główny kontener
+    const container = document.getElementById("testimonials-container");
+    if (!container) {
+      throw new Error("Container element not found");
+    }
+    this.container = container as HTMLElement;
+
+    // Renderujemy zawartość kontenera
+    this.render();
+
+    // Inicjalizujemy przyciski po renderowaniu
+    const elements = {
+      previousButton: document.getElementById("previous-comment"),
+      nextButton: document.getElementById("next-comment"),
+      previousButtonMobile: document.getElementById("previous-comment-mobile"),
+      nextButtonMobile: document.getElementById("next-comment-mobile"),
+    };
+
+    const missingElements = Object.entries(elements)
+      .filter(([_, element]) => !element)
+      .map(([name]) => name);
+
+    if (missingElements.length > 0) {
+      throw new Error(`Missing button elements: ${missingElements.join(", ")}`);
+    }
+
+    // Przypisujemy przyciski
+    this.previousButton = elements.previousButton as HTMLElement;
+    this.nextButton = elements.nextButton as HTMLElement;
+    this.previousButtonMobile = elements.previousButtonMobile as HTMLElement;
+    this.nextButtonMobile = elements.nextButtonMobile as HTMLElement;
+
+    // Inicjalizujemy slider po renderowaniu
+    const slider = document.getElementById("testimonials-slider-id");
+    if (!slider) {
+      throw new Error("Slider element not found");
+    }
+    this.slider = slider as HTMLElement;
+  }
+
+  private setTemplate(item: TestimonialsData): string {
     const template = `
         <article class="testimonials__container__card" 
           >
@@ -80,79 +145,78 @@ export class Testimonials {
         </article>`;
     return template;
   }
-  public render(): void {
-    const { testimonials, container } = this;
-
-    if (!testimonials || testimonials.length === 0) return;
+  private render(): void {
+    if (!this.testimonialsData || this.testimonialsData.length === 0) {
+      throw new Error("Testimonials not found");
+    }
 
     const carouselContainer = `
       <div id="testimonials-slider-id" class="testimonials__container__slider" >
-        ${testimonials.map((item) => this.setTemplate(item)).join("")}
+        ${this.testimonialsData.map((item) => this.setTemplate(item)).join("")}
       </div>
       `;
-    container.innerHTML = carouselContainer;
+    this.container.innerHTML = carouselContainer;
   }
 
-  private setupEventListeners(): void {
-    const { previous, next } = this.updateButtons() as Buttons;
-    const commentNumber = this.updateCommentsDisplay() as number;
+  private addEventListeners(): void {
+    const addListener = (
+      element: HTMLElement,
+      type: string,
+      handler: EventListener
+    ) => {
+      element?.addEventListener(type, handler);
+      this.listeners.push({ element, type, handler });
+    };
 
-    previous.addEventListener("click", () => {
-      if (this.currentIndex === 0) return;
+    addListener(this.previousButton, "click", () => {
+      if (this._currentIndex === 0) return;
 
-      this.currentIndex -= 1;
+      this._currentIndex -= 1;
       this.updateSliderPosition();
     });
 
-    next.addEventListener("click", () => {
-      if (this.currentIndex === this.testimonials.length - commentNumber) {
-        this.currentIndex = 0;
+    addListener(this.previousButtonMobile, "click", () => {
+      if (this._currentIndex === 0) return;
+
+      this._currentIndex -= 1;
+      this.updateSliderPosition();
+    });
+
+    const commentNumber = this.updateCommentsDisplay() as number;
+
+    addListener(this.nextButton, "click", () => {
+      if (this._currentIndex === this.testimonialsData.length - commentNumber) {
+        this._currentIndex = 0;
       } else {
-        this.currentIndex += 1;
+        this._currentIndex += 1;
+      }
+      this.updateSliderPosition();
+    });
+    addListener(this.nextButtonMobile, "click", () => {
+      if (this._currentIndex === this.testimonialsData.length - commentNumber) {
+        this._currentIndex = 0;
+      } else {
+        this._currentIndex += 1;
       }
       this.updateSliderPosition();
     });
   }
-  private updateSliderPosition(): void {
-    const slider = document.getElementById("testimonials-slider-id");
-    if (!slider) return;
 
+  private updateSliderPosition(): void {
+    if (!this.slider) return;
     const { laptop, mobile } = this.mediaBreakpoints();
 
+    let slideWidth = this.SLIDE_WIDTHS.desktop;
+
     if (mobile.matches) {
-      slider.style.transform = `translateX(-${this.currentIndex * 400}px)`;
-      return;
-    }
-    if (laptop.matches) {
-      slider.style.transform = `translateX(-${this.currentIndex * 380}px)`;
-      return;
-    }
-    slider.style.transform = `translateX(-${this.currentIndex * 470}px)`;
-  }
-  private updateButtons(): void | Buttons {
-    const {
-      previousButton,
-      nextButton,
-      previousButtonMobile,
-      nextButtonMobile,
-    } = this;
-
-    if (
-      !previousButton ||
-      !nextButton ||
-      !previousButtonMobile ||
-      !nextButtonMobile
-    ) {
-      console.error("Buttons not found");
-      return;
+      slideWidth = this.SLIDE_WIDTHS.mobile;
+    } else if (laptop.matches) {
+      slideWidth = this.SLIDE_WIDTHS.laptop;
     }
 
-    const { mobile } = this.mediaBreakpoints();
-
-    const previous = mobile.matches ? previousButtonMobile : previousButton;
-    const next = mobile.matches ? nextButtonMobile : nextButton;
-
-    return { previous, next };
+    this.slider.style.transform = `translateX(-${
+      this._currentIndex * slideWidth
+    }px)`;
   }
 
   private updateCommentsDisplay(): number {
@@ -169,8 +233,12 @@ export class Testimonials {
   }
 
   private mediaBreakpoints(): MediaQuery {
-    const laptop = window.matchMedia(`(max-width: ${this.laptopBreakpoint}px)`);
-    const mobile = window.matchMedia(`(max-width: ${this.mobileBreakpoint}px)`);
+    const laptop = window.matchMedia(
+      `(max-width: ${this.BREAKPOINT.laptop}px)`
+    );
+    const mobile = window.matchMedia(
+      `(max-width: ${this.BREAKPOINT.mobile}px)`
+    );
 
     return { laptop, mobile };
   }
