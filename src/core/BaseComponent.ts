@@ -22,4 +22,13 @@ export abstract class BaseComponent implements Component {
     });
     this.listeners = [];
   }
+
+  protected addListeners(
+    element: HTMLElement,
+    type: string,
+    handler: EventListener
+  ) {
+    element?.addEventListener(type, handler);
+    this.listeners.push({ element, type, handler });
+  }
 }

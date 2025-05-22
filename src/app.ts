@@ -1,4 +1,4 @@
-import { Loader, Router, Nav } from "./core";
+import { Loader, Router, Nav, Component } from "./core";
 import { navLinks, testimonialsData, faqData } from "./data";
 import { Testimonials, FAQ } from "./home";
 
@@ -20,13 +20,25 @@ document.addEventListener("DOMContentLoaded", async function () {
   router.render();
 
   //HANDLE ROUTES
+  let activeComponents: Component[] = [];
+
+  function cleanupComponents() {
+    activeComponents.forEach((component) => component.destroy());
+    activeComponents = [];
+  }
+
   function initializePageComponents() {
     const currentPath = window.location.pathname;
 
+    cleanupComponents();
+
     if (currentPath === "/") {
       nav.handleNavLinkBG(currentPath); // nav button bg change
-      initTestimonials();
-      initFAQ();
+
+      const testimonials = initTestimonials();
+      const faq = initFAQ();
+
+      activeComponents.push(testimonials, faq);
     }
 
     if (currentPath === "/about-us") {
@@ -39,13 +51,14 @@ document.addEventListener("DOMContentLoaded", async function () {
     const config = {
       data: testimonialsData,
     };
-    Testimonials.create(config);
+    return Testimonials.create(config);
   }
 
   function initFAQ() {
-    const faqContainer = document.getElementById("faq-container");
-    if (faqContainer) {
-      new FAQ(faqData, faqContainer);
-    }
+    const config = {
+      data: faqData,
+    };
+
+    return FAQ.create(config);
   }
 });

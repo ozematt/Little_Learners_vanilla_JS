@@ -24,9 +24,16 @@ export class Testimonials extends BaseComponent {
   // Data
   private readonly testimonialsData: TestimonialsData[];
 
-  // Breakpoints
-  private readonly laptopBreakpoint: number = 1700;
-  private readonly mobileBreakpoint: number = 1020;
+  //Magic numbers
+  private readonly SLIDE_WIDTHS = {
+    mobile: 400,
+    laptop: 380,
+    desktop: 470,
+  };
+  private readonly BREAKPOINT = {
+    mobile: 1020,
+    laptop: 1700,
+  };
 
   // DOM elements
   private container: HTMLElement;
@@ -38,17 +45,6 @@ export class Testimonials extends BaseComponent {
 
   // State
   private _currentIndex: number = 0;
-
-  //Magic numbers
-  private readonly SLIDE_WIDTHS = {
-    mobile: 400,
-    laptop: 380,
-    desktop: 470,
-  };
-  private readonly BREAKPOINT = {
-    mobile: 1020,
-    laptop: 1700,
-  };
 
   public static create(config: TestimonialsConfig): Testimonials {
     if (!config.data) {
@@ -70,7 +66,18 @@ export class Testimonials extends BaseComponent {
     this.addEventListeners();
   }
 
-  protected cleanup(): void {}
+  protected cleanup(): void {
+    if (this.container) {
+      this.container.innerHTML = "";
+    }
+
+    Object.keys(this).forEach((key) => {
+      (this as any)[key] = null;
+    });
+
+    this._currentIndex = 0;
+    console.log("Testimonials cleanup!");
+  }
 
   private initializeElements(): void {
     // Najpierw inicjalizujemy główny kontener
@@ -159,19 +166,14 @@ export class Testimonials extends BaseComponent {
   }
 
   private addEventListeners(): void {
-    const addListener = (
-      element: HTMLElement,
-      type: string,
-      handler: EventListener
-    ) => {
-      element?.addEventListener(type, handler);
-      this.listeners.push({ element, type, handler });
-    };
-
-    addListener(this.previousButton, "click", this.handlePreviousButton);
-    addListener(this.previousButtonMobile, "click", this.handlePreviousButton);
-    addListener(this.nextButton, "click", this.handleNextButton);
-    addListener(this.nextButtonMobile, "click", this.handleNextButton);
+    super.addListeners(this.previousButton, "click", this.handlePreviousButton);
+    super.addListeners(
+      this.previousButtonMobile,
+      "click",
+      this.handlePreviousButton
+    );
+    super.addListeners(this.nextButton, "click", this.handleNextButton);
+    super.addListeners(this.nextButtonMobile, "click", this.handleNextButton);
   }
 
   private handlePreviousButton = (): void => {

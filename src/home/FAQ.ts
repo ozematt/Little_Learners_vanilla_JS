@@ -1,16 +1,53 @@
+import { BaseComponent } from "../core";
+
+interface FAQConfig {
+  data: FAQdata[];
+}
+
 type FAQdata = {
   question: string;
   answer: string;
 };
 
-export class FAQ {
-  private questions: FAQdata[];
+export class FAQ extends BaseComponent {
+  private readonly questions: FAQdata[];
   private container: HTMLElement;
 
-  constructor(questions: FAQdata[], container: HTMLElement) {
-    this.questions = questions;
-    this.container = container;
-    this.setupEventListeners();
+  public static create(config: FAQConfig): FAQ {
+    if (!config.data) {
+      throw new Error("Data not found");
+    }
+    const instance = new FAQ(config);
+    return instance;
+  }
+
+  private constructor(config: FAQConfig) {
+    super();
+    this.listeners;
+    this.questions = config.data;
+
+    this.initializeElements();
+    this.addEventListeners();
+  }
+
+  protected cleanup(): void {
+    if (this.container) {
+      this.container.innerHTML = "";
+    }
+
+    Object.keys(this).forEach((key) => {
+      (this as any)[key] = null;
+    });
+    console.log("FAQ cleanup!");
+  }
+
+  private initializeElements() {
+    const container = document.getElementById("faq-container");
+    if (!container) {
+      throw new Error("Container element not found");
+    }
+    this.container = container as HTMLElement;
+
     this.render();
   }
 
@@ -52,24 +89,27 @@ export class FAQ {
       </div>
     `;
   }
-  private setupEventListeners() {
-    this.container.addEventListener("click", (e) => {
-      const target = (e.target as HTMLElement).closest(
-        "summary"
-      ) as HTMLDetailsElement;
-      if (!target) return;
 
-      const details = target.parentNode as HTMLDetailsElement;
-      const icon = details.querySelector(".faq__icon img") as HTMLImageElement;
-      if (!details.hasAttribute("open")) {
-        details.classList.add("faq__item--open");
-        details.classList.remove("faq__item--closed");
-        icon.src = "pages/home_assets/minus-icon.svg";
-      } else {
-        details.classList.add("faq__item--closed");
-        details.classList.remove("faq__item--open");
-        icon.src = "pages/home_assets/plus-icon.svg";
-      }
-    });
+  private addEventListeners() {
+    super.addListeners(this.container, "click", this.handleQuestionDisplay);
   }
+
+  private handleQuestionDisplay = (e: Event) => {
+    const target = (e.target as HTMLElement).closest(
+      "summary"
+    ) as HTMLDetailsElement;
+    if (!target) return;
+
+    const details = target.parentNode as HTMLDetailsElement;
+    const icon = details.querySelector(".faq__icon img") as HTMLImageElement;
+    if (!details.hasAttribute("open")) {
+      details.classList.add("faq__item--open");
+      details.classList.remove("faq__item--closed");
+      icon.src = "pages/home_assets/minus-icon.svg";
+    } else {
+      details.classList.add("faq__item--closed");
+      details.classList.remove("faq__item--open");
+      icon.src = "pages/home_assets/plus-icon.svg";
+    }
+  };
 }
