@@ -4,54 +4,42 @@
 @use "../../settings/mixins" as *;
 
 .navigation {
-  padding-top: 200px;
+  padding-top: 100px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 50px;
 
   @media (max-width: $laptop) {
-    padding-top: 150px;
-  }
-
-  @media (max-width: $laptop-small) {
     padding-top: 80px;
+    column-gap: 40px;
   }
-  &__content {
-    padding-top: 100px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 50px;
+  @media (max-width: $laptop-small) {
+    grid-template-columns: repeat(1, 1fr);
+    place-items: center;
+    // column-gap: 40px;
+  }
 
-    @media (max-width: $laptop) {
-      padding-top: 80px;
-      column-gap: 40px;
-    }
+  &__column {
     @media (max-width: $laptop-small) {
-      grid-template-columns: repeat(1, 1fr);
-      place-items: center;
-      // column-gap: 40px;
+      margin-bottom: 40px;
     }
+    & article:first-child {
+      margin-bottom: 50px;
 
-    &__column {
-      @media (max-width: $laptop-small) {
+      @media (max-width: $laptop) {
         margin-bottom: 40px;
-      }
-      & article:first-child {
-        margin-bottom: 50px;
-
-        @media (max-width: $laptop) {
-          margin-bottom: 40px;
-        }
       }
     }
   }
 }
 
-.navigation__item {
+.navigation-item {
   @include border-stroke();
   @include item-shadow();
   background-color: white;
   width: 100%;
   max-width: 773px;
   padding: 80px;
-  // height: 588px;
 
   @media (max-width: $laptop) {
     padding: 60px;
@@ -121,7 +109,7 @@
   }
 }
 
-.decoration__container {
+.decoration-container {
   padding-top: 30px;
   width: 100%;
   img {

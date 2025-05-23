@@ -1,12 +1,22 @@
+// GENERAL
 @use "settings";
 @use "elements/base";
 @use "elements/header";
 @use "elements/nav";
 @use "elements/footer";
 
+// HOME PAGE - PAGE
 @use "pages/home/home";
 @use "pages/home/hero";
 @use "pages/home/benefits";
 @use "pages/home/testimonials";
 @use "pages/home/faq";
 @use "pages/home/navigation";
+
+// ABOUT US - PAGE
+@use "pages/about-us/about-us";
+@use "pages/about-us/welcome";
+@use "pages/about-us/mission";
+@use "pages/about-us/awards";
+@use "pages/about-us/history";
+@use "pages/about-us/team";

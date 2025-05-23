@@ -4,17 +4,6 @@
 @use "../../settings/mixins" as *;
 
 .benefits {
-  padding-top: 200px;
-
-  @media (max-width: $laptop) {
-    padding-top: 150px;
-  }
-  @media (max-width: $laptop-small) {
-    padding-top: 80px;
-  }
-}
-
-.benefits__container {
   padding-top: 135px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);

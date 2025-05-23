@@ -11,10 +11,6 @@ type TestimonialsData = {
   comment: string;
 };
 
-type Buttons = {
-  previous: HTMLElement;
-  next: HTMLElement;
-};
 type MediaQuery = {
   laptop: MediaQueryList;
   mobile: MediaQueryList;
@@ -64,6 +60,15 @@ export class Testimonials extends BaseComponent {
 
     this.initializeElements();
     this.addEventListeners();
+  }
+
+  get currentIndex(): number {
+    return this._currentIndex;
+  }
+  set currentIndex(value: number) {
+    if (value < 0) return;
+    this._currentIndex = value;
+    this.updateSliderPosition(); //
   }
 
   protected cleanup(): void {
@@ -122,16 +127,16 @@ export class Testimonials extends BaseComponent {
 
   private setTemplate(item: TestimonialsData): string {
     const template = `
-        <article class="testimonials__container__card" 
+        <article class="testimonials-container__card" 
           >
-          <div class="avatar__container"><img src="${
+          <div class="avatar-container"><img src="${
             item.avatar
           }" alt="avatar icon" /></div>
 
-          <p class="testimonials__user-name">${item.name}</p>
+          <p class="card-user-name">${item.name}</p>
 
-          <div id="rating__container" class="rating__container">
-          <div class="rating__container__full" style="width: ${
+          <div id="rating-container" class="rating__container">
+          <div class="rating-container__fill" style="width: ${
             item.rating * 28
           }px">
            <img
@@ -146,7 +151,7 @@ export class Testimonials extends BaseComponent {
             />
           </div>
           
-          <p class="testimonials__comment">
+          <p class="card-comment">
             ${item.comment}
           </p>
         </article>`;
@@ -158,7 +163,7 @@ export class Testimonials extends BaseComponent {
     }
 
     const carouselContainer = `
-      <div id="testimonials-slider-id" class="testimonials__container__slider" >
+      <div id="testimonials-slider-id" class="testimonials-container__slider" >
         ${this.testimonialsData.map((item) => this.setTemplate(item)).join("")}
       </div>
       `;
@@ -177,21 +182,19 @@ export class Testimonials extends BaseComponent {
   }
 
   private handlePreviousButton = (): void => {
-    if (this._currentIndex === 0) return;
-
-    this._currentIndex -= 1;
-    this.updateSliderPosition();
+    if (this.currentIndex === 0) return;
+    this.currentIndex -= 1;
   };
 
   private handleNextButton = (): void => {
     const commentNumber = this.updateCommentsDisplay() as number;
+    const maxIndex = this.testimonialsData.length - commentNumber;
 
-    if (this._currentIndex === this.testimonialsData.length - commentNumber) {
-      this._currentIndex = 0;
+    if (this.currentIndex >= maxIndex) {
+      this.currentIndex = 0;
     } else {
-      this._currentIndex += 1;
+      this.currentIndex += 1;
     }
-    this.updateSliderPosition();
   };
 
   private updateSliderPosition(): void {

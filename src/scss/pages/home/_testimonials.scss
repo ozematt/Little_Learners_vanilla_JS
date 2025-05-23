@@ -4,110 +4,101 @@
 @use "../../settings/mixins" as *;
 
 .testimonials {
-  padding-top: 200px;
+  padding-top: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
   @media (max-width: $laptop) {
-    padding-top: 150px;
-  }
-  @media (max-width: $laptop-small) {
     padding-top: 80px;
   }
+  @media (max-width: 1020px) {
+    display: block;
+  }
+  @media (max-width: $mobile-large) {
+    padding-top: 50px;
+  }
+}
 
-  &__content {
-    padding-top: 100px;
+.testimonials-container {
+  width: 1380px;
+  padding: 8px;
+  overflow: hidden;
+
+  @media (max-width: $laptop) {
+    width: 1115px;
+  }
+  @media (max-width: 1020px) {
+    width: 740px;
+  }
+  @media (max-width: $mobile-large) {
+    padding: 8px 8px 8px 0;
+  }
+
+  &__slider {
     display: flex;
     justify-content: space-between;
+    gap: 50px;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+
+    @media (max-width: $laptop) {
+      gap: 40px;
+    }
+  }
+  &__card {
+    @include border-stroke();
+    @include item-shadow();
+    width: 420px;
+
+    background-color: white;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    flex-shrink: 0;
 
     @media (max-width: $laptop) {
-      padding-top: 80px;
+      width: 340px;
     }
-    @media (max-width: 1020px) {
-      display: block;
-    }
+
     @media (max-width: $mobile-large) {
-      padding-top: 50px;
-    }
-  }
-
-  &__container {
-    width: 1380px;
-    padding: 8px;
-    overflow: hidden;
-
-    @media (max-width: $laptop) {
-      width: 1115px;
-    }
-    @media (max-width: 1020px) {
-      width: 740px;
-    }
-    @media (max-width: $mobile-large) {
-      padding: 8px 8px 8px 0;
-    }
-
-    &__slider {
-      display: flex;
-      justify-content: space-between;
-      gap: 50px;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-      will-change: transform;
-
-      @media (max-width: $laptop) {
-        gap: 40px;
-      }
-    }
-    &__card {
-      @include border-stroke();
-      @include item-shadow();
-      width: 420px;
-
-      background-color: white;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex-shrink: 0;
-
-      @media (max-width: $laptop) {
-        width: 340px;
-      }
-
-      @media (max-width: $mobile-large) {
-        width: 355px;
-        height: 328px;
-      }
-    }
-  }
-  &__user-name {
-    padding-top: 12px;
-    font-family: $font-outfit;
-    font-size: 24px;
-    line-height: 150%;
-    font-weight: 600;
-    color: $color-gray;
-
-    @media (max-width: $laptop) {
-      padding-top: 10px;
-      font-size: 20px;
-    }
-  }
-  &__comment {
-    @include outfit-medium();
-    padding: 30px 50px 50px;
-    color: $color-gray;
-    text-align: center;
-    line-height: 150%;
-
-    @media (max-width: $laptop) {
-      padding: 24px 40px 40px;
-      font-size: 16px;
-    }
-    @media (max-width: $mobile-large) {
-      padding: 16px 30px 30px;
+      width: 355px;
+      height: 328px;
     }
   }
 }
 
-.avatar__container {
+.card-user-name {
+  padding-top: 12px;
+  font-family: $font-outfit;
+  font-size: 24px;
+  line-height: 150%;
+  font-weight: 600;
+  color: $color-gray;
+
+  @media (max-width: $laptop) {
+    padding-top: 10px;
+    font-size: 20px;
+  }
+}
+
+.card-comment {
+  @include outfit-medium();
+  padding: 30px 50px 50px;
+  color: $color-gray;
+  text-align: center;
+  line-height: 150%;
+
+  @media (max-width: $laptop) {
+    padding: 24px 40px 40px;
+    font-size: 16px;
+  }
+  @media (max-width: $mobile-large) {
+    padding: 16px 30px 30px;
+  }
+}
+
+.avatar-container {
   margin-top: 50px;
   border: $border-secondary-stroke;
   border-radius: 50%;
@@ -124,7 +115,7 @@
   }
 }
 
-.rating__container {
+.rating-container {
   position: relative;
   padding-top: 30px;
   width: 140px;
@@ -137,7 +128,7 @@
     padding-top: 17px;
   }
 
-  &__full {
+  &__fill {
     position: absolute;
     overflow: hidden;
   }

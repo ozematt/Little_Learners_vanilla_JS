@@ -37,109 +37,106 @@
       height: 100%;
     }
   }
+}
 
-  &__content {
-    padding-left: 60px;
+.hero-content {
+  padding-left: 60px;
+
+  @media (max-width: $laptop) {
+    padding-left: 50px;
+  }
+
+  @media (max-width: 1420px) {
+    padding-left: 0;
+    padding-top: 40px;
+  }
+
+  &__subtitle {
+    font-size: 22px;
+    line-height: 150%;
+    text-decoration: underline;
+    text-underline-offset: 15px;
+    padding-bottom: 20px;
 
     @media (max-width: $laptop) {
-      padding-left: 50px;
+      text-underline-offset: 10px;
+      font-size: 18px;
+      padding-bottom: 7px;
+    }
+    @media (max-width: $mobile-large) {
+      font-size: 16px;
+    }
+  }
+  &__title {
+    @include raleway-title();
+
+    @media (max-width: $laptop) {
+      font-size: 40px;
     }
 
     @media (max-width: 1420px) {
-      padding-left: 0;
-      padding-top: 40px;
+      padding-top: 10px;
     }
 
-    &__intro-text {
-      font-size: 22px;
+    @media (max-width: $mobile-large) {
+      font-size: 30px;
+      line-height: 130%;
+    }
+
+    & span {
+      color: $color-primary-accent;
+    }
+  }
+  &__description {
+    padding-top: 30px;
+    line-height: 150%;
+    color: $color-gray;
+
+    @media (max-width: $laptop) {
+      font-size: 16px;
+      padding-top: 20px;
+    }
+    @media (max-width: $mobile-large) {
+      padding-top: 18px;
+    }
+  }
+  &__stats {
+    @include border-stroke();
+    @include stats-shadow();
+    margin-top: 60px;
+    padding: 24px 50px;
+    display: flex;
+    justify-content: space-between;
+    background-color: $color-secondary-accent;
+    text-align: left;
+
+    @media (max-width: 1830px) {
+      margin-top: 50px;
+      padding: 20px 40px;
+    }
+    @media (max-width: $mobile-large) {
+      margin-top: 40px;
+      display: block;
+      text-align: center;
+      padding: 40px;
+    }
+
+    &-number {
+      @include outfit-extra-bold();
       line-height: 150%;
-      text-decoration: underline;
-      text-underline-offset: 15px;
-      padding-bottom: 20px;
-
-      @media (max-width: $laptop) {
-        text-underline-offset: 10px;
-        font-size: 18px;
-        padding-bottom: 7px;
-      }
-      @media (max-width: $mobile-large) {
-        font-size: 16px;
-      }
-    }
-
-    &__title {
-      @include raleway-title();
-
-      @media (max-width: $laptop) {
-        font-size: 40px;
-      }
-
-      @media (max-width: 1420px) {
-        padding-top: 10px;
-      }
-
-      @media (max-width: $mobile-large) {
-        font-size: 30px;
-        line-height: 130%;
-      }
-
-      & span {
-        color: $color-primary-accent;
-      }
-    }
-
-    &__description {
-      padding-top: 30px;
-      line-height: 150%;
-      color: $color-gray;
-
-      @media (max-width: $laptop) {
-        font-size: 16px;
-        padding-top: 20px;
-      }
-      @media (max-width: $mobile-large) {
-        padding-top: 18px;
-      }
-    }
-
-    &__stats {
-      @include border-stroke();
-      @include stats-shadow();
-      margin-top: 60px;
-      padding: 24px 50px;
-      display: flex;
-      justify-content: space-between;
-      background-color: $color-secondary-accent;
-      text-align: left;
 
       @media (max-width: 1830px) {
-        margin-top: 50px;
-        padding: 20px 40px;
+        font-size: 34px;
       }
-      @media (max-width: $mobile-large) {
-        margin-top: 40px;
-        display: block;
-        text-align: center;
-        padding: 40px;
-      }
+    }
 
-      &__number {
-        @include outfit-extra-bold();
-        line-height: 150%;
+    &-info {
+      @include outfit-medium();
+      font-size: 18px;
+      line-height: 150%;
 
-        @media (max-width: 1830px) {
-          font-size: 34px;
-        }
-      }
-
-      &__info {
-        @include outfit-medium();
-        font-size: 18px;
-        line-height: 150%;
-
-        @media (max-width: 1830px) {
-          font-size: 16px;
-        }
+      @media (max-width: 1830px) {
+        font-size: 16px;
       }
     }
   }

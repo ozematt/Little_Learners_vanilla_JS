@@ -53,15 +53,15 @@ export class FAQ extends BaseComponent {
 
   private setTemplate(item: FAQdata): string {
     const template = `
-       <details class="faq__item">
-          <summary class="faq__item__question">
-            <span class="faq__item__question__q">${item.question}</span>
+       <details class="faq-item">
+          <summary class="faq-item__question">
+            <span class="faq-item__question__q">${item.question}</span>
             <div class="question-underline"></div> 
-            <span class="faq__icon">
+            <span class="faq-icon">
               <img src="pages/home_assets/plus-icon.svg" alt="plus icon"/>
             </span>
           </summary>
-          <p class="faq__item__answer">${item.answer}</p>
+          <p class="faq-item__answer">${item.answer}</p>
         </details>
         `;
     return template;
@@ -81,10 +81,10 @@ export class FAQ extends BaseComponent {
       .join("");
 
     this.container.innerHTML = `
-      <div class="faq__column">
+      <div class="faq-column">
         ${firstColumnHtml}
       </div>
-      <div class="faq__column">
+      <div class="faq-column">
         ${secondColumnHtml}
       </div>
     `;
@@ -101,14 +101,14 @@ export class FAQ extends BaseComponent {
     if (!target) return;
 
     const details = target.parentNode as HTMLDetailsElement;
-    const icon = details.querySelector(".faq__icon img") as HTMLImageElement;
+    const icon = details.querySelector(".faq-icon img") as HTMLImageElement;
     if (!details.hasAttribute("open")) {
-      details.classList.add("faq__item--open");
-      details.classList.remove("faq__item--closed");
+      details.classList.add("faq-item--open");
+      details.classList.remove("faq-item--closed");
       icon.src = "pages/home_assets/minus-icon.svg";
     } else {
-      details.classList.add("faq__item--closed");
-      details.classList.remove("faq__item--open");
+      details.classList.add("faq-item--closed");
+      details.classList.remove("faq-item--open");
       icon.src = "pages/home_assets/plus-icon.svg";
     }
   };
