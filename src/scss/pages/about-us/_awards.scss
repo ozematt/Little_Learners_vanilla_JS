@@ -2,3 +2,26 @@
 @use "../../settings/variables" as *;
 @use "../../settings/fonts" as *;
 @use "../../settings/mixins" as *;
+
+.awards {
+  padding-top: 100px;
+  display: flex;
+  gap: 40px;
+}
+
+.awards-buttons {
+  display: flex;
+  gap: 20px;
+}
+
+.awards-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 50px;
+
+  & p {
+    @include raleway-bold();
+    font-size: 22px;
+  }
+}

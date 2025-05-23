@@ -133,27 +133,6 @@
     overflow: hidden;
   }
 }
-.arrow-btn {
-  @include border-stroke();
-  background-color: white;
-  width: 58px;
-  height: 58px;
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  cursor: pointer;
-
-  @media (max-width: $laptop) {
-    width: 48px;
-    height: 48px;
-    & img {
-      scale: 0.6;
-    }
-  }
-  &__left {
-    transform: rotate(180deg);
-  }
-}
 
 .comments-nav {
   display: none;
@@ -166,7 +145,7 @@
   }
 }
 
-.arrow-hidden {
+.hidden-btn {
   @media (max-width: 1020px) {
     display: none;
   }

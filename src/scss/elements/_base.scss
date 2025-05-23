@@ -101,6 +101,95 @@ body {
   }
 }
 
+.article {
+  @include border-stroke();
+  @include item-shadow();
+  position: relative;
+  padding: 80px 50px 50px;
+  width: 100%;
+  max-width: 504px;
+  background-color: white;
+
+  @media (max-width: $laptop) {
+    padding: 60px 38px 40px;
+  }
+  @media (max-width: $mobile-large) {
+    padding: 50px 38px 30px 30px;
+  }
+
+  &__icon-container {
+    @include border-stroke();
+    position: absolute;
+    display: grid;
+    place-items: center;
+    width: 74px;
+    height: 74px;
+    background: $color-background-item;
+    left: 30px;
+    top: -37px;
+
+    @media (max-width: $laptop) {
+      width: 56px;
+      height: 56px;
+      left: 24px;
+      top: -28px;
+      & img {
+        scale: 0.7;
+      }
+    }
+  }
+
+  &__title {
+    @include raleway-bold();
+    font-size: 28px;
+
+    @media (max-width: $laptop) {
+      font-size: 24px;
+    }
+    @media (max-width: $mobile-large) {
+      font-size: 22px;
+    }
+  }
+  &__description {
+    @include outfit-medium();
+    padding-top: 20px;
+    font-size: 18px;
+    line-height: 150%;
+    color: $color-gray-description;
+
+    @media (max-width: $laptop) {
+      font-size: 16px;
+    }
+  }
+}
+
+.btn {
+  @include border-stroke();
+  background-color: white;
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  @media (max-width: $laptop) {
+    width: 48px;
+    height: 48px;
+  }
+
+  & img {
+    width: 25px;
+    height: 25px;
+    @media (max-width: $laptop) {
+      scale: 0.6;
+    }
+  }
+  &__arrow-left {
+    transform: rotate(180deg);
+  }
+}
+
 .fade-out {
   opacity: 0;
   transition: opacity 0.3s;
