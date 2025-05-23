@@ -8,12 +8,9 @@
   @include item-shadow();
   position: relative;
   background: white;
-  margin: 0 -130px;
+  margin: 0 -111px;
 
   @media (max-width: $laptop) {
-    margin: 0 -50px;
-  }
-  @media (max-width: $mobile-large) {
     margin: 0;
   }
 
@@ -97,6 +94,7 @@
   }
   &__description {
     @include outfit-medium();
+    color: $color-gray;
     line-height: 150%;
     width: 100%;
     max-width: 765px;

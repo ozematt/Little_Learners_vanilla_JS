@@ -4,10 +4,10 @@
 @use "../../settings/mixins" as *;
 
 .about-us {
-  padding: 60px 160px 200px;
+  padding: 60px 111px 200px;
 
   @media (max-width: $laptop) {
-    padding: 40px 80px 150px;
+    padding: 40px 30px 150px;
   }
   @media (max-width: $mobile-large) {
     padding: 40px 0 150px;
