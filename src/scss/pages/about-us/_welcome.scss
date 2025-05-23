@@ -2,3 +2,113 @@
 @use "../../settings/variables" as *;
 @use "../../settings/fonts" as *;
 @use "../../settings/mixins" as *;
+
+.welcome {
+  @include border-stroke();
+  @include item-shadow();
+  position: relative;
+  background: white;
+  margin: 0 -130px;
+
+  @media (max-width: $laptop) {
+    margin: 0 -50px;
+  }
+  @media (max-width: $mobile-large) {
+    margin: 0;
+  }
+
+  &__abstract {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    @media (max-width: $laptop) {
+      width: 137px;
+      height: 137px;
+    }
+
+    @media (max-width: $mobile-large) {
+      width: 100px;
+      height: 100px;
+    }
+  }
+}
+
+.welcome-content {
+  padding: 150px 120px;
+  display: flex;
+  justify-content: space-between;
+
+  @media (max-width: $laptop) {
+    padding: 100px 80px;
+  }
+
+  @media (max-width: $laptop-small) {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: $mobile-large) {
+    padding: 50px 30px;
+  }
+
+  &__title {
+    width: 100%;
+    max-width: 765px;
+    padding-right: 50px;
+
+    @media (max-width: $laptop) {
+      max-width: 535px;
+      padding-right: 20px;
+    }
+    @media (max-width: $laptop-small) {
+      text-align: center;
+    }
+
+    & p {
+      @include border-stroke();
+      @include outfit-medium();
+      display: inline-block;
+      font-size: 18px;
+      padding: 10px 20px;
+
+      @media (max-width: $laptop) {
+        font-size: 16px;
+        padding: 8px 16px;
+      }
+
+      @media (max-width: $mobile-large) {
+        font-size: 14px;
+      }
+    }
+    & h2 {
+      @include raleway-bold();
+      font-size: 48px;
+      padding-top: 14px;
+
+      @media (max-width: $laptop) {
+        font-size: 38px;
+      }
+      @media (max-width: $mobile-large) {
+        font-size: 28px;
+        padding-top: 10px;
+      }
+    }
+  }
+  &__description {
+    @include outfit-medium();
+    line-height: 150%;
+    width: 100%;
+    max-width: 765px;
+
+    @media (max-width: $laptop) {
+      font-size: 16px;
+      max-width: 535px;
+    }
+
+    @media (max-width: $laptop-small) {
+      text-align: center;
+      padding-top: 20px;
+    }
+  }
+}

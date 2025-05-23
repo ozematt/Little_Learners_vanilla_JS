@@ -2,3 +2,14 @@
 @use "../../settings/variables" as *;
 @use "../../settings/fonts" as *;
 @use "../../settings/mixins" as *;
+
+.about-us {
+  padding: 60px 160px 200px;
+
+  @media (max-width: $laptop) {
+    padding: 40px 80px 150px;
+  }
+  @media (max-width: $mobile-large) {
+    padding: 40px 0 150px;
+  }
+}
