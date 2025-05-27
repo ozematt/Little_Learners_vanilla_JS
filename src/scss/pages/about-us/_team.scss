@@ -2,3 +2,146 @@
 @use "../../settings/variables" as *;
 @use "../../settings/fonts" as *;
 @use "../../settings/mixins" as *;
+
+.team {
+  margin-top: 100px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 50px;
+
+  @media (max-width: $laptop) {
+    margin-top: 80px;
+    gap: 40px;
+  }
+
+  @media (max-width: $laptop-small) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (max-width: $mobile-large) {
+    margin-top: 50px;
+  }
+}
+
+.member {
+  @include border-stroke();
+  @include item-shadow();
+  background: white;
+  width: 100%;
+  max-width: 773px;
+  padding: 50px;
+
+  @media (max-width: $laptop) {
+    padding: 40px;
+  }
+
+  @media (max-width: $mobile-large) {
+    padding: 30px;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__description {
+    @include border-stroke();
+    background-color: $color-background;
+    margin-top: 30px;
+    padding: 30px;
+
+    @media (max-width: $laptop) {
+      margin-top: 24px;
+      padding: 24px;
+    }
+
+    @media (max-width: $mobile-large) {
+      padding: 20px;
+    }
+
+    & :first-child {
+      font-family: $font-outfit;
+      font-weight: 600;
+      color: $color-gray;
+      font-size: 24px;
+      line-height: 150%;
+      padding-bottom: 20px;
+
+      @media (max-width: $laptop) {
+        font-size: 20px;
+      }
+      @media (max-width: $mobile-large) {
+        padding-bottom: 12px;
+      }
+    }
+
+    & :last-child {
+      font-family: $font-outfit;
+      font-weight: 500;
+      font-size: 20px;
+      color: $color-gray;
+      line-height: 150%;
+
+      @media (max-width: $laptop) {
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.member-name-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  @media (max-width: $laptop) {
+    gap: 12px;
+  }
+
+  @media (max-width: $mobile-large) {
+    gap: 10px;
+  }
+  & img {
+    background: $color-background;
+
+    @media (max-width: $laptop) {
+      width: 80px;
+      height: 80px;
+    }
+
+    @media (max-width: $mobile-large) {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  & p {
+    font-family: $font-raleway;
+    font-weight: 800;
+    line-height: 150%;
+    font-size: 30px;
+    color: $color-gray;
+
+    @media (max-width: $laptop) {
+      font-size: 24px;
+    }
+
+    @media (max-width: $mobile-large) {
+      font-size: 20px;
+    }
+  }
+
+  &__mail-icon {
+    @include border-stroke();
+    width: 56px;
+    height: 56px;
+    background-color: $color-background-item;
+    display: grid;
+    place-items: center;
+
+    @media (max-width: $laptop) {
+      width: 48px;
+      height: 48px;
+    }
+  }
+}
