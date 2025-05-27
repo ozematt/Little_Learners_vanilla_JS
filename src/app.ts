@@ -44,6 +44,10 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (currentPath === "/about-us") {
       nav.handleNavLinkBG(currentPath);
     }
+
+    if (currentPath === "/academics") {
+      nav.handleNavLinkBG(currentPath);
+    }
   }
 
   ////HOME PAGE - RENDERING

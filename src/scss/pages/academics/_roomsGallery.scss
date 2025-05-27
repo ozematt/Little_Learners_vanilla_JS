@@ -1,0 +1,73 @@
+@use "../../settings/colors" as *;
+@use "../../settings/variables" as *;
+@use "../../settings/fonts" as *;
+@use "../../settings/mixins" as *;
+
+.gallery-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+}
+
+.gallery-btn {
+  @include border-stroke();
+  margin-left: 15px;
+  padding: 14px 20px;
+  background: white;
+  font-family: $font-outfit;
+  font-weight: 600;
+  color: $color-secondary-black;
+  line-height: 130%;
+  font-size: 20px;
+}
+
+.gallery {
+  margin-top: 300px;
+}
+
+.album {
+  @include border-stroke();
+  @include item-shadow();
+  background: white;
+  position: relative;
+  height: 415px;
+  padding: 50px 50px;
+  margin-top: 300px;
+
+  &__images {
+    display: flex;
+    gap: 40px;
+    position: absolute;
+    top: -150px;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 150px;
+
+    & p {
+      @include raleway-bold();
+      font-size: 40px;
+    }
+  }
+  &__description {
+    @include outfit-medium();
+    color: $color-gray-description;
+    line-height: 150%;
+    margin-top: 40px;
+  }
+}
+
+.image-container {
+  @include border-stroke();
+  width: 344px;
+  height: 304px;
+  background: #000;
+}
+
+.album-nav {
+  display: flex;
+  gap: 20px;
+}

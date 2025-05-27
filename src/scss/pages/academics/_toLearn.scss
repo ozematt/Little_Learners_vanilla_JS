@@ -1,0 +1,124 @@
+@use "../../settings/colors" as *;
+@use "../../settings/variables" as *;
+@use "../../settings/fonts" as *;
+@use "../../settings/mixins" as *;
+
+.toLearn {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  margin-top: 100px;
+
+  @media (max-width: $laptop) {
+    gap: 40px;
+    margin-top: 80px;
+  }
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 950px) {
+    margin-top: 50px;
+    // grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 840px) {
+    grid-template-columns: repeat(1, 1fr);
+    // place-items: center;
+  }
+}
+
+.subject {
+  @include border-stroke();
+  @include item-shadow();
+  background: white;
+  padding: 50px;
+  text-align: center;
+  overflow: hidden;
+
+  @media (max-width: $laptop) {
+    padding: 40px;
+  }
+
+  @media (max-width: 950px) {
+    padding: 30px;
+  }
+
+  &__background {
+    @include border-stroke();
+    position: absolute;
+    width: 125px;
+    height: 410px;
+    background-color: $color-secondary-accent;
+    z-index: -1;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -5%);
+
+    @media (max-width: $laptop) {
+      width: 100px;
+      height: 390px;
+    }
+    @media (max-width: 950px) {
+      width: 90px;
+      height: 350px;
+    }
+  }
+
+  &__image {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+
+    & img {
+      width: 100%;
+    }
+  }
+
+  &__name {
+    @include raleway-bold();
+    font-size: 28px;
+    margin-top: 50px;
+
+    @media (max-width: $laptop) {
+      margin-top: 40px;
+      font-size: 24px;
+    }
+    @media (max-width: 950px) {
+      margin-top: 30px;
+      font-size: 22px;
+    }
+  }
+
+  &__description {
+    @include outfit-medium();
+    margin-top: 20px;
+    line-height: 150%;
+    color: $color-gray-description;
+
+    @media (max-width: $laptop) {
+      margin-top: 14px;
+      font-size: 16px;
+    }
+    @media (max-width: 950px) {
+      margin-top: 10px;
+    }
+  }
+}
+
+.image-background {
+  @include border-stroke();
+  position: absolute;
+  width: 125px;
+  height: 410px;
+  background-color: $color-secondary-accent;
+  z-index: -1;
+  bottom: -15%;
+  left: 50%;
+  transform: translate(-50%, -5%);
+
+  @media (max-width: $laptop) {
+    width: 100px;
+    height: 390px;
+  }
+}
