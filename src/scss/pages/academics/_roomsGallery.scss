@@ -8,6 +8,10 @@
   justify-content: center;
   align-items: center;
   margin-top: 100px;
+
+  @media (max-width: $laptop) {
+    margin-top: 80px;
+  }
 }
 
 .gallery-btn {
@@ -20,10 +24,19 @@
   color: $color-secondary-black;
   line-height: 130%;
   font-size: 20px;
+
+  @media (max-width: $laptop) {
+    font-size: 16px;
+    padding: 10px 16px;
+    margin-left: 10px;
+  }
 }
 
 .gallery {
   margin-top: 300px;
+
+  @media (max-width: $laptop) {
+  }
 }
 
 .album {
@@ -32,14 +45,28 @@
   background: white;
   position: relative;
   height: 415px;
-  padding: 50px 50px;
+  padding: 50px;
   margin-top: 300px;
+  width: 100%;
+
+  @media (max-width: $laptop) {
+    margin-top: 210px;
+    padding: 40px;
+    height: 100%;
+    // max-height: 328px;
+  }
 
   &__images {
+    width: calc(100% - 100px);
     display: flex;
     gap: 40px;
     position: absolute;
     top: -150px;
+
+    @media (max-width: $laptop) {
+      width: calc(100% - 80px);
+      top: -130px;
+    }
   }
 
   &__top {
@@ -47,9 +74,22 @@
     justify-content: space-between;
     padding-top: 150px;
 
+    @media (max-width: $laptop) {
+      padding-top: 170px;
+    }
+    @media (max-width: $mobile-large) {
+      flex-direction: column-reverse;
+      align-items: center;
+      gap: 30px;
+    }
+
     & p {
       @include raleway-bold();
       font-size: 40px;
+
+      @media (max-width: $laptop) {
+        font-size: 34px;
+      }
     }
   }
   &__description {
@@ -57,17 +97,32 @@
     color: $color-gray-description;
     line-height: 150%;
     margin-top: 40px;
+
+    @media (max-width: $laptop) {
+      font-size: 20px;
+      margin-top: 30px;
+    }
+    @media (max-width: $mobile-large) {
+      text-align: center;
+    }
   }
 }
 
 .image-container {
   @include border-stroke();
-  width: 344px;
+  width: 100%;
+  max-width: 344px;
   height: 304px;
   background: #000;
+
+  @media (max-width: $laptop) {
+  }
 }
 
 .album-nav {
   display: flex;
   gap: 20px;
+
+  @media (max-width: $laptop) {
+  }
 }
