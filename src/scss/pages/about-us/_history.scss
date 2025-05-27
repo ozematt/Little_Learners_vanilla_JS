@@ -2,3 +2,127 @@
 @use "../../settings/variables" as *;
 @use "../../settings/fonts" as *;
 @use "../../settings/mixins" as *;
+
+.history {
+  @include border-stroke();
+  @include item-shadow();
+  background-color: white;
+  margin-top: 100px;
+  padding: 150px 150px 50px 150px;
+  width: 100%;
+
+  @media (max-width: $laptop) {
+    margin-top: 80px;
+    padding: 100px 100px 20px 100px;
+  }
+  @media (max-width: $laptop-small) {
+    margin-top: 80px;
+    padding: 80px 80px 10px 80px;
+  }
+  @media (max-width: $mobile-large) {
+    margin-top: 50px;
+    padding: 50px 35px 0 35px;
+  }
+}
+
+.event {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 100px;
+
+  @media (max-width: $laptop) {
+    padding-bottom: 80px;
+  }
+
+  @media (max-width: $laptop-small) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-bottom: 70px;
+  }
+
+  @media (max-width: $mobile-large) {
+    padding-bottom: 50px;
+  }
+
+  &__date {
+    @include border-stroke();
+    @include item-shadow();
+    @include raleway-bold();
+    width: 100%;
+    max-width: 364px;
+    font-size: 68px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 30px 50px;
+
+    @media (max-width: $laptop) {
+      font-size: 48px;
+      padding: 24px 34px;
+      max-width: 260px;
+    }
+
+    @media (max-width: $mobile-large) {
+      font-size: 38px;
+      padding: 20px 24px;
+      max-width: 206px;
+    }
+
+    & img {
+      @media (max-width: $laptop) {
+        width: 60px;
+        height: 60px;
+      }
+
+      @media (max-width: $mobile-large) {
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+  &__info {
+    padding-left: 50px;
+
+    @media (max-width: $laptop) {
+      padding-left: 40px;
+    }
+
+    @media (max-width: $laptop-small) {
+      padding-left: 0;
+      padding-top: 50px;
+    }
+
+    @media (max-width: $mobile-large) {
+      padding-top: 30px;
+    }
+
+    & :first-child {
+      @include raleway-bold();
+      font-size: 28px;
+
+      @media (max-width: $laptop) {
+        font-size: 24px;
+      }
+
+      @media (max-width: $mobile-large) {
+        font-size: 22px;
+      }
+    }
+
+    & :last-child {
+      @include outfit-medium();
+      padding-top: 20px;
+      color: $color-gray;
+      line-height: 150%;
+
+      @media (max-width: $laptop) {
+        font-size: 16px;
+      }
+      @media (max-width: $laptop-small) {
+        padding-top: 12px;
+      }
+    }
+  }
+}
