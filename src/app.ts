@@ -48,6 +48,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (currentPath === "/academics") {
       nav.handleNavLinkBG(currentPath);
     }
+    if (currentPath === "/admissions") {
+      nav.handleNavLinkBG(currentPath);
+    }
   }
 
   ////HOME PAGE - RENDERING

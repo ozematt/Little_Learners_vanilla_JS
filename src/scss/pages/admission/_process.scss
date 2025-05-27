@@ -1,0 +1,107 @@
+@use "../../settings/colors" as *;
+@use "../../settings/variables" as *;
+@use "../../settings/fonts" as *;
+@use "../../settings/mixins" as *;
+
+.steps {
+  margin-top: 100px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 50px;
+  row-gap: 100px;
+  //   height: 100%;
+
+  @media (max-width: $laptop) {
+    margin-top: 80px;
+    column-gap: 40px;
+    row-gap: 80px;
+  }
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 830px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.step {
+  @media (max-width: 830px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__number {
+    @include border-stroke();
+    @include item-shadow();
+    @include raleway-title();
+    display: inline;
+    background: white;
+    font-size: 60px;
+    padding: 14px 30px;
+
+    @media (max-width: $laptop) {
+      font-size: 44px;
+      padding: 10px 24px;
+    }
+    @media (max-width: 830px) {
+      display: block;
+    }
+    @media (max-width: $mobile-large) {
+      font-size: 40px;
+    }
+  }
+
+  &__line {
+    & img {
+      @media (max-width: $laptop) {
+        width: 98px;
+        height: 63px;
+      }
+    }
+  }
+
+  &__name {
+    @include border-stroke();
+    @include item-shadow();
+    background: white;
+    margin-top: -5px;
+    padding: 50px;
+    height: 70%;
+
+    @media (max-width: $laptop) {
+      padding: 40px;
+    }
+    @media (max-width: $mobile-large) {
+      padding: 30px;
+    }
+
+    & :first-child {
+      @include raleway-bold();
+      font-size: 40px;
+
+      @media (max-width: $laptop) {
+        font-size: 30px;
+      }
+      @media (max-width: $mobile-large) {
+        font-size: 26px;
+      }
+    }
+
+    & :last-child {
+      @include outfit-medium();
+      line-height: 150%;
+      color: $color-gray-description;
+      padding-top: 20px;
+
+      @media (max-width: $laptop) {
+        font-size: 16px;
+        padding-top: 16px;
+      }
+
+      @media (max-width: $mobile-large) {
+        padding-top: 14px;
+      }
+    }
+  }
+}
