@@ -1,0 +1,28 @@
+@use "../../settings/colors" as *;
+@use "../../settings/variables" as *;
+@use "../../settings/fonts" as *;
+@use "../../settings/mixins" as *;
+
+.activities {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 135px;
+  gap: 40px;
+  row-gap: 85px;
+
+  @media (max-width: $laptop) {
+    margin-top: 108px;
+    row-gap: 68px;
+  }
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 800px) {
+    grid-template-columns: repeat(1, 1fr);
+    place-items: center;
+  }
+
+  @media (max-width: $mobile-large) {
+    margin-top: 78px;
+  }
+}
