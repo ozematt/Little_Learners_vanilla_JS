@@ -54,6 +54,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (currentPath === "/student-life") {
       nav.handleNavLinkBG(currentPath);
     }
+    if (currentPath === "/contact") {
+      nav.handleNavLinkBG(currentPath);
+    }
   }
 
   ////HOME PAGE - RENDERING

@@ -2,6 +2,7 @@ export class Nav {
   private navLinks: NodeList = document.querySelectorAll("[data-link-name]")!;
 
   public handleNavLinkBG(path: string): void {
+    if (path === "/contact") return;
     const navButtons = Array.from(this.navLinks) as HTMLElement[];
 
     const currentButton = document.querySelector(
