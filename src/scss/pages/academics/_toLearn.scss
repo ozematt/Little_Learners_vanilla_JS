@@ -42,27 +42,6 @@
     padding: 30px;
   }
 
-  &__background {
-    @include border-stroke();
-    position: absolute;
-    width: 125px;
-    height: 410px;
-    background-color: $color-secondary-accent;
-    z-index: -1;
-    top: 0;
-    left: 50%;
-    transform: translate(-50%, -5%);
-
-    @media (max-width: $laptop) {
-      width: 100px;
-      height: 390px;
-    }
-    @media (max-width: 950px) {
-      width: 90px;
-      height: 350px;
-    }
-  }
-
   &__image {
     position: relative;
     z-index: 1;
