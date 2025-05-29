@@ -134,8 +134,8 @@ export class Testimonials extends BaseComponent {
           <p class="card-user-name">${item.name}</p>
           <div id="rating-container" class="rating__container">
             <div class="rating-container__fill" style="width: ${item.rating * 28}px">
-            <img src="pages/home_assets/rating-full-stars.svg" alt="rating stars"/>
-          </div>
+              <img src="pages/home_assets/rating-full-stars.svg" alt="rating stars"/>
+            </div>
             <img src="pages/home_assets/rating-empty-stars.svg" alt="rating stars"/>
           </div>
           <p class="card-comment">

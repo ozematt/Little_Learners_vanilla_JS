@@ -5,13 +5,45 @@
 
 .awards {
   padding-top: 100px;
+  padding-bottom: 10px;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1600px;
+  @media (max-width: $laptop) {
+    padding-top: 80px;
+  }
+  @media (max-width: $laptop) {
+    padding-top: 50px;
+  }
+}
+
+.awards-slider {
   display: flex;
   gap: 40px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+  scroll-snap-type: x mandatory;
+
+  &__item {
+    flex-shrink: 0;
+
+    scroll-snap-align: start;
+
+    @media (max-width: $laptop) {
+      width: 405px;
+    }
+    @media (max-width: $laptop) {
+      width: 348px;
+    }
+  }
 }
 
 .awards-buttons {
   display: flex;
   gap: 20px;
+  @media (max-width: $laptop) {
+    gap: 16px;
+  }
 }
 
 .awards-nav {
@@ -19,9 +51,18 @@
   justify-content: space-between;
   align-items: center;
   padding-top: 50px;
+  @media (max-width: $laptop) {
+    padding-top: 40px;
+  }
+  @media (max-width: $laptop) {
+    padding-top: 30px;
+  }
 
   & p {
     @include raleway-bold();
     font-size: 22px;
+    @media (max-width: $laptop) {
+      font-size: 18px;
+    }
   }
 }
