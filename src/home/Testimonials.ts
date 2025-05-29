@@ -11,43 +11,31 @@ type TestimonialsData = {
   comment: string;
 };
 
-type MediaQuery = {
-  laptop: MediaQueryList;
-  mobile: MediaQueryList;
-};
-
 export class Testimonials extends BaseComponent {
   // Data
   private readonly testimonialsData: TestimonialsData[];
 
-  //Magic numbers
-  private readonly SLIDE_WIDTHS = {
-    mobile: 400,
-    laptop: 380,
-    desktop: 470,
-  };
-  private readonly BREAKPOINT = {
-    mobile: 1020,
-    laptop: 1700,
-  };
-
   // DOM elements
-  private container: HTMLElement;
-  private slider: HTMLElement;
-  private previousButton: HTMLElement;
-  private nextButton: HTMLElement;
-  private previousButtonMobile: HTMLElement;
-  private nextButtonMobile: HTMLElement;
+  private container: HTMLElement | null;
+  private slider: HTMLElement | null;
+  private commentCards: HTMLCollectionOf<Element> | null;
+  private previousButton: HTMLElement | null;
+  private nextButton: HTMLElement | null;
+  private previousButtonMobile: HTMLElement | null;
+  private nextButtonMobile: HTMLElement | null;
+
+  // consts
+  private commentsGap: number = 50;
 
   // State
+  private maxComment: boolean = false;
   private _currentIndex: number = 0;
+  private _commentCardWidth: number = 0;
 
   public static create(config: TestimonialsConfig): Testimonials {
     if (!config.data) {
       throw new Error("Data not found");
     }
-
-    // Mozliwa dodatkowa inicjalizacja
 
     const instance = new Testimonials(config);
     return instance;
@@ -60,6 +48,8 @@ export class Testimonials extends BaseComponent {
 
     this.initializeElements();
     this.addEventListeners();
+    this.handleResize();
+    this.lastCommentDisplay();
   }
 
   get currentIndex(): number {
@@ -71,16 +61,42 @@ export class Testimonials extends BaseComponent {
     this.updateSliderPosition(); //
   }
 
+  get commentCardWidth(): number {
+    return this._commentCardWidth;
+  }
+
+  set commentCardWidth(value: number) {
+    if (value < 0) return;
+    this._commentCardWidth = value;
+  }
+
   protected cleanup(): void {
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = undefined;
+    }
+
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+      this.intersectionObserver = undefined;
+    }
+
     if (this.container) {
       this.container.innerHTML = "";
     }
 
-    Object.keys(this).forEach((key) => {
-      (this as any)[key] = null;
-    });
+    this.container = null;
+    this.slider = null;
+    this.previousButton = null;
+    this.nextButton = null;
+    this.previousButtonMobile = null;
+    this.nextButtonMobile = null;
+    this.commentCards = null;
 
     this._currentIndex = 0;
+    this._commentCardWidth = 0;
+    this.maxComment = false;
+
     console.log("Testimonials cleanup!");
   }
 
@@ -123,6 +139,14 @@ export class Testimonials extends BaseComponent {
       throw new Error("Slider element not found");
     }
     this.slider = slider as HTMLElement;
+
+    const commentCards = document.getElementsByClassName(
+      "testimonials-container__card"
+    );
+    if (!commentCards) {
+      throw new Error("Comment card not found");
+    }
+    this.commentCards = commentCards as HTMLCollectionOf<Element>;
   }
 
   private setTemplate(item: TestimonialsData): string {
@@ -145,7 +169,10 @@ export class Testimonials extends BaseComponent {
     return template;
   }
   private render(): void {
-    if (!this.testimonialsData || this.testimonialsData.length === 0) {
+    if (
+      (!this.testimonialsData || this.testimonialsData.length === 0,
+      !this.container)
+    ) {
       throw new Error("Testimonials not found");
     }
 
@@ -158,6 +185,14 @@ export class Testimonials extends BaseComponent {
   }
 
   private addEventListeners(): void {
+    if (
+      !this.previousButton ||
+      !this.previousButtonMobile ||
+      !this.nextButton ||
+      !this.nextButtonMobile
+    )
+      return;
+
     super.addListeners(this.previousButton, "click", this.handlePreviousButton);
     super.addListeners(
       this.previousButtonMobile,
@@ -174,55 +209,35 @@ export class Testimonials extends BaseComponent {
   };
 
   private handleNextButton = (): void => {
-    const commentNumber = this.updateCommentsDisplay() as number;
-    const maxIndex = this.testimonialsData.length - commentNumber;
-
-    if (this.currentIndex >= maxIndex) {
+    if (this.maxComment) {
       this.currentIndex = 0;
-    } else {
-      this.currentIndex += 1;
+      return;
     }
+    this.currentIndex += 1;
   };
 
   private updateSliderPosition(): void {
     if (!this.slider) return;
-    const { laptop, mobile } = this.mediaBreakpoints();
-
-    let slideWidth = this.SLIDE_WIDTHS.desktop;
-
-    if (mobile.matches) {
-      slideWidth = this.SLIDE_WIDTHS.mobile;
-    } else if (laptop.matches) {
-      slideWidth = this.SLIDE_WIDTHS.laptop;
-    }
-
-    this.slider.style.transform = `translateX(-${this._currentIndex * slideWidth}px)`;
+    this.slider.style.transform = `translateX(-${this.currentIndex * (this.commentCardWidth + this.commentsGap)}px)`;
   }
 
-  private updateCommentsDisplay(): number {
-    const { laptop, mobile } = this.mediaBreakpoints();
+  private lastCommentDisplay() {
+    if (!this.commentCards) return;
+    const lastItem = this.commentCards[
+      this.commentCards.length - 1
+    ] as HTMLElement;
 
-    if (mobile.matches) {
-      return 1;
-    }
-    if (laptop.matches) {
-      return 2;
-    }
-
-    return 3;
+    this.intersectedLastElement(lastItem, (isIntersecting) => {
+      this.maxComment = isIntersecting;
+    });
   }
 
-  private mediaBreakpoints(): MediaQuery {
-    const laptop = window.matchMedia(
-      `(max-width: ${this.BREAKPOINT.laptop}px)`
-    );
-    const mobile = window.matchMedia(
-      `(max-width: ${this.BREAKPOINT.mobile}px)`
-    );
+  private handleResize() {
+    if (!this.commentCards) return;
+    const item = this.commentCards[0] as HTMLElement;
 
-    return {
-      laptop,
-      mobile,
-    };
+    this.observeElementWidth(item, (width) => {
+      this.commentCardWidth = width;
+    });
   }
 }

@@ -1,8 +1,8 @@
 import { BaseComponent } from "../core";
 
 export class Awards extends BaseComponent {
-  private resizeObserver?: ResizeObserver;
-  private intersectionObserver?: IntersectionObserver;
+  // private resizeObserver?: ResizeObserver;
+  // private intersectionObserver?: IntersectionObserver;
 
   // Elements
   private previousButton: HTMLElement | null;
@@ -12,10 +12,10 @@ export class Awards extends BaseComponent {
   private awardItem: HTMLElement | null;
 
   // consts
-  private maxAwards: boolean = false;
   private awardsGap: number = 40;
 
   // State
+  private maxAwards: boolean = false;
   private _currentIndex: number = 0;
   private _awardItemWidth: number = 0;
 
@@ -28,6 +28,7 @@ export class Awards extends BaseComponent {
   private constructor() {
     super();
     this.listeners;
+    this.resizeObserver;
 
     this.initializeElements();
     this.addEventListeners();
@@ -136,23 +137,11 @@ export class Awards extends BaseComponent {
     );
     this.intersectionObserver.observe(lastItem as Element);
   }
+
   private handleResize() {
     if (!this.awardItem) return;
-    this.updateElementWidth(this.awardItem, (width) => {
+    this.observeElementWidth(this.awardItem, (width) => {
       this.awardItemWidth = width;
     });
-  }
-  private updateElementWidth(
-    element: HTMLElement,
-    onWidthChange: (width: number) => void
-  ) {
-    this.resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
-        const width = element.getBoundingClientRect().width;
-        onWidthChange(width);
-      }
-    });
-
-    this.resizeObserver.observe(element);
   }
 }
