@@ -1,9 +1,9 @@
-import { Loader, Router, Nav, Component } from "./core";
-import { navLinks, testimonialsData, faqData } from "./data";
-import { Testimonials, FAQ } from "./home";
+import { Loader, Router, Nav, Component } from './core';
+import { navLinks, testimonialsData, faqData } from './data';
+import { Testimonials, FAQ } from './home';
 
-document.addEventListener("DOMContentLoaded", async function () {
-  const rootElement = document.getElementById("app")!;
+document.addEventListener('DOMContentLoaded', async function () {
+  const rootElement = document.getElementById('app')!;
 
   const router = new Router(navLinks, rootElement);
   const loader = new Loader();
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     cleanupComponents();
 
-    if (currentPath === "/") {
+    if (currentPath === '/') {
       nav.handleNavLinkBG(currentPath); // nav button bg change
 
       const testimonials = initTestimonials();
@@ -41,20 +41,20 @@ document.addEventListener("DOMContentLoaded", async function () {
       activeComponents.push(testimonials, faq);
     }
 
-    if (currentPath === "/about-us") {
+    if (currentPath === '/about-us') {
       nav.handleNavLinkBG(currentPath);
     }
 
-    if (currentPath === "/academics") {
+    if (currentPath === '/academics') {
       nav.handleNavLinkBG(currentPath);
     }
-    if (currentPath === "/admissions") {
+    if (currentPath === '/admissions') {
       nav.handleNavLinkBG(currentPath);
     }
-    if (currentPath === "/student-life") {
+    if (currentPath === '/student-life') {
       nav.handleNavLinkBG(currentPath);
     }
-    if (currentPath === "/contact") {
+    if (currentPath === '/contact') {
       nav.handleNavLinkBG(currentPath);
     }
   }

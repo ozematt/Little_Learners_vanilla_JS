@@ -127,30 +127,17 @@ export class Testimonials extends BaseComponent {
 
   private setTemplate(item: TestimonialsData): string {
     const template = `
-        <article class="testimonials-container__card" 
-          >
-          <div class="avatar-container"><img src="${
-            item.avatar
-          }" alt="avatar icon" /></div>
-
+        <article class="testimonials-container__card">
+          <div class="avatar-container">
+            <img src="${item.avatar}" alt="avatar icon" />
+          </div>
           <p class="card-user-name">${item.name}</p>
-
           <div id="rating-container" class="rating__container">
-          <div class="rating-container__fill" style="width: ${
-            item.rating * 28
-          }px">
-           <img
-              src="pages/home_assets/rating-full-stars.svg"
-              alt="rating stars"
-            />
+            <div class="rating-container__fill" style="width: ${item.rating * 28}px">
+            <img src="pages/home_assets/rating-full-stars.svg" alt="rating stars"/>
           </div>
-           
-            <img
-              src="pages/home_assets/rating-empty-stars.svg"
-              alt="rating stars"
-            />
+            <img src="pages/home_assets/rating-empty-stars.svg" alt="rating stars"/>
           </div>
-          
           <p class="card-comment">
             ${item.comment}
           </p>
@@ -209,9 +196,7 @@ export class Testimonials extends BaseComponent {
       slideWidth = this.SLIDE_WIDTHS.laptop;
     }
 
-    this.slider.style.transform = `translateX(-${
-      this._currentIndex * slideWidth
-    }px)`;
+    this.slider.style.transform = `translateX(-${this._currentIndex * slideWidth}px)`;
   }
 
   private updateCommentsDisplay(): number {
@@ -235,6 +220,9 @@ export class Testimonials extends BaseComponent {
       `(max-width: ${this.BREAKPOINT.mobile}px)`
     );
 
-    return { laptop, mobile };
+    return {
+      laptop,
+      mobile,
+    };
   }
 }

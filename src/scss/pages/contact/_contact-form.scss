@@ -85,7 +85,7 @@
 }
 
 .input {
-  & p {
+  &__name {
     @include outfit-semi-bold();
     color: $color-gray-description;
     line-height: 150%;

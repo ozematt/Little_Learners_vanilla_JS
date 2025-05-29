@@ -58,7 +58,7 @@
 .table-body {
   @include border-stroke();
   @include outfit-medium();
-  //   background: $color-secondary-accent;
+  background: $color-input-background;
   margin-top: 30px;
 
   @media (max-width: $laptop) {
