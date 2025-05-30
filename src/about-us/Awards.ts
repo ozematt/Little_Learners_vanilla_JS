@@ -1,9 +1,6 @@
 import { BaseComponent } from "../core";
 
 export class Awards extends BaseComponent {
-  // private resizeObserver?: ResizeObserver;
-  // private intersectionObserver?: IntersectionObserver;
-
   // Elements
   private previousButton: HTMLElement | null;
   private nextButton: HTMLElement | null;

@@ -1,4 +1,5 @@
 import { Awards } from "./about-us/Awards";
+import { Gallery } from "./academics/Gallery";
 import { Loader, Router, Nav, Component } from "./core";
 import { navLinks, testimonialsData, faqData } from "./data";
 import { Testimonials, FAQ } from "./home";
@@ -52,6 +53,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     if (currentPath === "/academics") {
       nav.handleNavLinkBG(currentPath);
+      const gallery = Gallery.create();
+
+      activeComponents.push(gallery);
     }
     if (currentPath === "/admissions") {
       nav.handleNavLinkBG(currentPath);

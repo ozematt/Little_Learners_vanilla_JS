@@ -30,6 +30,10 @@
     padding: 10px 16px;
     margin-left: 10px;
   }
+
+  &:first-child {
+    background: $color-secondary-accent;
+  }
 }
 
 .gallery {
