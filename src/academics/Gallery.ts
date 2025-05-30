@@ -1,11 +1,16 @@
-import { log } from "console";
+// import { log } from "console";
 import { BaseComponent } from "../core";
 
 export class Gallery extends BaseComponent {
+  //consts
   private accentColor: string = "#ffefe5";
-
   //state
   private _selected: string = "all";
+
+  //elements
+  private galleryBtnsContainer: HTMLElement | null;
+  private galleryBtns: NodeListOf<Element> | null;
+  private galleries: NodeListOf<Element> | null;
 
   public static create(): Gallery {
     // if(!config)
@@ -15,7 +20,10 @@ export class Gallery extends BaseComponent {
 
   private constructor() {
     super();
-    this.handleGaleryButton();
+
+    this.initializeElements();
+    this.addEventListeners();
+    // this.handleGalleryButton();
   }
 
   get selected(): string {
@@ -27,12 +35,47 @@ export class Gallery extends BaseComponent {
     this._selected = value;
   }
 
-  protected cleanup() {}
+  protected cleanup() {
+    this.galleryBtnsContainer = null;
+    this.galleryBtns = null;
+    this.galleries = null;
+
+    console.log("Gallery cleanup!");
+  }
+
+  private initializeElements(): void {
+    const elements = {
+      galleryBtnsContainer: document.getElementById("gallery-buttons-container"),
+      galleryBtns: document.querySelectorAll(".gallery-btn"),
+      galleries: document.querySelectorAll(".album"),
+    };
+    const missingElements = Object.entries(elements)
+      .filter(([_, element]) => !element)
+      .map(([name]) => name);
+
+    if (missingElements.length > 0) {
+      throw new Error(`Missing elements: ${missingElements.join(", ")}`);
+    }
+
+    this.galleryBtnsContainer = elements.galleryBtnsContainer as HTMLElement;
+    this.galleryBtns = elements.galleryBtns as NodeListOf<Element>;
+    this.galleries = elements.galleries as NodeListOf<Element>;
+  }
+
+  private addEventListeners(): void {
+    if (!this.galleryBtnsContainer) return;
+
+    super.addListeners(
+      this.galleryBtnsContainer,
+      "click",
+      this.handleGalleryButton as EventListener
+    );
+  }
 
   private handleGalleryDisplay(name: string) {
-    const galleries = document.querySelectorAll(".album");
+    if (!this.galleries) return;
 
-    galleries.forEach((album) => {
+    this.galleries.forEach((album) => {
       if (name === "all") {
         album.classList.remove("hidden");
         return;
@@ -49,9 +92,8 @@ export class Gallery extends BaseComponent {
   }
 
   private changeButton(button: HTMLElement) {
-    const btns = document.querySelectorAll(".gallery-btn");
-
-    btns.forEach((btn) => {
+    if (!this.galleryBtns) return;
+    this.galleryBtns.forEach((btn) => {
       (btn as HTMLElement).style.backgroundColor = "white";
     });
 
@@ -63,16 +105,11 @@ export class Gallery extends BaseComponent {
     }
   }
 
-  private handleGaleryButton() {
-    const btnsContainer = document.getElementById("gallery-buttons-container");
-    if (!btnsContainer) return;
+  private handleGalleryButton = (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const galleryBtn = target.closest(".gallery-btn") as HTMLElement;
+    if (!galleryBtn) return;
 
-    btnsContainer.addEventListener("click", (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const galleryBtn = target.closest(".gallery-btn") as HTMLElement;
-      if (!galleryBtn) return;
-
-      this.changeButton(galleryBtn);
-    });
-  }
+    this.changeButton(galleryBtn);
+  };
 }

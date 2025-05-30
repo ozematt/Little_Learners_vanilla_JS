@@ -17,15 +17,12 @@ export class Awards extends BaseComponent {
   private _awardItemWidth: number = 0;
 
   public static create(): Awards {
-    // if(!config)
     const instance = new Awards();
     return instance;
   }
 
   private constructor() {
     super();
-    this.listeners;
-    this.resizeObserver;
 
     this.initializeElements();
     this.addEventListeners();
