@@ -12,6 +12,9 @@
   @media (max-width: $laptop) {
     margin-top: 80px;
   }
+  @media (max-width: $mobile-large) {
+    margin-top: 50px;
+  }
 }
 
 .gallery-btn {
@@ -41,6 +44,10 @@
   margin-top: 300px;
 
   @media (max-width: $laptop) {
+    margin-top: 250px;
+  }
+  @media (max-width: $mobile-large) {
+    margin-top: 180px;
   }
 }
 
