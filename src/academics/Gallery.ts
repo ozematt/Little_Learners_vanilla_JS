@@ -1,4 +1,3 @@
-// import { log } from "console";
 import { BaseComponent } from "../core";
 
 type Image = {
@@ -12,15 +11,16 @@ export class Gallery extends BaseComponent {
   //consts
   private accentColor: string = "#ffefe5";
   //state
-  private _selected: string = "all";
+  private _selectedGallery: string = "all";
+  // private _currentIndex: number = 0;
 
   //elements
   private galleryBtnsContainer: HTMLElement | null;
   private galleryBtns: NodeListOf<Element> | null;
   private galleries: NodeListOf<Element> | null;
+  private galleryContainers: NodeListOf<Element> | null;
 
   public static create(): Gallery {
-    // if(!config)
     const instance = new Gallery();
     return instance;
   }
@@ -31,23 +31,24 @@ export class Gallery extends BaseComponent {
     this.initializeElements();
     this.addEventListeners();
     this.uploadImages();
+    // this.handleImageNav();
   }
 
-  get selected(): string {
-    return this._selected;
+  get selectedGallery(): string {
+    return this._selectedGallery;
   }
 
-  set selected(value: string) {
+  set selectedGallery(value: string) {
     if (value === "") return;
-    this._selected = value;
+    this._selectedGallery = value;
   }
 
   protected cleanup() {
     this.galleryBtnsContainer = null;
-    this.galleryBtns = null;
     this.galleries = null;
+    this.galleryBtns = null;
 
-    this._selected = "all";
+    this._selectedGallery = "all";
 
     console.log("Gallery cleanup!");
   }
@@ -55,8 +56,9 @@ export class Gallery extends BaseComponent {
   private initializeElements(): void {
     const elements = {
       galleryBtnsContainer: document.getElementById("gallery-buttons-container"),
+      galleries: document.querySelectorAll(".gallery"),
       galleryBtns: document.querySelectorAll(".gallery-btn"),
-      galleries: document.querySelectorAll(".album"),
+      galleryContainers: document.querySelectorAll("[data-gallery-container]"),
     };
     const missingElements = Object.entries(elements)
       .filter(([_, element]) => !element)
@@ -67,8 +69,9 @@ export class Gallery extends BaseComponent {
     }
 
     this.galleryBtnsContainer = elements.galleryBtnsContainer as HTMLElement;
-    this.galleryBtns = elements.galleryBtns as NodeListOf<Element>;
     this.galleries = elements.galleries as NodeListOf<Element>;
+    this.galleryBtns = elements.galleryBtns as NodeListOf<Element>;
+    this.galleryContainers = elements.galleryContainers as NodeListOf<Element>;
   }
 
   private addEventListeners(): void {
@@ -77,36 +80,38 @@ export class Gallery extends BaseComponent {
     super.addListeners(this.galleryBtnsContainer, "click", this.handleGalleryButton as EventListener);
   }
 
-  private handleGalleryDisplay(name: string) {
+  private handleGalleryDisplay(galleryButtonName: string) {
     if (!this.galleries) return;
 
-    this.galleries.forEach((album) => {
-      if (name === "all") {
-        album.classList.remove("hidden");
+    this.galleries.forEach((gallery) => {
+      if (galleryButtonName === "all") {
+        gallery.classList.remove("hidden");
         return;
       }
-      const selectedGallery = name + "-gallery";
-      const galleryId = album.getAttribute("id");
+
+      const selectedGallery = galleryButtonName + "-gallery";
+      const galleryId = gallery.getAttribute("id");
 
       if (selectedGallery !== galleryId) {
-        album.classList.add("hidden");
+        gallery.classList.add("hidden");
       } else {
-        album.classList.remove("hidden");
+        gallery.classList.remove("hidden");
       }
     });
   }
 
   private changeButton(button: HTMLElement) {
     if (!this.galleryBtns) return;
+
     this.galleryBtns.forEach((btn) => {
       (btn as HTMLElement).style.backgroundColor = "white";
     });
 
     if (button) {
       button.style.background = this.accentColor;
-      const name = button.getAttribute("id") as string;
-      this.selected = name;
-      this.handleGalleryDisplay(name);
+      const galleryName = button.getAttribute("id") as string;
+      this.selectedGallery = galleryName;
+      this.handleGalleryDisplay(galleryName);
     }
   }
 
@@ -118,35 +123,43 @@ export class Gallery extends BaseComponent {
     this.changeButton(galleryBtn);
   };
 
+  // private handleImageNav() {
+  //   const slider = document.querySelector("#classroom-gallery .album__images > .images-slider") as HTMLElement;
+  //   const prev = document.querySelector("#classroom-gallery .album-nav > button:first-child");
+  //   const next = document.querySelector("#classroom-gallery .album-nav > button:last-child")!;
+
+  //   console.log(slider);
+  //   if (!slider) return;
+  //   next.addEventListener("click", () => {
+  //     slider.style.transform = `translateX(-${1 * 300}px)`;
+  //     console.log("ssa");
+  //   });
+  // }
+
   private loadImages(container: HTMLElement, images: Image[]) {
-    const html = `<div class="images-slider">${images
+    const html = images
       .map((image: any) => {
-        const img = this.createImageCard(image);
-        return img;
+        return this.createImageCard(image);
       })
-      .join("")}</div>`;
+      .join("");
 
     container.innerHTML = html;
   }
 
   private async uploadImages() {
-    const classroomContainer = document.querySelector("#classroom-gallery > .album__images") as HTMLElement;
-    const libraryContainer = document.querySelector("#library-gallery > .album__images") as HTMLElement;
-    const scienceLabContainer = document.querySelector("#science-lab-gallery > .album__images") as HTMLElement;
-    const computerLabContainer = document.querySelector("#computer-lab-gallery > .album__images") as HTMLElement;
-    const natureAreaContainer = document.querySelector("#nature-area-gallery > .album__images") as HTMLElement;
+    if (!this.galleryContainers) return;
 
-    const classroomImages = await this.fetchImages("classroom");
-    const libraryImages = await this.fetchImages("library");
-    const scienceLabImages = await this.fetchImages("science-lab");
-    const computerLabImages = await this.fetchImages("computer-lab");
-    const natureAreaImages = await this.fetchImages("garden-and-nature-area");
+    for (const container of this.galleryContainers) {
+      const galleryType = container.getAttribute("data-gallery-container") as string;
+      if (!galleryType) continue;
 
-    this.loadImages(classroomContainer, classroomImages);
-    this.loadImages(libraryContainer, libraryImages);
-    this.loadImages(scienceLabContainer, scienceLabImages);
-    this.loadImages(computerLabContainer, computerLabImages);
-    this.loadImages(natureAreaContainer, natureAreaImages);
+      try {
+        const images = await this.fetchImages(galleryType);
+        this.loadImages(container as HTMLElement, images);
+      } catch (error) {
+        console.error("Gallery load error:", error);
+      }
+    }
   }
 
   private createImageCard(image: Image) {
@@ -158,14 +171,13 @@ export class Gallery extends BaseComponent {
   }
 
   private async fetchImages(query: string) {
-    const apiKey = "FuT0cQsGZ8peRhLoqznIwHFWiORGEnN0wHMq1nPz0Kwl98Gp0uH2Zfoa";
     const url = `https://api.pexels.com/v1/search?query=${query}&orientation=square&size=small&page=1&per_page=5`;
 
     try {
       const response = await fetch(url, {
         method: "GET",
         headers: {
-          Authorization: apiKey,
+          Authorization: import.meta.env.VITE_PEXELS_API_KEY,
         },
       });
 
@@ -173,7 +185,7 @@ export class Gallery extends BaseComponent {
         throw new Error("Błąd pobierania");
       }
       const data = await response.json();
-
+      ``;
       const newData = data.photos.map((photo: any) => ({
         author: photo.photographer,
         src_big: photo.src.portrait,

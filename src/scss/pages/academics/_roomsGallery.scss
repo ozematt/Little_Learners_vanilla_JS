@@ -24,6 +24,7 @@
   color: $color-secondary-black;
   line-height: 130%;
   font-size: 20px;
+  flex-shrink: 0;
 
   @media (max-width: $laptop) {
     font-size: 16px;
@@ -36,14 +37,14 @@
   }
 }
 
-.gallery {
+.galleries {
   margin-top: 300px;
 
   @media (max-width: $laptop) {
   }
 }
 
-.album {
+.gallery {
   @include border-stroke();
   @include item-shadow();
   background: white;
@@ -57,18 +58,24 @@
     margin-top: 210px;
     padding: 40px;
     height: 100%;
-    // max-height: 328px;
+  }
+  @media (max-width: $mobile-large) {
+    padding: 30px;
   }
 
   &__images {
     width: calc(100% - 100px);
-
+    max-width: 1496px;
     position: absolute;
     top: -150px;
     overflow: hidden;
 
     @media (max-width: $laptop) {
       width: calc(100% - 80px);
+      top: -130px;
+    }
+    @media (max-width: $mobile-large) {
+      width: calc(100% - 60px);
       top: -130px;
     }
   }
@@ -79,9 +86,10 @@
     padding-top: 150px;
 
     @media (max-width: $laptop) {
-      padding-top: 170px;
+      padding-top: 120px;
     }
     @media (max-width: $mobile-large) {
+      padding-top: 70px;
       flex-direction: column-reverse;
       align-items: center;
       gap: 30px;
@@ -93,6 +101,10 @@
 
       @media (max-width: $laptop) {
         font-size: 34px;
+      }
+      @media (max-width: $mobile-large) {
+        font-size: 28px;
+        margin-top: -10px;
       }
     }
   }
@@ -108,38 +120,46 @@
     }
     @media (max-width: $mobile-large) {
       text-align: center;
+      font-size: 18px;
+      margin-top: 20px;
     }
   }
 }
 
 .images-slider {
   width: 100%;
-  max-width: 1496px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
   display: flex;
   gap: 40px;
 }
 
 .image-container {
   @include border-stroke();
-  // width: 100%;
   width: 343px;
   height: 304px;
   background: #000;
   overflow: hidden;
-
+  scroll-snap-align: start;
   flex-shrink: 0;
+
+  @media (max-width: $laptop) {
+    width: 270px;
+    height: 234px;
+  }
+  @media (max-width: $mobile-large) {
+    width: 298px;
+    height: 204px;
+  }
 
   & img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-
-  @media (max-width: $laptop) {
-  }
 }
 
-.album-nav {
+.gallery-nav {
   display: flex;
   gap: 20px;
 
