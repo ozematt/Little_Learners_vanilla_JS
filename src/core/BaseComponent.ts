@@ -26,19 +26,12 @@ export abstract class BaseComponent implements Component {
     this.listeners = [];
   }
 
-  protected addListeners(
-    element: HTMLElement,
-    type: string,
-    handler: EventListener
-  ) {
+  protected addListeners(element: HTMLElement, type: string, handler: EventListener) {
     element?.addEventListener(type, handler);
     this.listeners.push({ element, type, handler });
   }
 
-  protected observeElementWidth(
-    element: HTMLElement,
-    onWidthChange: (width: number) => void
-  ) {
+  protected observeElementWidth(element: HTMLElement, onWidthChange: (width: number) => void) {
     if (!element) {
       console.warn("No last item provided to observe");
       return;
@@ -58,10 +51,7 @@ export abstract class BaseComponent implements Component {
     this.resizeObserver.observe(element);
   }
 
-  protected intersectedLastElement(
-    lastItem: HTMLElement,
-    onIntersectedElement: (isIntersected: boolean) => void
-  ) {
+  protected intersectedLastElement(lastItem: HTMLElement, onIntersectedElement: (isIntersected: boolean) => void) {
     if (!lastItem) {
       console.warn("No last item provided to observe");
       return;

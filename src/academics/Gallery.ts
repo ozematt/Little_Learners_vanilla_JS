@@ -26,12 +26,13 @@ export class Gallery extends BaseComponent {
 
   //gallery images load
   private galleryContainers: NodeListOf<Element> | null;
-  private imageCard: HTMLElement | null;
+  private imageCards: NodeListOf<Element> | null;
+
+  private popup: HTMLElement | null;
+  private popupImageContainer: HTMLElement | null;
 
   //state
   private imageCardWidth: number = 0;
-
-  //consts
   private imageCardsGap: number = 40;
 
   //galleries config
@@ -84,7 +85,6 @@ export class Gallery extends BaseComponent {
     this.initializeElements();
     this.initializeGalleries();
     this.addEventListeners();
-    // this.handleResize();
   }
 
   protected cleanup() {
@@ -97,12 +97,11 @@ export class Gallery extends BaseComponent {
 
   private async initializeElements() {
     const elements = {
-      // gallery display
       galleryBtnsContainer: document.getElementById("gallery-buttons-container"),
       galleries: document.querySelectorAll(".gallery"),
       galleryBtns: document.querySelectorAll(".gallery-btn"),
-
-      //gallery images
+      popup: document.querySelector(".popup"),
+      popupImageContainer: document.querySelector("#popup-container"),
       galleryContainers: document.querySelectorAll("[data-gallery-container]"),
     };
     const missingElements = Object.entries(elements)
@@ -117,22 +116,28 @@ export class Gallery extends BaseComponent {
     this.galleries = elements.galleries as NodeListOf<Element>;
     this.galleryBtns = elements.galleryBtns as NodeListOf<Element>;
     this.galleryContainers = elements.galleryContainers as NodeListOf<Element>;
+    this.popup = elements.popup as HTMLElement;
+    this.popupImageContainer = elements.popupImageContainer as HTMLElement;
 
     await this.uploadImages(); //galleries image upload => image card
 
-    const imageCard = document.querySelector(".image-container");
-    if (!imageCard) {
-      throw new Error("Image card not found");
+    const imageCards = document.querySelectorAll(".image-container");
+    if (!imageCards) {
+      throw new Error("Image cards not found");
     }
-    this.imageCard = imageCard as HTMLElement;
+    this.imageCards = imageCards as NodeListOf<Element>;
 
     this.handleResize(); // handle resize image card
+    // this.handlePopupDisplay();
   }
 
   private addEventListeners(): void {
-    if (!this.galleryBtnsContainer) return;
+    if (!this.galleryBtnsContainer || !this.popup) return;
 
     super.addListeners(this.galleryBtnsContainer, "click", this.handleGalleryButton as EventListener);
+    super.addListeners(this.galleryBtnsContainer, "click", this.handleGalleryButton as EventListener);
+    super.addListeners(this.popup, "click", this.handlePopupClose as EventListener);
+    super.addListeners(document.body, "click", this.handlePopupDisplay as EventListener);
   }
 
   private initializeGalleries(): void {
@@ -157,8 +162,6 @@ export class Gallery extends BaseComponent {
     this.updateGalleryPosition(gallery);
   }
   private handleNextSlide(gallery: SliderConfig) {
-    console.log(gallery);
-
     const maxIndex = 4;
     if (gallery.currentIndex >= maxIndex) {
       gallery.currentIndex = 0;
@@ -249,7 +252,7 @@ export class Gallery extends BaseComponent {
   private createImageCard(image: Image) {
     return `
     <div class="image-container">
-      <img src=${image.src_big} alt=${image.alt}/>
+      <img src=${image.src_small} alt=${image.alt} data-image-big="${image.src_big}" data-image-author="${image.author}" data-image/>
     </div>
     `;
   }
@@ -272,8 +275,8 @@ export class Gallery extends BaseComponent {
 
       const newData = data.photos.map((photo: any) => ({
         author: photo.photographer,
-        src_big: photo.src.portrait,
-        src_small: photo.src.small,
+        src_small: photo.src.portrait,
+        src_big: photo.src.large2x,
         alt: photo.alt,
       }));
 
@@ -283,9 +286,38 @@ export class Gallery extends BaseComponent {
     }
   }
   private handleResize() {
-    if (!this.imageCard) return;
-    this.observeElementWidth(this.imageCard, (width) => {
+    if (!this.imageCards) return;
+    const imageCard = this.imageCards[0] as HTMLElement;
+    this.observeElementWidth(imageCard, (width) => {
       this.imageCardWidth = width;
     });
   }
+
+  private handlePopupDisplay = (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (!target) return;
+
+    if (target.hasAttribute("data-image")) {
+      this.displayPopup(target);
+    }
+  };
+
+  private displayPopup(image) {
+    console.log(image);
+
+    if (!this.popup || !this.popupImageContainer) return;
+    const src = image.dataset.imageBig;
+    const alt = image.getAttribute("alt");
+    // console.log(src, alt);
+
+    this.popupImageContainer.innerHTML = `<img src="${src}" alt="${alt}">`;
+    this.popup.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  private handlePopupClose = () => {
+    if (!this.popup) return;
+    this.popup.classList.add("hidden");
+    document.body.style.overflow = "auto";
+  };
 }
