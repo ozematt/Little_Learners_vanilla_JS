@@ -5,9 +5,11 @@
 The code is modular and maintainable, with encapsulated logic written using classes. Sass was used to organize styles into reusable, scalable components. The website includes sections such as About, Offer, and Contact, as well as a validated contact form and a mobile-first layout.
 
 
+
 ## 🌍 Live Demo  
 The application is available online on Netlify:  
 🔗 [Little Learners – Live Preview](https://littlelearnersvanillajs.netlify.app/)  
+
 
 
 ## 🛠️ Technologies  
@@ -17,12 +19,14 @@ The application is available online on Netlify:
 - **Netlify** – hosting and automatic deployment  
 
 
+
 ## 🎯 Project Goals  
 ✅ Practicing JavaScript concepts      
 ✅ Utilizing TypeScript for better code quality        
 ✅ Building a responsive application based on a Figma design          
 ✅ Styling with SASS        
 ✅ Automating deployment with Netlify          
+
 
 
 ## 📂 Running the Project Locally  
@@ -54,6 +58,7 @@ To install and run the project locally, follow these steps:
    ```
 
 
+
 ## 📌 Features
 
 - 🌍 Multi-page navigation
@@ -62,9 +67,11 @@ To install and run the project locally, follow these steps:
 - 🎨 Animations and page transitions
 
 
+
 ## 🚧 Features in progress
 
 🤓 No features in progress at the moment.
+
 
 
 ## 📜 License
