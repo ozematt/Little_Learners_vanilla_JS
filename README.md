@@ -14,18 +14,21 @@ The application is available online on Netlify:
 
 ## 🛠️ Technologies  
 - **TypeScript** – improved code organization and type safety  
-- **SASS** – quick component styling
-- **Figma** – design reference for the application  
+- **SASS** – quick and modular component styling
+- **Vite** – fast development server and optimized build system
+- **ESLint & Prettier** – consistent code style and error prevention
+- **Pexels API** – dynamic image gallery powered by external data
+- **Figma** – design reference for layout and UI 
 - **Netlify** – hosting and automatic deployment  
 
 
 
 ## 🎯 Project Goals  
-✅ Practicing JavaScript concepts      
-✅ Utilizing TypeScript for better code quality        
-✅ Building a responsive application based on a Figma design          
-✅ Styling with SASS        
-✅ Automating deployment with Netlify          
+✅ Practice core JavaScript concepts         
+✅ Strengthen code quality using TypeScript         
+✅ Build a responsive website based on a Figma design      
+✅ Apply modular styling with Sass         
+✅ Automate deployment using Netlify           
 
 
 
@@ -61,10 +64,12 @@ To install and run the project locally, follow these steps:
 
 ## 📌 Features
 
-- 🌍 Multi-page navigation
-- 📝 Booking Form
+- 🗂️ Multi-page website structure
 - 📱 Responsive design (mobile, tablet, desktop)
-- 🎨 Animations and page transitions
+- 🖼️ Image gallery powered by the Pexels API
+- 🧱 Modular JavaScript using classes
+- 🎨 Clean and scalable Sass styling
+- ♿ Semantic HTML and accessible form labels for better accessibility
 
 
 
