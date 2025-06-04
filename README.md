@@ -75,7 +75,7 @@ To install and run the project locally, follow these steps:
 
 ## 🚧 Features in progress
 
-🖼️ Enhancing the image gallery with pagination and improved loading performance
+🖼️ Enhancing the image gallery and improved loading performance            
 ✔️ Adding more robust form validation with user-friendly error messages
 
 
