@@ -84,4 +84,4 @@ To install and run the project locally, follow these steps:
 
 This project is for educational purposes only. Feel free to explore, learn from, and modify the code.
 
-Enjoy your space exploration! 🚀
+Thank you for visiting the repository! 😊
