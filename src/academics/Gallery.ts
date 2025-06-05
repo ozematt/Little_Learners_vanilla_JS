@@ -279,7 +279,9 @@ export class Gallery extends BaseComponent {
   }
 
   private async fetchImages(query: string) {
-    const url = `https://api.pexels.com/v1/search?query=${query}&orientation=square&size=small&page=1&per_page=5`;
+    const url = `
+      https://api.pexels.com/v1/search?query=${query}&orientation=square&size=small&page=1&per_page=5
+    `;
 
     try {
       const response = await fetch(url, {
