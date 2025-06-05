@@ -35,7 +35,6 @@ export class Gallery extends BaseComponent {
 
   //state
   private imageCardWidth: number = 0;
-  private currentGallery: string;
   private maxImage: boolean = false;
 
   //galleries config
@@ -94,7 +93,6 @@ export class Gallery extends BaseComponent {
     this.galleryBtnsContainer = null;
     this.galleryBtns = null;
     this.galleries = null;
-
     this.galleryContainers = null;
     this.imageCards = null;
 
@@ -265,9 +263,17 @@ export class Gallery extends BaseComponent {
   }
 
   private createImageCard(image: Image) {
+    // console.log(image);
+
     return `
     <div class="image-container">
-      <img src=${image.src_small} alt=${image.alt} data-image-big="${image.src_big}" data-image-author="${image.author}" data-image/>
+      <img 
+        src="${image.src_small}"
+        alt="${image.alt}"
+        data-image-big="${image.src_big}" 
+        data-image-author="${image.author}" 
+        data-image
+      />
     </div>
     `;
   }
@@ -336,12 +342,34 @@ export class Gallery extends BaseComponent {
 
   private displayPopup(image: HTMLElement) {
     if (!this.popup || !this.popupImageContainer) return;
-    const src = image.dataset.imageBig;
+    const srcBig = image.dataset.imageBig;
+    const srcSmall = image.getAttribute("src");
     const alt = image.getAttribute("alt");
 
-    this.popupImageContainer.innerHTML = `<img src="${src}" alt="${alt}">`;
+    this.popupImageContainer.innerHTML = `
+      <img src="${srcBig}" alt="${alt}" loading="lazy" class="popup__image--main">
+      <img src="${srcSmall}" alt="${alt}" class="popup__image--placeholder">
+    `;
+
+    this.handleImageLoad();
     this.popup.classList.remove("hidden");
     document.body.style.overflow = "hidden";
+  }
+
+  private handleImageLoad() {
+    const mainImage = this.popupImageContainer?.querySelector(".popup__image--main");
+    const placeholder = this.popupImageContainer?.querySelector(".popup__image--placeholder");
+
+    if (!mainImage || !placeholder) return;
+
+    mainImage.addEventListener("load", async () => {
+      await new Promise((resolve) => {
+        setTimeout(resolve, 350);
+      });
+
+      mainImage.classList.add("loaded");
+      placeholder.classList.add("hidden");
+    });
   }
 
   private handlePopupClose = () => {
