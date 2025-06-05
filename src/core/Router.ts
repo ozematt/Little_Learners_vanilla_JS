@@ -30,6 +30,7 @@ export class Router {
 
     if (target.matches("[data-link]")) {
       e.preventDefault();
+
       const path = target.getAttribute("href");
       if (path) this.navigate(path);
     }
@@ -51,10 +52,15 @@ export class Router {
       this.rootElement.innerHTML = html;
       this.rootElement.classList.remove("fade-out");
       this.onRenderCallbacks.forEach((callback) => callback()); // Call all registered render callbacks
-      if (sectionId) {
+      if (!sectionId) {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      } else {
         const section = document.querySelector(`#${sectionId}`);
         if (!section) return;
-        section.scrollIntoView();
+        section.scrollIntoView({ behavior: "smooth" });
       }
     } catch (error) {
       this.rootElement.innerHTML = this.routes["/404"].html;
@@ -102,8 +108,7 @@ export class Router {
   }
 
   private handleFooterLinks() {
-    const links =
-      document.querySelectorAll<HTMLAnchorElement>("a[data-target]");
+    const links = document.querySelectorAll<HTMLAnchorElement>("a[data-target]");
 
     links.forEach((link: HTMLAnchorElement) => {
       link.addEventListener("click", async (e: MouseEvent) => {
