@@ -17,7 +17,9 @@ interface SliderConfig {
 
 export class Gallery extends BaseComponent {
   //consts
-  private accentColor: string = "#ffefe5";
+  private readonly ACCENT_COLOR: string = "#ffefe5";
+  private readonly IMAGE_CARD_GAP: number = 40;
+  private readonly MAX_IMAGE_INDEX: number = 4;
 
   // gallery display
   private galleryBtnsContainer: HTMLElement | null;
@@ -33,10 +35,11 @@ export class Gallery extends BaseComponent {
 
   //state
   private imageCardWidth: number = 0;
-  private imageCardsGap: number = 40;
+  private currentGallery: string;
+  private maxImage: boolean = false;
 
   //galleries config
-  private sliderConfig: SliderConfig[] = [
+  private sliderConfig: SliderConfig[] | null = [
     {
       id: "classroom",
       imageContainer: '[data-gallery-container="classroom"]',
@@ -88,9 +91,18 @@ export class Gallery extends BaseComponent {
   }
 
   protected cleanup() {
-    // this.galleryBtnsContainer = null;
-    // this.galleries = null;
-    // this.galleryBtns = null;
+    this.galleryBtnsContainer = null;
+    this.galleryBtns = null;
+    this.galleries = null;
+
+    this.galleryContainers = null;
+    this.imageCards = null;
+
+    this.popup = null;
+    this.popupImageContainer = null;
+
+    this.imageCardWidth = 0;
+    this.sliderConfig = null;
 
     console.log("Gallery cleanup!");
   }
@@ -138,9 +150,11 @@ export class Gallery extends BaseComponent {
     super.addListeners(this.galleryBtnsContainer, "click", this.handleGalleryButton as EventListener);
     super.addListeners(this.popup, "click", this.handlePopupClose as EventListener);
     super.addListeners(document.body, "click", this.handlePopupDisplay as EventListener);
+    super.addListeners(document.body, "click", this.handleCurrentGallery as EventListener);
   }
 
   private initializeGalleries(): void {
+    if (!this.sliderConfig) return;
     this.sliderConfig.forEach((gallery) => {
       const container = document.querySelector(gallery.imageContainer) as HTMLElement;
       const prevButton = document.querySelector(gallery.prevButton) as HTMLElement;
@@ -162,8 +176,9 @@ export class Gallery extends BaseComponent {
     this.updateGalleryPosition(gallery);
   }
   private handleNextSlide(gallery: SliderConfig) {
-    const maxIndex = 4;
-    if (gallery.currentIndex >= maxIndex) {
+    if (this.maxImage) return;
+
+    if (gallery.currentIndex >= this.MAX_IMAGE_INDEX) {
       gallery.currentIndex = 0;
     } else {
       gallery.currentIndex += 1;
@@ -176,7 +191,7 @@ export class Gallery extends BaseComponent {
     if (!container) return;
 
     const imageCardWidth = Math.floor(this.imageCardWidth);
-    const offset = gallery.currentIndex * (imageCardWidth + this.imageCardsGap);
+    const offset = gallery.currentIndex * (imageCardWidth + this.IMAGE_CARD_GAP);
 
     container.style.transform = `translateX(-${offset}px)`;
   }
@@ -209,7 +224,7 @@ export class Gallery extends BaseComponent {
     });
 
     if (button) {
-      button.style.background = this.accentColor;
+      button.style.background = this.ACCENT_COLOR;
       const galleryName = button.getAttribute("id") as string;
       this.handleGalleryDisplay(galleryName);
     }
@@ -288,8 +303,25 @@ export class Gallery extends BaseComponent {
   private handleResize() {
     if (!this.imageCards) return;
     const imageCard = this.imageCards[0] as HTMLElement;
+
     this.observeElementWidth(imageCard, (width) => {
       this.imageCardWidth = width;
+    });
+  }
+  private handleCurrentGallery = (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    const check = target.matches("[data-gallery-nav]");
+    if (check) {
+      const gallery = target.closest(".gallery")?.querySelector(".images-slider") as HTMLElement;
+      if (!gallery) return;
+      this.lastImageDisplay(gallery);
+    }
+  };
+  private lastImageDisplay(container: HTMLElement) {
+    const lastImage = container.children[container.children.length - 1] as HTMLElement;
+
+    this.intersectedLastElement(lastImage, (maxImage) => {
+      this.maxImage = maxImage;
     });
   }
 
@@ -302,13 +334,10 @@ export class Gallery extends BaseComponent {
     }
   };
 
-  private displayPopup(image) {
-    console.log(image);
-
+  private displayPopup(image: HTMLElement) {
     if (!this.popup || !this.popupImageContainer) return;
     const src = image.dataset.imageBig;
     const alt = image.getAttribute("alt");
-    // console.log(src, alt);
 
     this.popupImageContainer.innerHTML = `<img src="${src}" alt="${alt}">`;
     this.popup.classList.remove("hidden");

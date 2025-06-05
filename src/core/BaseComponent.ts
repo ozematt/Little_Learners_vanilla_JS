@@ -14,6 +14,18 @@ export abstract class BaseComponent implements Component {
 
   public destroy(): void {
     this.removeEventListeners();
+
+    // Czyści obserwatory
+    if (this.resizeObserver) {
+      this.resizeObserver.disconnect();
+      this.resizeObserver = undefined;
+    }
+
+    if (this.intersectionObserver) {
+      this.intersectionObserver.disconnect();
+      this.intersectionObserver = undefined;
+    }
+
     this.cleanup();
   }
 

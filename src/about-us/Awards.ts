@@ -49,16 +49,6 @@ export class Awards extends BaseComponent {
   }
 
   protected cleanup(): void {
-    // Cleanup ResizeObserver
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-      this.resizeObserver = undefined;
-    }
-    // Cleanup IntersectionObserver
-    if (this.intersectionObserver) {
-      this.intersectionObserver.disconnect();
-      this.intersectionObserver = undefined;
-    }
     // Cleaning up DOM element references
     this.previousButton = null;
     this.nextButton = null;
@@ -118,18 +108,12 @@ export class Awards extends BaseComponent {
 
   private lastAwardDisplay() {
     if (!this.awards) return;
-    const lastItem = this.awards[this.awards.length - 1];
+    const lastItem = this.awards[this.awards.length - 1] as HTMLElement;
     if (!lastItem) return;
 
-    this.intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          this.maxAwards = entry.isIntersecting;
-        });
-      },
-      { root: null, threshold: 0.5, rootMargin: "0px" }
-    );
-    this.intersectionObserver.observe(lastItem as Element);
+    this.intersectedLastElement(lastItem, (maxAwards) => {
+      this.maxAwards = maxAwards;
+    });
   }
 
   private handleResize() {
