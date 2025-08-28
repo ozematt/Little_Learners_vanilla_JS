@@ -6,6 +6,14 @@ export class ContactForm extends BaseComponent {
   private inputs: NodeListOf<HTMLInputElement> | null;
   private form: HTMLFormElement | null;
 
+  private parentNameInput: HTMLInputElement | null;
+  private emailInput: HTMLInputElement | null;
+  private phoneNumberInput: HTMLInputElement | null;
+  private studentNameInput: HTMLInputElement | null;
+  private studentAgeInput: HTMLInputElement | null;
+  private programTitleInput: HTMLInputElement | null;
+  private messageInput: HTMLInputElement | null;
+
   public static create(): ContactForm {
     const instance = new ContactForm();
     return instance;
@@ -26,6 +34,13 @@ export class ContactForm extends BaseComponent {
     const elements = {
       form: document.querySelector("form"),
       inputs: document.querySelectorAll(".input__item"),
+      parentNameInput: document.querySelector("#parent-name"),
+      emailInput: document.querySelector("#email"),
+      phoneNumberInput: document.querySelector("#phone"),
+      studentNameInput: document.querySelector("#student-name"),
+      studentAgeInput: document.querySelector("#student-age"),
+      programTitleInput: document.querySelector("#program"),
+      messageInput: document.querySelector("#message"),
     };
     const missingElements = Object.entries(elements)
       .filter(([_, element]) => !element)
@@ -37,26 +52,44 @@ export class ContactForm extends BaseComponent {
 
     this.form = elements.form as HTMLFormElement;
     this.inputs = elements.inputs as NodeListOf<HTMLInputElement>;
+
+    this.parentNameInput = elements.parentNameInput as HTMLInputElement;
+    this.emailInput = elements.emailInput as HTMLInputElement;
+    this.phoneNumberInput = elements.phoneNumberInput as HTMLInputElement;
+    this.studentNameInput = elements.studentNameInput as HTMLInputElement;
+    this.studentAgeInput = elements.studentAgeInput as HTMLInputElement;
+    this.programTitleInput = elements.programTitleInput as HTMLInputElement;
+    this.messageInput = elements.messageInput as HTMLInputElement;
   }
 
   private addEventListeners(): void {
     if (!this.inputs || !this.form) return;
 
-    // sprawdzaj pole po opuszczeniu
+    // validate on blur
     this.inputs.forEach((input) => {
       input.addEventListener("blur", () => {
         this.validateInput(input);
       });
     });
 
-    // sprawdzaj wszystkie przy wysłaniu
+    // validate data on submit
     this.form.addEventListener("submit", (e) => {
       if (!this.form!.checkValidity()) {
         e.preventDefault();
         this.inputs!.forEach((input) => this.validateInput(input));
       } else {
         e.preventDefault();
-        console.log("Poszło!");
+
+        const formData = {
+          parentName: this.parentNameInput?.value,
+          email: this.emailInput?.value,
+          phoneNumber: this.phoneNumberInput?.value,
+          studentName: this.studentNameInput?.value,
+          studentAge: this.studentAgeInput?.value,
+          programTitle: this.programTitleInput?.value,
+          message: this.messageInput?.value,
+        };
+        console.log(formData);
       }
     });
   }
