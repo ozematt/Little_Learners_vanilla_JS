@@ -54,17 +54,29 @@ export class ContactForm extends BaseComponent {
       if (!this.form!.checkValidity()) {
         e.preventDefault();
         this.inputs!.forEach((input) => this.validateInput(input));
+      } else {
+        e.preventDefault();
+        console.log("Poszło!");
       }
     });
   }
 
   private validateInput(input: HTMLInputElement): void {
-    if (!input.checkValidity()) {
+    let isValid = input.checkValidity();
+
+    // additional email validation
+    if (input.type === "email" && input.value) {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      isValid = emailRegex.test(input.value);
+    }
+
+    if (!isValid) {
       input.classList.add("invalid");
       input.nextElementSibling?.classList.remove("hidden");
     } else {
       input.classList.remove("invalid");
       input.nextElementSibling?.classList.add("hidden");
+      2;
     }
   }
 }

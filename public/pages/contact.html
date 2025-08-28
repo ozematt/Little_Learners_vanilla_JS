@@ -90,7 +90,7 @@
             name="parent-name"
             class="input__item"
             placeholder="Enter Parent Name"
-            a
+            pattern="^[A-Za-z\s\-]{3,}$"
             required
           />
           <p class="error hidden">Name must be at least 3 characters long.</p>
@@ -98,24 +98,28 @@
         <div class="input">
           <label for="email" class="input__name">Email Address</label>
           <input
-            type="text"
+            type="email"
             id="email"
             name="email"
             class="input__item"
             placeholder="Enter Email Address"
+            title="Please enter a valid email address (e.g.: user@example.com)"
             required
           />
+          <p class="error hidden">Please enter a valid email address.</p>
         </div>
         <div class="input">
           <label for="phone" class="input__name">Phone Number</label>
           <input
-            type="number"
+            type="text"
             id="phone"
             name="phone"
             class="input__item"
             placeholder="Enter Phone Number"
+            pattern="^(\+?[0-9]{2})?[\s\-]?[0-9]{3}[\s\-]?[0-9]{3}[\s\-]?[0-9]{3}$"
             required
           />
+          <p class="error hidden">Please enter a valid phone number</p>
         </div>
         <div class="input">
           <label for="student-name" class="input__name">Student Name</label>
@@ -125,8 +129,12 @@
             name="student-name"
             class="input__item"
             placeholder="Enter Student Name"
+            pattern="^[A-Za-z\s\-]{3,}$"
             required
           />
+          <p class="error hidden">
+            Student name must be at least 3 characters long.
+          </p>
         </div>
         <div class="input">
           <label for="student-age" class="input__name">Student Age</label>
@@ -140,6 +148,7 @@
             max="7"
             required
           />
+          <p class="error hidden">Student age must be between 3 and 7 years.</p>
         </div>
         <div class="input">
           <label for="program" class="input__name">Program of Interest</label>
@@ -148,9 +157,11 @@
             id="program"
             name="program"
             class="input__item"
-            placeholder="Select Program"
+            placeholder="Enter Program"
+            minlength="3"
             required
           />
+          <p class="error hidden">Enter program title.</p>
         </div>
         <div class="input">
           <label for="message" class="input__name">Message</label>
@@ -162,6 +173,9 @@
             minlength="5"
             maxlength="300"
           ></textarea>
+          <p class="error hidden">
+            Message must be at least 10 characters long.
+          </p>
         </div>
         <button type="submit" class="submit-btn">Submit</button>
       </form>
