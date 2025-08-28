@@ -153,3 +153,16 @@
     padding: 16px;
   }
 }
+
+.error {
+  font-family: $font-outfit;
+  font-weight: 500;
+  font-size: 18px;
+  color: red;
+  padding: 5px 0 0 3px;
+  text-align: right;
+
+  @media (max-width: $laptop) {
+    font-size: 15px;
+  }
+}

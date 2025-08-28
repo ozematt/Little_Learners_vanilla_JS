@@ -61,8 +61,10 @@ export class ContactForm extends BaseComponent {
   private validateInput(input: HTMLInputElement): void {
     if (!input.checkValidity()) {
       input.classList.add("invalid");
+      input.nextElementSibling?.classList.remove("hidden");
     } else {
       input.classList.remove("invalid");
+      input.nextElementSibling?.classList.add("hidden");
     }
   }
 }
