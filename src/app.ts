@@ -1,5 +1,6 @@
 import { Awards } from "./about-us/Awards";
 import { Gallery } from "./academics/Gallery";
+import { ContactForm } from "./contact/contactForm";
 import { Loader, Router, Nav, Component } from "./core";
 import { navLinks, testimonialsData, faqData } from "./data";
 import { Testimonials, FAQ } from "./home";
@@ -65,6 +66,9 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
     if (currentPath === "/contact") {
       nav.handleNavLinkBG(currentPath);
+
+      const form = ContactForm.create();
+      activeComponents.push(form);
     }
   }
 

@@ -21,13 +21,14 @@ li {
   margin: 0;
 }
 
-input:valid {
-  @include border-stroke();
-}
+// input,
+// textarea {
+//   border: 3px solid transparent;
+// }
 
-input:invalid {
-  border: 3px solid red;
-}
+// input:focus:invalid {
+//   border: 3px solid red;
+// }
 
 body {
   background-color: $color-background;

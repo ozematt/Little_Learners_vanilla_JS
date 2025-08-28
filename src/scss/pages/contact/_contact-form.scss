@@ -131,6 +131,10 @@
   }
 }
 
+.input__item.invalid {
+  border: 3px solid red;
+}
+
 .submit-btn {
   @include border-stroke();
   @include outfit-medium();
