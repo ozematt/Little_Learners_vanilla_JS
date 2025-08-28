@@ -14,6 +14,8 @@ export class ContactForm extends BaseComponent {
   private programTitleInput: HTMLInputElement | null;
   private messageInput: HTMLInputElement | null;
 
+  private submitButton: HTMLButtonElement | null;
+
   public static create(): ContactForm {
     const instance = new ContactForm();
     return instance;
@@ -41,6 +43,7 @@ export class ContactForm extends BaseComponent {
       studentAgeInput: document.querySelector("#student-age"),
       programTitleInput: document.querySelector("#program"),
       messageInput: document.querySelector("#message"),
+      submitButton: document.querySelector("#submitBtn"),
     };
     const missingElements = Object.entries(elements)
       .filter(([_, element]) => !element)
@@ -60,6 +63,7 @@ export class ContactForm extends BaseComponent {
     this.studentAgeInput = elements.studentAgeInput as HTMLInputElement;
     this.programTitleInput = elements.programTitleInput as HTMLInputElement;
     this.messageInput = elements.messageInput as HTMLInputElement;
+    this.submitButton = elements.submitButton as HTMLButtonElement;
   }
 
   private addEventListeners(): void {
@@ -74,9 +78,13 @@ export class ContactForm extends BaseComponent {
 
     // validate data on submit
     this.form.addEventListener("submit", (e) => {
+      this.submitButton!.disabled = true;
+
       if (!this.form!.checkValidity()) {
         e.preventDefault();
         this.inputs!.forEach((input) => this.validateInput(input));
+
+        this.submitButton!.disabled = false;
       } else {
         e.preventDefault();
 
@@ -90,6 +98,10 @@ export class ContactForm extends BaseComponent {
           message: this.messageInput?.value,
         };
         console.log(formData);
+
+        this.form?.reset();
+
+        this.submitButton!.disabled = false;
       }
     });
   }
