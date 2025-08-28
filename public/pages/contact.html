@@ -58,6 +58,7 @@
       </span>
     </div>
   </section>
+
   <section class="section" id="form">
     <div class="section-header">
       <p class="section-subtitle">Contact Form</p>
@@ -89,6 +90,7 @@
             name="parent-name"
             class="input__item"
             placeholder="Enter Parent Name"
+            required
           />
         </div>
         <div class="input">
@@ -99,6 +101,7 @@
             name="email"
             class="input__item"
             placeholder="Enter Email Address"
+            required
           />
         </div>
         <div class="input">
@@ -109,6 +112,7 @@
             name="phone"
             class="input__item"
             placeholder="Enter Phone Number"
+            required
           />
         </div>
         <div class="input">
@@ -119,6 +123,7 @@
             name="student-name"
             class="input__item"
             placeholder="Enter Student Name"
+            required
           />
         </div>
         <div class="input">
@@ -129,6 +134,9 @@
             name="student-age"
             class="input__item"
             placeholder="Enter Student Age"
+            min="3"
+            max="7"
+            required
           />
         </div>
         <div class="input">
@@ -139,6 +147,7 @@
             name="program"
             class="input__item"
             placeholder="Select Program"
+            required
           />
         </div>
         <div class="input">
@@ -148,6 +157,8 @@
             name="message"
             class="input__item"
             placeholder="Enter your Message"
+            minlength="5"
+            maxlength="300"
           ></textarea>
         </div>
         <button type="submit" class="submit-btn">Submit</button>

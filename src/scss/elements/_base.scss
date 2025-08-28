@@ -21,6 +21,14 @@ li {
   margin: 0;
 }
 
+input:valid {
+  @include border-stroke();
+}
+
+input:invalid {
+  border: 3px solid red;
+}
+
 body {
   background-color: $color-background;
 }
